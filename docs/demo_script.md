@@ -4,7 +4,7 @@ The point to land: launchpad is a consulting firm that keeps the founder in char
 
 ## Before you start
 - Ollama running with the model already pulled; `streamlit run app/ui.py` (or `docker compose up`) open at http://localhost:8501.
-- A second browser tab with the committed demo outputs open: `outputs/phase1_gate_evidence.md`, the weak-brief STOP files (`*_weak.md`) and `decision_log.json`.
+- A second browser tab with the committed demo outputs open: `outputs/phase1_gate_evidence.md`, the weak-brief files (`*_weak.md`), `payment_test_log.md` and `decision_log.json`.
 - On a CPU-only laptop one step takes minutes, so the live run shows the start and the committed run shows the rest. Say so.
 
 ## 0:00-0:20 The problem and the promise
@@ -21,10 +21,10 @@ The point to land: launchpad is a consulting firm that keeps the founder in char
 2. **Evidence gate** (`phase1_gate_evidence.md`): the go / pivot / stop rule, decided in code.
 3. **Demand test (2.2)**: the founder locks the waitlist target before any results exist; it cannot be changed afterwards.
 4. **Approval inbox**: agents can only propose (publish, send, hire). Approving creates a one-time token in the UI, and the action is only written to `outputs/` as MOCKED.
-5. **Weak brief** (`*_weak.md` files): the evidence was thin, so the system recommended **STOP** rather than spinning it.
+5. **STOP cases**: the strong brief pauses at the demand gate (`phase2_gate_final_recommendation.md`) because no real waitlist result exists yet, and the system will not invent one; the weak brief (`*_weak.md`) reaches the same demand-gate STOP; the crypto brief (`*_excluded.md`) is refused at intake.
 
 ## 2:15-2:45 Back to the live run
 Show the first checkpoint if it has arrived: approve / edit / redo with feedback / stop.
 
 ## 2:45-3:00 Close
-"Apache-2.0, `docker compose up`, no keys, $0 per run. Phases 1-2 and the pricing step are live; the other steps of 3-6 are labelled MOCKED; there is no payment code. It will never promise income, fake reviews or urgency, or act without the founder."
+"Apache-2.0, `docker compose up`, no keys, $0 per run. Phases 1-2 and the pricing step are live; the other steps of 3-6 are labelled MOCKED; payments run only against a MOCKED provider, and refunds need the founder. It will never promise income, fake reviews or urgency, or act without the founder."

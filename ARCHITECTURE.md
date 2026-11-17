@@ -59,11 +59,11 @@ Product department added. MVP spec (at most 5 core features), user docs draft, t
 ### Phase 4: Commercial setup (4.1 LIVE, 4.2 MOCKED)
 Legal and Sales added.
 
-- **4.1 Pricing (LIVE).** The market researcher searches for published prices of comparable products. The departments list price points, each tied to a claim. After Tier 2 verification the calculator counts a price only if its claim is still SOURCED, its quote is on the fetched page, and the quote contains that number. One-time and monthly prices are never mixed. Tiers are 0.6× / 1× / 1.6× the median of the counted prices; with none, it falls back to step 1.3's sourced median, and otherwise leaves tiers to the founder (ASSUMPTION). Core features are never paywalled. No payment code. Output `phase4_step1_pricing.md`.
+- **4.1 Pricing (LIVE).** The market researcher searches for published prices of comparable products. The departments list price points, each tied to a claim. After Tier 2 verification the calculator counts a price only if its claim is still SOURCED, its quote is on the fetched page, and the quote contains that number. One-time and monthly prices are never mixed. Tiers are 0.6× / 1× / 1.6× the median of the counted prices; with none, it falls back to step 1.3's sourced median, and otherwise leaves tiers to the founder (ASSUMPTION). Core features are never paywalled. Output `phase4_step1_pricing.md`.
 - **4.2 Policies (MOCKED).** Draft terms, privacy and refund policy summaries, labelled as drafts that are not legal advice. Output `phase4_step2_policies.md`.
 
 ### Phase 5: Launch (MOCKED)
-Operations added. Store page and launch post drafts (publish actions are MOCKED) and a delivery plan (MOCKED). Output `phase5_step1_launch_drafts.md`.
+Operations added. Store page and launch post drafts (publish actions are MOCKED) and a delivery plan (MOCKED). Output `phase5_step1_launch_drafts.md`. Selling, delivery, refunds and reconciliation run in code against a MOCKED payment provider (see [Sale to cash](#sale-to-cash)); `python -m app.payment_test` writes `outputs/payment_test_log.md`.
 
 ### Phase 6: Operate and learn (MOCKED)
 Support added. Support reply templates, a metrics plan with a decision threshold per metric, and a persevere-or-pivot memo. Output `phase6_step1_operate_plan.md`.
@@ -85,22 +85,26 @@ The system **recommends STOP on weak evidence**: when research cannot source cla
 
 ## Sale to cash
 
-No payment code exists in this version (**STUBBED**, design only). The cash step is a future integration that the founder would connect to their own payment provider account, behind founder approval:
+Built in code against a **MOCKED** payment provider (an in-process simulation in test mode; no real money, no card data). `python -m app.payment_test` runs the whole path with the founder approving at the prompts and writes `outputs/payment_test_log.md`; `tests/test_payments.py` covers each rule below. Connecting the founder's own provider account in test mode is the next step on the roadmap.
 
 ```
-store page (5, MOCKED) -> buyer order (MOCKED) -> payment provider (founder's own account, test mode first)
-   -> webhook "payment succeeded" -> delivery grants access to the download (once per order)
-   -> webhook "refund succeeded"  -> delivery revokes that access
-   -> support (6) -> metrics (6)
-reconciliation: per order, gross - provider fee - refunds = net; the sum of nets = expected payout,
-compared with the provider's payout report; mismatches go to the founder
+founder approves "open store" (action gateway, one-time token)          app/payments.py
+   -> buyer checkout: opaque buyer id only, never card data              app/payments.py
+   -> MockProvider takes payment, sends signed "payment.succeeded"       app/payments.py (MOCKED)
+   -> webhook verified (HMAC) + event id recorded in the same transaction app/webhooks.py
+   -> delivery grants access, keyed by order id                          app/delivery.py
+support requests a refund -> founder approves (one-time token)          app/refunds.py
+   -> MockProvider refunds, sends signed "refund.succeeded"
+   -> webhook -> delivery revokes that order's access
+reconciliation: per order, gross - fee - refund = net; totals vs the     app/reconcile.py
+provider's payout report; access vs order status; mismatches go to the founder
 ```
 
-- **Payment triggers delivery:** only a verified provider webhook grants access, never a model.
-- **A refund revokes access:** the founder approves every refund in the action gateway; the provider's refund webhook revokes the grant.
-- **Idempotency:** processed webhook event ids are stored and grants are keyed by order id, so a repeated webhook cannot deliver twice.
-- **Reconciliation:** orders, payments, fees, refunds and payouts are matched per order, and any difference is shown to the founder.
-- The system never holds, moves or refunds money itself, and never stores card details.
+- **Payment triggers delivery:** only a verified provider webhook grants access, never a model. A forged webhook (bad signature) is rejected.
+- **A refund revokes access:** Support can only request a refund; it runs with the founder's one-time token, and the provider's refund webhook revokes the grant.
+- **Idempotency:** each webhook's event id is stored in the same transaction as its effect, and grants are keyed by order id, so a repeated webhook cannot deliver twice.
+- **Reconciliation:** orders, payments, fees, refunds and payouts are matched per order and in total against the provider's payout report, and access is checked against order status. Any difference is listed for the founder; nothing is corrected automatically.
+- The system never holds, moves or refunds money by itself, and never stores card details or buyer personal data (buyers are opaque ids).
 
 ## Data flow
 
@@ -124,12 +128,12 @@ compared with the provider's payout report; mismatches go to the founder
 | Department review: fast mode (one panel call) and full mode (parallel `Send` reviews + negotiation) | Built |
 | Step 4.1 pricing (research, verification, calculator tiers) | Built |
 | Steps 3.1, 4.2, 5.1, 6.1 | **MOCKED** drafts |
-| Payments, delivery, refunds, reconciliation | **STUBBED** (design above) |
+| Payments, webhooks, delivery, refunds, reconciliation (`app/payments.py`, `webhooks.py`, `delivery.py`, `refunds.py`, `reconcile.py`) | Built against a **MOCKED** payment provider; a real provider in test mode is on the roadmap |
 
 ## Roadmap
 
 1. Take phase 3 (Build) to LIVE: generate the first deliverable and run its tests as the "tests pass" gate.
-2. Add a founder-owned checkout in test mode behind the action gateway, following the sale-to-cash design.
+2. Swap the MOCKED provider for the founder's own payment provider account in test mode, behind the same action gateway and webhook handler.
 3. Add more region-aware sources (local forums, marketplaces) for MENA briefs.
 4. Grow the eval set of trick prompts and score the department pushback.
 5. Add more departments as files that contributors can drop in.

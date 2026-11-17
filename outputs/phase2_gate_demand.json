@@ -1,0 +1,18 @@
+{
+  "step": "2.4",
+  "gate": "demand",
+  "outcome": "stop",
+  "reasons": [
+    "no results entered yet: run the demand test, then enter the real number",
+    "paused: run the demand test, then start again with the real result"
+  ],
+  "comparison": null,
+  "thresholds": {
+    "metric": "waitlist signups",
+    "target": 0,
+    "days": 14,
+    "basis": "200 visitors x 0.1% conversion (ASSUMPTION unless sourced). Assumption based on median SaaS landing page conversion (3.8%) and waitlist conversion benchmarks (C2.2-7)",
+    "locked": true
+  },
+  "founder_decision": "approve"
+}

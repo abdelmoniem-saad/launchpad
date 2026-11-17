@@ -1,0 +1,18 @@
+{
+  "step": "2.4",
+  "gate": "demand",
+  "outcome": "stop",
+  "reasons": [
+    "no results entered yet: run the demand test, then enter the real number",
+    "paused: run the demand test, then start again with the real result"
+  ],
+  "comparison": null,
+  "thresholds": {
+    "metric": "waitlist signups",
+    "target": 10,
+    "days": 7,
+    "basis": "200 visitors x 5% conversion (ASSUMPTION unless sourced). Assumption based on low\u2011budget paid ads (\u2248$0.25 per click) and organic reach in niche communities. 200 visitors over 7 days yields ~10 sign\u2011ups, a 5% conversion.",
+    "locked": true
+  },
+  "founder_decision": "approve"
+}

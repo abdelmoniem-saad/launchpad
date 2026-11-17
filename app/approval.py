@@ -17,7 +17,7 @@ from pathlib import Path
 
 from app import decision_log as dl
 
-ACTION_TYPES = ("publish", "send", "spend", "sign", "hire", "contact")
+ACTION_TYPES = ("publish", "send", "spend", "sign", "hire", "contact", "refund")
 
 
 class ApprovalRequired(Exception):
