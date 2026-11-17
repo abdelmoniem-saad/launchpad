@@ -1,0 +1,12 @@
+# Use an Ollama already running on the host instead of the bundled ollama container.
+#   docker compose -f docker-compose.yml -f compose.host-ollama.yml up --build app searxng
+# Pull the model on the host first: ollama pull qwen3:8b
+services:
+  app:
+    depends_on: !override
+      searxng:
+        condition: service_started
+    environment:
+      - OLLAMA_HOST=http://host.docker.internal:11434
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
