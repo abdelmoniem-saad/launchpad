@@ -12,81 +12,74 @@ Strategy architect recommendation: **GO**. Phase is MOCKED; drafts only, nothing
 
 ## Work
 
-- **store_page_markdown:** # Notion Revision Tracker Pack
+- **store_page_markdown:** # Revision‑Tracking Notion Template Pack
 
-## What it is
-A set of Notion templates designed for freelance video editors who juggle multiple clients. The pack lets you:
+**What it is**
+A set of ready‑made Notion pages that let freelance video editors keep every client’s revisions, feedback rounds and deadlines in one place. The pack includes:
 
-- **Track revisions** – log every round of feedback in a single table.
-- **Set deadlines** – attach due dates and receive reminders.
-- **Keep all client info together** – store contracts, deliverables, and notes in one place.
+* **Client Overview** – a table of all active clients, their project status and key dates.
+* **Revision Tracker** – a board that records each feedback round, the reviewer’s comments and the editor’s action items.
+* **Deadline Calendar** – a shared calendar that syncs with the Revision Tracker and sends gentle reminders.
+* **Template Instructions** – a short, step‑by‑step guide on how to set up and use each page.
 
-All templates are ready‑to‑use and come with a short guide on how to set them up.
+**Why it matters**
+Freelance editors often juggle multiple projects and need a single, clear view of where each client’s feedback sits. The pack removes the need to switch between email, spreadsheets and project‑management tools.
 
-## Why you need it
-When you work with several clients at once, it’s easy to lose track of who wants what and when. The Revision Tracker Pack keeps everything in one view so you can focus on editing, not on chasing emails.
+**How it works**
+1. Purchase the pack.
+2. Open the bundled Notion link.
+3. Follow the quick‑start guide to duplicate the pages into your own workspace.
+4. Start adding clients, revisions and deadlines – the structure is ready to go.
 
-## How it works
-1. **Download** the ZIP file from the store.
-2. **Open** the main template in Notion.
-3. **Follow** the 5‑minute onboarding guide.
-4. **Start** adding clients, projects, and feedback rounds.
+**What you’ll get**
+* One‑time download of the Notion pages.
+* A 30‑minute video walkthrough (optional, included in the pack).
+* Email support for the first 30 days if you run into setup questions.
 
-## Pricing
-$19.99 (one‑time purchase). No subscription, no hidden fees.
+**No hidden fees** – the price covers the template pack and the support period.
 
-## Delivery
-Your purchase is delivered instantly via email. A link to the ZIP file is sent automatically after payment confirmation.
+**Get started**
+[Join the waitlist](/waitlist) to be the first to receive the pack when it launches.
 
----
+- **launch_post:** Hey fellow editors,
 
-**Questions?** Email us at support@example.com.
+I’ve built a small set of Notion pages that help you keep every client’s revisions, feedback rounds and deadlines in one place. It’s a quick, no‑frills tool that fits into the way you already work.
 
-- **launch_post:** Hey fellow video editors,
+If you’re juggling multiple projects and find yourself chasing emails or spreadsheets for feedback, this might be useful.
 
-I’ve built a small set of Notion templates that help you keep every client’s revisions, feedback rounds, and deadlines in one place. It’s a quick way to stop chasing emails and start editing.
+I’m putting the pack on a waitlist right now. If you’re interested, drop your email here: [waitlist link] – I’ll let you know as soon as it’s ready.
 
-If you’re juggling multiple projects, this pack might be useful.
+No pressure, no sales pitch – just a tool I think could make your workflow smoother.
 
-I’m putting it on sale for $19.99 and will ship it instantly via email. No upsells, no hidden fees.
+Thanks for reading!
+- **delivery_plan:** 1. **Purchase** – The buyer pays the one‑time price via the store page checkout.
+2. **Confirmation email** – An automated email is sent immediately with a link to the Notion template pack.
+3. **Notion access** – The buyer clicks the link, duplicates the pages into their own workspace, and follows the included instructions.
+4. **Support window** – For 30 days after download, the founder will be available via email for any setup questions.
+5. **Feedback loop** – After the support window, the founder will send a short survey to gather user experience insights.
 
-Let me know what you think – I’d love to hear your feedback.
-
-- **delivery_plan:** 1. Payment is processed through the store’s checkout system.
-2. Once the transaction is confirmed, an automated email is sent to the buyer’s registered address.
-3. The email contains a secure link to download a ZIP file that includes:
-   - The main Notion template.
-   - A 5‑minute onboarding PDF.
-   - A short FAQ.
-4. The buyer can open the ZIP, import the template into Notion, and start using it immediately.
-5. No further manual steps are required from the founder. The process is fully automated within the store’s infrastructure.
 
 ## Department positions and pushback
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can create the templates and write the onboarding guide within the 10‑hour weekly limit. The email delivery is handled by the store platform, so no additional time is needed. | None – the scope matches the founder’s skills and hours. | If the founder wants to add more advanced features, it would require extra hours beyond the weekly budget. |
-| marketing | The store page and launch post are clear, honest, and avoid hype. They focus on the core benefit of tracking revisions. | The post could include a call‑to‑action to join a waitlist for future updates, but it is not required for this launch. | Adding a waitlist link would increase copy time but could improve future demand validation. |
-| finance | The $19.99 price is within the founder’s $300 budget and does not require additional costs. | None – the cost of the store platform is assumed to be covered by the budget. | If the founder wants to offer a discount, it would reduce revenue but still stay within budget. |
-| product | The product is a minimal template pack that meets the validated need. | None – the scope is within the founder’s weekly hours. | Adding extra templates would increase development time beyond the 10‑hour limit. |
-| legal | The drafts are intentionally minimal and labeled as not legal advice. | The founder should have a lawyer review the terms, especially the license and liability clauses, to ensure compliance with local consumer protection laws. | Allocate a small portion of the budget (e.g., $50–$100) for a brief legal review. |
-| sales | The offer is a single price with no tiered features, keeping the sales process simple. | None – the pricing is straightforward and competitive. | Adding a premium tier would complicate the sales funnel and require more content. |
-| operations | Delivery is fully automated via email, requiring no manual intervention from the founder. | None – the process fits within the founder’s time constraints. | If the founder wants to offer personalized onboarding, it would require additional hours. |
+| founder_fit | The drafts use only the founder’s skills (video editing, Notion, writing tutorials) and fit within the 10‑hour weekly limit. No new tools or expertise are required. |  |  |
+| marketing | The store page and launch post focus on clear value and avoid any urgency or promise of income. | The call‑to‑action link to the waitlist is essential; without it, conversion may be low. Ensure the waitlist link is prominent. | Add a simple sign‑up form to capture emails directly on the page. |
+| finance | All costs are within the $300 budget – the founder’s time and a small email service for the waitlist are the only expenses. |  |  |
+| product | The product is a minimal template pack that can be built within the founder’s skill set and time constraints. |  |  |
+| legal | The store page uses plain language and does not collect unnecessary data. | Ensure the support period and email contact details comply with privacy best practices. | Add a brief privacy notice linking to a full policy. |
+| sales | The offer is a one‑time price with no hidden fees, which aligns with the founder’s values. |  |  |
+| operations | Delivery is automated via email and Notion, requiring minimal founder involvement after launch. |  |  |
 
 ## Open disagreements for the founder
 
-- None – the scope matches the founder’s skills and hours.
-- The post could include a call‑to‑action to join a waitlist for future updates, but it is not required for this launch.
-- None – the cost of the store platform is assumed to be covered by the budget.
-- None – the scope is within the founder’s weekly hours.
-- None – the terms are simple and do not collect unnecessary data.
-- None – the pricing is straightforward and competitive.
-- None – the process fits within the founder’s time constraints.
+- The call‑to‑action link to the waitlist is essential; without it, conversion may be low. Ensure the waitlist link is prominent.
+- Ensure the support period and email contact details comply with privacy best practices.
 
 ## Proposed actions (MOCKED, pending founder approval in the action gateway)
 
-- act_736d7b09
-- act_b1bb4d88
+- act_3e4e68f7
+- act_003fef53
 
 ## Founder checkpoint
 

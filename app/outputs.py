@@ -107,6 +107,32 @@ def write_step(state, step, decision=None, gate=None) -> Path:
     return path
 
 
+def write_product(state, step) -> Path:
+    """The MVP built in step 3.1, as the buyer would receive it. Built and tested here; never published or sold."""
+    w = state.get("work") or {}
+    phase, num = step["id"].split(".")
+    res = (state.get("quant") or {}).get("build_tests") or {}
+    lines = [f"# {w.get('product_title') or 'MVP'}", "",
+             f"> MVP built by the pipeline in step {step['id']} for the founder's review. Build tests: "
+             f"{res.get('passed', 0)}/{res.get('total', 0)} passed. Not published, listed or sold: launching it needs "
+             "the founder's approval (phase 5, MOCKED).", ""]
+    if (state.get("evidence") or {}).get("demo_input"):
+        lines += ["> **DEMO INPUT:** this run reached the build step with a hypothetical step 2.4 result; demand is NOT validated.", ""]
+    for f in w.get("core_features") or []:
+        if isinstance(f, dict):
+            lines += [f"## {f.get('name', '')}", "", str(f.get("content", "")), ""]
+    lines += ["## How to use it", "", str(w.get("user_docs") or ""), ""]
+    if w.get("out_of_scope"):
+        lines += ["## Not included in this version", ""] + [f"- {x}" for x in w["out_of_scope"]] + [""]
+    if res.get("tests"):
+        lines += ["## Build tests", "", "| Test | Result | Detail |", "|---|---|---|"]
+        lines += [f"| {t['name']} | {'PASS' if t['passed'] else 'FAIL'} | {str(t['detail']).replace('|', '/')} |" for t in res["tests"]]
+        lines.append("")
+    path = _p(state, f"phase{phase}_step{num}_mvp_product{sfx(state)}.md")
+    path.write_text("\n".join(lines), "utf-8")
+    return path
+
+
 def write_gate(state, step, name: str, gate: dict) -> None:
     data = {"step": step["id"], "gate": name, "outcome": gate["outcome"], "reasons": gate["reasons"],
             "comparison": gate.get("comparison"), "thresholds": state.get("thresholds"),

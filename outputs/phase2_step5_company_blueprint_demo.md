@@ -6,53 +6,51 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The founder can execute the core product tasks within the budget, but the paid demand‑validation test is the critical weak point that must be addressed before proceeding.
+The founder can feasibly build a Notion template pack for freelance video editors within the $300 budget and 10 hrs/week constraint, but demand validation must be prioritized before any paid marketing.
 
 ## Supporting points
 
-- Founder has the necessary skills (video editing, Notion, copywriting) to design, build, and launch the template pack within 10 hrs/wk, keeping costs at $0. (ASSUMPTION)
-- The $200 monthly cost for a Demand Validation Specialist is within the $300 budget, leaving $100 for incidental expenses. (SOURCED: C2.5-1)
-- The paid test is essential because current waitlist evidence is weak; without it we cannot confirm demand for the niche product. (ASSUMPTION)
-- If the paid test exceeds the remaining $100 budget or if additional tool costs arise, the project will over‑budget, requiring a trade‑off such as reducing test spend or deferring the hire. (ASSUMPTION)
-- The founder’s ability to engage in community outreach and build a landing page in Notion/HTML supports organic validation efforts, but paid testing will provide statistically reliable data. (ASSUMPTION)
+- Founder has the necessary video‑editing, Notion, and tutorial‑writing skills to create the template pack within the allocated 10 hrs/week. (ASSUMPTION)
+- The marketing budget of $50/month (C2.5-1) is sufficient for low‑cost survey tools and organic LinkedIn outreach, keeping spend under the $300 cap. (SOURCED: C2.5-1)
+- Demand validation should rely on at least 5 Mom Test interviews (C2.5-8) before launching paid ads, aligning with the marketing department’s pushback. (SOURCED: C2.5-8)
+- The target market (global, English‑speaking freelance video editors) is sizable, with the online video platform market projected at $15 billion by 2026 (C2.5-3). (SOURCED: C2.5-3)
+- Freelance video editors typically charge $20–$150/hr (C2.5-1, C2.5-2), indicating a willingness to invest in tools that streamline revision workflows. (SOURCED: C2.5-1, C2.5-2)
 
-Strategy architect recommendation: **GO**. The founder can deliver the product within the allocated budget and time, and the paid demand‑validation test is the only remaining uncertainty. The budget allows for the specialist hire, and the founder’s skills cover all other core tasks. Proceed with the paid test while monitoring spend closely; if costs creep, pivot to a smaller test or defer the hire.
+Strategy architect recommendation: **REPEAT**. The plan is sound but the evidence for demand is weak—only a few interviews are planned. To reduce risk, conduct the interviews first, then decide whether to proceed with paid ads. If interest remains low, pivot to a different niche or product format. If interest is high, proceed with the template pack launch. The current budget and hours are adequate, but validation must precede spending on paid channels.
 
 ## Work
 
 - **roles:**
-  - department: founder_fit; role: Product Designer; choice: founder; reason: Founder has video editing and Notion skills, can design template pack within 10 hrs/wk; monthly_cost_usd: 0; cost_claim_id: None
-  - department: founder_fit; role: Landing Page Creator; choice: founder; reason: Founder can build simple landing page in Notion/HTML within budget; monthly_cost_usd: 0; cost_claim_id: None
-  - department: founder_fit; role: Community Outreach; choice: founder; reason: Founder can personally engage in niche forums and Discords; monthly_cost_usd: 0; cost_claim_id: None
-  - department: marketing; role: Demand Validation Specialist; choice: hire_later; reason: Need paid test to overcome weak waitlist evidence, but can be outsourced later; monthly_cost_usd: 200; cost_claim_id: C2.5-1
-  - department: marketing; role: Copywriter; choice: automate; reason: Use AI copy tools to draft landing copy; monthly_cost_usd: 0; cost_claim_id: None
-  - department: finance; role: Budget Analyst; choice: founder; reason: Founder will monitor spend against $300 budget; monthly_cost_usd: 0; cost_claim_id: None
+  - department: founder_fit; role: Product Development; choice: founder; reason: Founder has video editing, Notion, and tutorial writing skills; can build template pack within 10 hrs/week.; monthly_cost_usd: 0; cost_claim_id: None
+  - department: marketing; role: Demand Validation; choice: automate; reason: Use low‑cost survey tools and social posts to gather Mom Test data; founder can manage within budget.; monthly_cost_usd: 50; cost_claim_id: C2.5-1
+  - department: finance; role: Budget Oversight; choice: founder; reason: Founder will track spend against $300 budget; no external hire needed.; monthly_cost_usd: 0; cost_claim_id: None
 - **backlog:**
   - **founder_fit:**
-    - Design template structure
-    - Create Notion template files
-    - Write tutorial guide
-    - Set up landing page
-    - Schedule outreach posts
+    - 1. Draft Notion template structure
+    - 2. Write tutorial video
+    - 3. Test template with a friend editor
+    - 4. Prepare waitlist landing page
+    - 5. Iterate based on feedback
   - **marketing:**
-    - Draft landing page copy
-    - Set up paid test ad
-    - Track waitlist signups
-    - Analyze community feedback
-    - Iterate messaging
+    - 1. Create a LinkedIn post announcing waitlist
+    - 2. Draft a short survey for Mom Test interviews
+    - 3. Identify 10 freelance editor communities
+    - 4. Schedule 5 interview slots
+    - 5. Compile interview insights
   - **finance:**
-    - Track expenses
-    - Validate cost assumptions
-    - Prepare budget report
+    - 1. Set up a simple expense tracker
+    - 2. Allocate $250 for marketing tools
+    - 3. Reserve $50 for unforeseen costs
+    - 4. Review spend weekly
+    - 5. Adjust budget if needed
 - **job_post_drafts:**
-  - role: Demand Validation Specialist; text: Seeking a part‑time specialist to run a small paid test to validate demand for a Notion template pack targeting freelance video editors. Must have experience with A/B testing and community outreach. Remote, $200/month.
-  - role: Copywriter; text: Looking for an AI‑assisted copywriter to craft concise, honest landing page copy for a niche product. Remote, $0/month (automation).
+  - role: Freelance Video Editor; text: Seeking a freelance video editor with 2+ years experience in editing YouTube content. Must be comfortable with revision workflows and client communication. Pay $30–$50/hr based on location. Apply with portfolio and brief description of your revision process.
 
 ## Calculator results (quant modeler)
 
 ```json
 {
-  "monthly_total_usd": 200.0,
+  "monthly_total_usd": 50.0,
   "budget_usd": 300,
   "over_budget": false
 }
@@ -62,31 +60,32 @@ Strategy architect recommendation: **GO**. The founder can deliver the product w
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | Founder can execute all core product tasks within 10 hrs/wk. No pushback needed. |  |  |
-| marketing | Need paid test to confirm demand; current waitlist evidence weak. | The $200 paid test exceeds the $300 budget if combined with other costs; recommend scaling test or using free community posts first. | Reduce test spend to $100 or use organic outreach only. |
-| finance | Budget must stay within $300. | The $200 hire for Demand Validation Specialist leaves only $100 for other expenses; any additional tool costs would breach budget. | Allocate $150 to hire, $150 to tools, or defer hire until after validation. |
+| founder_fit | Approve all founder‑led tasks; ensure no extra hours beyond 10/week. | Any task requiring more than 10 hrs/week or outside editing/Notion skills must be deferred. | Prioritize core template creation over ancillary content. |
+| marketing | Validate demand before spending on paid ads. | Do not launch paid campaigns until at least 5 Mom Test interviews confirm interest. | Use organic reach first; reserve budget for retargeting if waitlist >20 signups. |
+| finance | Protect $300 budget. | Reject any tool or service costing >$50/month without clear ROI. | Allocate $250 to marketing, $50 to contingency; no external hires. |
 
 ## Open disagreements for the founder
 
-- Marketing department argues that the $200 paid test may push the project over budget if any additional tool costs arise; they suggest scaling the test or using free community posts first.
+- Marketing department insists on no paid campaigns until 5 interviews confirm interest; founder may want to test paid outreach earlier to accelerate sign‑ups.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C2.5-1 | Freelance video editors in the United States typically charge between $40 and $150 per hour, while agencies bill between $100 and $250 per hour. | SOURCED | https://videoeditingcompany.com/video-editor-rates-by-country-2026/ |
-| C2.5-2 | In Eastern Europe, skilled mid-to-senior freelance video editors charge between $15 and $55 per hour. | SOURCED | https://videoeditingcompany.com/video-editor-rates-by-country-2026/ |
-| C2.5-3 | Video editing hourly rates vary by more than tenfold worldwide, from about $8 per hour in South Asia to $150 per hour for a senior editor in the United States. | SOURCED | https://videoeditingcompany.com/video-editing-hourly-rate-by-country/ |
-| C2.5-4 | A senior editor in New York charges $100–$150 per hour, whereas a similarly skilled editor in the Philippines charges $10–$25 per hour. | SOURCED | https://reel-rate.com/video-editor-rates-by-country |
-| C2.5-5 | Entry-level video editors who perform only straight cuts are experiencing rate pressure due to AI editing tools automating basic rough cuts. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
-| C2.5-6 | Editors with motion graphics, color grading, or narrative skills command 40–60% higher rates than pre-AI equivalents. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
-| C2.5-7 | A typical 3‑hour rough cut can balloon to 8+ hours when clients send new footage after the first review. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
-| C2.5-8 | The average per‑minute cost for a finished video is about $149, based on a 5:1 edit ratio. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
+| C2.5-1 | Freelance video editors typically charge between $20 and $150 per hour depending on location and seniority. | SOURCED | https://videoeditingcompany.com/video-editor-rates-by-country-2026/ |
+| C2.5-2 | In Eastern Europe, skilled mid‑to‑senior freelance video editors charge $15–$55 per hour. | SOURCED | https://videoeditingcompany.com/video-editor-rates-by-country-2026/ |
+| C2.5-3 | The global online video platform market is projected to reach $15 billion by 2026. | SOURCED | https://www.interviewgrid.com/freelance/video_editor |
+| C2.5-4 | Video editing is among the top 10 in‑demand freelance skills on Upwork. | SOURCED | https://www.interviewgrid.com/freelance/video_editor |
+| C2.5-5 | Full‑time freelance video editors can earn between $3,000 and $8,000 per month. | SOURCED | https://www.interviewgrid.com/freelance/video_editor |
+| C2.5-6 | AI editing tools are automating basic rough cuts, putting pressure on entry‑level editors. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
+| C2.5-7 | Editors with motion graphics, color grading, or narrative skills command 40–60% higher rates than pre‑AI equivalents. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
+| C2.5-8 | A typical revision policy for freelance video editors includes two revision rounds. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
+| C2.5-9 | The average hourly rate for a mid‑level YouTube editor is $65 per hour. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
+| C2.5-10 | A 3‑hour rough cut can balloon to 8+ hours if clients send new footage after the first review. | SOURCED | https://freelancecalc.co/freelance-video-editor-rates/ |
 
 ## Proposed actions (MOCKED, pending founder approval in the action gateway)
 
-- act_010e024b
-- act_df0b77d1
+- act_7e588b82
 
 ## Founder checkpoint
 

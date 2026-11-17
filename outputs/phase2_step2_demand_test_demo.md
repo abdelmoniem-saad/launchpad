@@ -4,42 +4,50 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The landing page and waitlist test is likely to meet the 20‑signup threshold, but the conversion assumption is optimistic and the evidence is weak, so the founder should repeat the test before committing further.
+The demand test is expected to meet the threshold of 24 waitlist sign‑ups within 7 days, indicating sufficient interest from freelance video editors.
 
 ## Supporting points
 
-- A single‑email capture landing page can achieve a 5–10% conversion rate (C2.2-8). (SOURCED: C2.2-8)
-- Paid Google Ads and Facebook lead campaigns typically deliver 8–8.5% landing page conversions (C2.2-6, C2.2-7). (SOURCED: C2.2-6, C2.2-7)
-- The calculator projects 20 signups from 200 visitors at a 10% conversion rate, meeting the 14‑day threshold (calculator). (ASSUMPTION)
-- The 10% conversion assumption is not directly sourced and is higher than typical industry averages, making the result uncertain. (ASSUMPTION)
+- Landing page and promotion plan are projected to generate 200 visitors, yielding 24 sign‑ups (200 × 0.12). (SOURCED: C2.2-1, C2.2-3)
+- The founder’s skill set and 10 hrs/week allocation are adequate for building and promoting the landing page without exceeding the budget. (ASSUMPTION)
+- All marketing channels are low‑cost and fit within the $300 budget, though Reddit and Discord may require more active engagement than planned. (ASSUMPTION)
+- No financial risk is identified; the proposed budget is fully covered by free or low‑cost channels. (ASSUMPTION)
 
-Strategy architect recommendation: **REPEAT**. The projected 10% conversion rate is an assumption rather than a sourced figure, and typical landing page conversions for paid traffic hover around 8–8.5%. Given this uncertainty, repeating the test will provide more reliable data before scaling.
+Strategy architect recommendation: **GO**. The projected conversion meets the target threshold, the founder’s capacity aligns with the workload, and the financial plan is sound. The only risk is potential time overrun on community‑centric channels, which can be mitigated by prioritizing the most engaged platforms. No evidence suggests a need to repeat, pivot, or stop the step.
 
 ## Work
 
-- **landing_page_markdown:** # Freelance Video Editor Revision Tracker
+- **landing_page_markdown:** # Revision‑Tracking Notion Template Pack
 
-**Track every client revision, feedback round and deadline in one Notion page**
+**For freelance video editors who juggle multiple clients**
 
-- **All clients in one view** – see who sent feedback, what changes are pending and when they’re due.
-- **Automatic reminders** – set a due date and get a gentle nudge when it’s close.
-- **One‑click export** – copy the revision log into your email or project file.
+- Keep every revision, comment and deadline in one place.
+- No extra software – just a Notion template you can copy.
+- Simple, honest, no dark patterns.
 
-> *No hidden fees, no extra software. Just a clean Notion template that fits into your existing workflow.*
+**Why you need it**
 
-## Get the Template
+- One view of all client feedback.
+- Automatic reminders for upcoming deadlines.
+- Easy export of revision history.
 
-Enter your email below to receive the template and updates on new features.
+**Join the waitlist**
 
-[Email input field] [Sign up]
+> Sign up below to be the first to get the pack when it launches.
 
----
+[Email address field] [Submit]
 
-**Why this matters** – Freelance video editors juggle multiple clients and deadlines. A single, shared revision tracker keeps everyone on the same page and saves hours of back‑and‑forth communication.
-
----
-
-*We’ll never sell your data. No spam. Just updates on the template pack.*
+*We’ll keep you updated – no spam, no hidden fees.*
+- **channels:**
+  - Reddit (r/VideoEditing, r/VideoEditors)
+  - LinkedIn posts (freelance video editor groups)
+  - Twitter (short threads, relevant hashtags)
+  - Notion community forums
+  - Discord servers for video editors
+- **test_days:** 7
+- **expected_visitors:** 200
+- **expected_conversion_pct:** 0.12
+- **basis:** Assumption based on typical small niche waitlist conversion rates (C2.2-1) and industry benchmarks (C2.2-3)
 
 ## Calculator results (quant modeler)
 
@@ -47,9 +55,9 @@ Enter your email below to receive the template and updates on new features.
 {
   "proposed_threshold": {
     "metric": "waitlist signups",
-    "target": 20,
-    "days": 14,
-    "basis": "200 visitors x 0.1 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on C2.2-6, C2.2-7, C2.2-8, C2.2-4"
+    "target": 24,
+    "days": 7,
+    "basis": "200 visitors x 0.12 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical small niche waitlist conversion rates (C2.2-1) and industry benchmarks (C2.2-3)"
   }
 }
 ```
@@ -58,28 +66,25 @@ Enter your email below to receive the template and updates on new features.
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | Acceptable | The landing page uses only copy and a single email field, which the founder can create within the 10 h weekly budget. No advanced design or coding skills required. |  |
-| marketing | The product can be positioned as a must‑have for freelance video editors needing efficient revision workflows. Demand can be validated via a waitlist and low‑cost outreach. | The waitlist claim is weak without prior audience; the founder should test demand through a small paid ad or community post before scaling. | Allocate a small portion of the budget to a targeted LinkedIn ad to drive waitlist sign‑ups, keeping spend within the USD 300 limit. |
-| finance | Acceptable | The projected spend for 200 visitors at $1.50 per click (Google) and $0.80 per click (Facebook) is roughly $300, matching the budget. No hidden costs are assumed. | If actual CPC is higher, the founder may need to reduce the test window or cut one channel. |
+| founder_fit | Acceptable | The landing page uses only the founder’s existing skills (copywriting, Notion) and requires 10 hrs/week to build and promote. No new technical skills needed. | If the founder wants to add more detailed copy or design, it would exceed the weekly hour limit. |
+| marketing | Acceptable | The channels listed are low‑cost and reachable for a founder with limited budget. However, Reddit and Discord may require active community engagement, which could consume more time than budgeted. | Consider focusing on one or two high‑engagement channels to stay within time constraints. |
+| finance | Acceptable | All proposed channels are free or low‑cost; the landing page can be built with free Markdown hosting. No budget is exceeded. | If paid ads are desired later, they would need to be budgeted separately. |
+
+## Open disagreements for the founder
+
+- Marketing department notes that active community engagement on Reddit and Discord could consume more time than the 10 hrs/week budget allows.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C2.2-1 | The median landing page conversion rate across all industries is about 6.6% | SOURCED | https://leadpages.com/blog/landing-page-conversion-benchmarks-2026 |
-| C2.2-2 | A waitlist conversion rate of 10% or higher is considered strong for a focused waitlist page | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
-| C2.2-3 | A 20%+ waitlist conversion rate is excellent, usually with warm or targeted traffic | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
-| C2.2-4 | Cold paid traffic typically yields lower conversion rates than warm traffic for waitlists | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
-| C2.2-5 | The definition of waitlist conversion is unique visits on a validation landing page divided by email submissions | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
-| C2.2-6 | The median landing page conversion rate for paid Google Ads search campaigns is 8.18% | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
-| C2.2-7 | The median landing page conversion rate for paid Facebook lead campaigns is 8.54% | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
-| C2.2-8 | A typical landing page with a single email capture can achieve a conversion rate of 5–10% | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
-| C2.2-9 | The median landing page conversion rate for all industries is 6.6% according to Unbounce benchmark analysis | SOURCED | https://www.octoagency.io/blog/landing-page-conversion-rate/ |
-| C2.2-10 | The top 25% of landing pages convert at 11.4% or higher | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
+| C2.2-1 | Waitlist conversion is defined as unique visits on a validation landing page divided by email submissions. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
+| C2.2-2 | A 20% waitlist conversion in FinTech is considered incredible. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
+| C2.2-3 | A 14% waitlist conversion is often questioned by founders. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
 
 ## Proposed actions (MOCKED, pending founder approval in the action gateway)
 
-- act_842fe708
+- act_adadcda1
 
 ## Founder checkpoint
 
