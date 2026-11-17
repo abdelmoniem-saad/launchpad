@@ -53,18 +53,8 @@ Every step ends in a founder checkpoint and writes `outputs/phase<N>_step<M>_<na
 - **2.4 Demand gate:** the founder enters the real result, and code compares it with the locked target. The system never fills in this number. Output `phase2_step4_demand_results.md`, `phase2_gate_demand.json`.
 - **2.5 Company blueprint:** one role per department. For each: founder does it / automate it / hire later, with the reason and a monthly cost (sourced or ASSUMPTION). The calculator compares the total with the budget; Finance pushes back in code when it is over. Each department gets a 3-5 item backlog, and job posts are MOCKED drafts. Output `phase2_step5_company_blueprint.md`.
 
-### Phase 3: Build (3.1 MOCKED; 3.2-3.3 not built yet, designed here)
-Product department added. Core step: **build the product**, a tested MVP with user docs.
-
-- **3.1 MVP spec (MOCKED draft).** The strategy architect and the Product department turn the approved Lean Canvas and the step 1.4 interview pains into at most 5 core features, an out-of-scope list, a user docs draft and a test plan with one acceptance check per feature. Output `phase3_step1_mvp_spec.md` (committed example: `outputs/phase3_step1_mvp_spec_demo.md`).
-- **3.2 Build the product (not built yet).** A builder agent writes the product files for an in-scope digital product (template, guide, small tool) into a git-ignored workspace: one or more files per core feature, plus the user docs. For the demo brief, a Notion template pack, that means CSV files Notion can import as the Clients, Projects and Revisions databases, the dashboard page and the quick-start guide. Tools: a file writer limited to the workspace; no network and no publishing. Anything outbound still goes through the action gateway.
-- **3.3 Test and document (not built yet).** The 3.1 test plan becomes checks in code: each core feature maps to a product file and an acceptance check, every check runs, the user docs mention every feature, and the rule guard scans the product files (no income promises, fake reviews or urgency). The tests-pass gate decides in code (see [Gates](#gates)), then the founder approves the build at a checkpoint.
-
-```
-3.1 MVP spec -> founder approves -> 3.2 build files -> 3.3 run checks -> tests-pass gate
-tests-pass gate: all checks pass -> founder checkpoint -> Phase 4
-                 a check fails   -> repeat 3.2 (twice) -> pivot to 3.1 to cut scope -> stop
-```
+### Phase 3: Build (MOCKED)
+Product department added. MVP spec (at most 5 core features), user docs draft, test plan. Output `phase3_step1_mvp_spec.md`.
 
 ### Phase 4: Commercial setup (4.1 LIVE, 4.2 MOCKED)
 Legal and Sales added.
@@ -89,7 +79,7 @@ Support added. Support reply templates, a metrics plan with a decision threshold
 | Rule guard (every step) | Output blocked after one rewrite | **repeat** once, then **stop** |
 | Evidence gate (after 1.4) | Verified, sourced Phase 1 claims and sourced demand signals | fewer than 3 sourced claims or a sourced ratio under 0.3 → **stop**; no sourced demand signal → **pivot** (once, then stop); sourced signals that only show the customer's problems, none showing demand for this product → **stop ("don't launch this")**; otherwise **go** |
 | Demand gate (2.4) | Founder-entered result against the threshold locked in 2.2 | met → **go**; at least 50% of target → **pivot**; below 50% → **stop**; no locked threshold → **stop**; no result yet → **repeat** |
-| Tests pass (Build, after 3.3) | Not built yet (designed in Phase 3): every 3.1 core feature maps to a product file and an acceptance check, all checks pass, the user docs cover every feature, the rule guard passes on the product files | all pass → **go** (founder checkpoint); a failing check → **repeat** 3.2 (twice), then **pivot** back to 3.1 to cut scope; still failing → **stop** |
+| Tests pass (Build) | MOCKED in this version | n/a |
 
 The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, when the sources show the customer's problems but no one wanting this product (a product demand check over the step 1.4 signals), or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
 
@@ -140,7 +130,6 @@ provider's payout report; access vs order status; mismatches go to the founder
 | Department review: fast mode (one panel call) and full mode (parallel `Send` reviews + negotiation) | Built |
 | Step 4.1 pricing (research, verification, calculator tiers) | Built |
 | Steps 3.1, 4.2, 5.1, 6.1 | **MOCKED** drafts |
-| Steps 3.2-3.3 (build the product files, run the checks) and the tests-pass gate | Not built yet; designed in [Phase 3](#phase-3-build-31-mocked-32-33-not-built-yet-designed-here) |
 | Payments, webhooks, delivery, refunds, reconciliation (`app/payments.py`, `webhooks.py`, `delivery.py`, `refunds.py`, `reconcile.py`) | Built against a **MOCKED** payment provider; no real or sandbox provider is used |
 
 ## Roadmap

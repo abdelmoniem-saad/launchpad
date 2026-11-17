@@ -4,17 +4,6 @@
 
 An open-source AI consulting firm that a founder hires to take a brief to a validated, sellable **digital** product. It builds the company's departments along the way, keeps the founder in charge of every decision, and says "don't launch this" when the evidence is weak. It runs on a local open-weight model with no keys and no paid services.
 
-It is for a first-time founder with a skill, a small budget and limited time who needs an honest answer before spending months on an idea. Closed AI business tools promise income, lock founders into their platform and stop at a generic plan. This one is Apache-2.0, runs locally for $0, gives every claim a source URL or an `ASSUMPTION` label, and records every agent action in [decision_log.json](decision_log.json).
-
-**What the committed runs show** (every file in `outputs/` and `decision_log.json` was produced by running the pipeline):
-
-- **Weak idea: STOP.** For crossword packs about medieval tax law for dog groomers, the evidence gate finds no sourced demand signal for the product, has already pivoted once, and recommends STOP ([outputs/phase1_gate_evidence_weak.md](outputs/phase1_gate_evidence_weak.md)).
-- **Strong idea: GO, then a STOP.** The evidence gate passes (29/40 claims sourced and verified, 10 of 10 demand signals), then the demand gate stops because no real waitlist result was entered; the system never invents one ([outputs/phase1_gate_evidence.md](outputs/phase1_gate_evidence.md), [outputs/phase2_gate_demand.md](outputs/phase2_gate_demand.md)).
-- **Excluded product: STOP at intake** with the reason (a crypto signals app, [outputs/phase1_gate_final_recommendation_excluded.md](outputs/phase1_gate_final_recommendation_excluded.md)).
-- **All six phases:** a run labelled DEMO INPUT (hypothetical waitlist result) continues through phase 6 ([outputs/phase6_gate_final_recommendation_demo.md](outputs/phase6_gate_final_recommendation_demo.md)).
-- **Sale to cash (MOCKED provider):** 13/13 checks passed: payment triggers delivery, duplicate webhooks are ignored, a founder-approved refund revokes access, and reconciliation matches the payout ([outputs/payment_test_log.md](outputs/payment_test_log.md)).
-- **Smoke tests:** 55 pass with `pytest`, with no network or model needed.
-
 ## Quickstart
 
 ```bash
@@ -60,7 +49,7 @@ There is also a command-line founder console, which runs the same graph: `python
 | 2 Validate | 2.3 Collaborations: communities, partners, outreach drafts | **Working** (sending is **MOCKED**) |
 | 2 Validate | 2.4 Founder enters the real result; demand gate compares it in code | **Working** |
 | 2 Validate | 2.5 Company blueprint: roles, founder / automate / hire later, cost against budget | **Working** (job posts are **MOCKED**) |
-| 3 Build | 3.1 The model writes the MVP spec, user docs draft and test plan ([example](outputs/phase3_step1_mvp_spec_demo.md)); the MVP itself is not built yet | **MOCKED** |
+| 3 Build | MVP spec, user docs draft, test plan | **MOCKED** |
 | 4 Commercial setup | 4.1 Pricing: competitor prices researched and verified; tiers computed by the calculator only from prices a verified source quote contains | **Working** |
 | 4 Commercial setup | 4.2 Draft terms, privacy and refund policies (not legal advice) | **MOCKED** |
 | 5 Launch | Store page and launch post drafts; automatic delivery to buyers | **MOCKED** |
