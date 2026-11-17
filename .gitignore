@@ -229,3 +229,17 @@ data/
 *.pptx
 *.pdf
 CLAUDE.md
+
+# IDEs: JetBrains (PyCharm) and VS Code
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/
+*.code-workspace
+.history/
+
+# OS files
+.DS_Store
+Thumbs.db
