@@ -15,7 +15,7 @@ from app import approval, gates
 from app import decision_log as dl
 from app.agents import (compliance_officer, departments, engagement_manager, market_researcher,
                         quant_modeler, synthesis_lead)
-from app.guardrails import health_check, label_numeric_claims, tier2_verify
+from app.guardrails import health_check, label_numeric_claims, product_demand_check, tier2_verify
 from app.phases import roster, step_of
 from app.state import EngagementState
 
@@ -132,6 +132,9 @@ def verify(state: EngagementState) -> dict:
     if mine and step.get("live") and not state.get("step_blocked"):
         mine, f2 = tier2_verify(mine, state.get("sources_text") or {}, step["id"])
         flags += f2
+        if step.get("gate") == "evidence":  # does the evidence show demand for this product, not just the problem?
+            mine, f3 = product_demand_check(mine, state["brief"], (state.get("work_memory") or {}).get("niche"), step["id"])
+            flags += f3
     claims = _replace_step_claims(state, step["id"], mine)
     report = dict(state.get("report") or {})
     types = {c["id"]: c["type"] for c in mine}

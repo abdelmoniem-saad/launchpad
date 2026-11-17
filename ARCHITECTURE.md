@@ -77,11 +77,11 @@ Support added. Support reply templates, a metrics plan with a decision threshold
 | Intake | Brief complete (otherwise a founder interview); product not excluded | excluded → **stop**, with the reason |
 | Founder checkpoint (every step) | Founder chooses approve / edit / redo with feedback / stop | redo → **repeat** (once per step, then stop); stop → **stop** |
 | Rule guard (every step) | Output blocked after one rewrite | **repeat** once, then **stop** |
-| Evidence gate (after 1.4) | Verified, sourced Phase 1 claims and sourced demand signals | fewer than 3 sourced claims or a sourced ratio under 0.3 → **stop**; no sourced demand signal → **pivot** (once, then stop); otherwise **go** |
+| Evidence gate (after 1.4) | Verified, sourced Phase 1 claims and sourced demand signals | fewer than 3 sourced claims or a sourced ratio under 0.3 → **stop**; no sourced demand signal → **pivot** (once, then stop); sourced signals that only show the customer's problems, none showing demand for this product → **stop ("don't launch this")**; otherwise **go** |
 | Demand gate (2.4) | Founder-entered result against the threshold locked in 2.2 | met → **go**; at least 50% of target → **pivot**; below 50% → **stop**; no locked threshold → **stop**; no result yet → **repeat** |
 | Tests pass (Build) | MOCKED in this version | n/a |
 
-The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
+The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, when the sources show the customer's problems but no one wanting this product (a product demand check over the step 1.4 signals), or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
 
 ## Sale to cash
 

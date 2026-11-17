@@ -31,17 +31,24 @@ def change_threshold(thresholds: dict, new: dict) -> dict:
 
 
 def evidence_gate(claims: list[dict], phase: int = 1) -> dict:
-    """Phase 1 evidence gate: enough verified, sourced claims and at least one sourced demand signal."""
+    """Phase 1 evidence gate: enough verified, sourced claims and at least one sourced demand signal
+    for THIS product. A source that only shows the customer's general problems is not demand for the
+    product (`product_demand` is set by guardrails.product_demand_check; unchecked claims count)."""
     mine = [c for c in claims if str(c.get("step", "")).startswith(f"{phase}.")]
     sourced = [c for c in mine if c.get("type") == "SOURCED"]
-    demand = [c for c in sourced if str(c.get("step")) == f"{phase}.4"]
+    signals = [c for c in sourced if str(c.get("step")) == f"{phase}.4"]
+    demand = [c for c in signals if c.get("product_demand", True)]
     ratio = len(sourced) / len(mine) if mine else 0.0
     reasons = [f"{len(sourced)}/{len(mine)} Phase {phase} claims are sourced and verified (ratio {ratio:.2f})",
-               f"{len(demand)} sourced demand signal(s) from step {phase}.4"]
+               f"{len(demand)} of {len(signals)} sourced demand signal(s) from step {phase}.4 show demand for this product"]
     if len(sourced) < 3 or ratio < 0.3:
         return {"outcome": STOP, "reasons": reasons + ["evidence too weak: recommend STOP rather than build on assumptions"]}
-    if not demand:
+    if not signals:
         return {"outcome": PIVOT, "reasons": reasons + ["no sourced demand signal: recommend PIVOT to a different niche"]}
+    if not demand:
+        return {"outcome": STOP, "reasons": reasons + [
+            "don't launch this: the sources show the customer's problems, but none shows anyone wanting this "
+            "product or paying for something like it. Recommend STOP rather than build on hope."]}
     return {"outcome": GO, "reasons": reasons + ["evidence threshold met"]}
 
 

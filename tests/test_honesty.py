@@ -43,3 +43,14 @@ def test_weak_brief_ends_in_stop(env, monkeypatch):
     res, _ = drive(graph, cfg, res, lambda p: {"decision": "approve"} if p["type"] == "checkpoint" else {"actual": ""})
     assert res["status"] == "stopped"
     assert any(g["outcome"] in ("stop", "pivot") for g in res["gate_history"])
+
+
+def test_problem_without_product_demand_says_dont_launch(env):
+    """The sources show the customer's problems, but nobody wants this product: the evidence gate stops."""
+    config.set_llm(FakeChat(product_demand=False))
+    graph, cfg, res = start(env)
+    res, _ = drive(graph, cfg, res, lambda p: {"decision": "approve"} if p["type"] == "checkpoint" else {"actual": ""})
+    gate_14 = next(g for g in res["gate_history"] if g["step"] == "1.4")
+    assert gate_14["outcome"] == "stop"
+    assert any("don't launch this" in r for r in gate_14["reasons"])
+    assert res["status"] == "stopped"

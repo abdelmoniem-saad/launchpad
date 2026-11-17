@@ -40,9 +40,10 @@ def work_for(step_id: str, overrides: dict) -> dict:
 class FakeChat:
     """Returns role-appropriate JSON. `overrides` maps step id -> work dict."""
 
-    def __init__(self, overrides=None, synthesis_extra=""):
+    def __init__(self, overrides=None, synthesis_extra="", product_demand=True):
         self.overrides = overrides or {}
         self.synthesis_extra = synthesis_extra
+        self.product_demand = product_demand  # verdict of the evidence gate's product demand check
         self.calls = []
 
     def invoke(self, messages):
@@ -53,6 +54,9 @@ class FakeChat:
             urls = re.findall(r'"url": "([^"]+)"', user)
             body = {"claims": [{"text": "Editors ask for a simple tracker template", "source_url": u,
                                 "quote": "Many editors ask for a simple tracker template"} for u in urls[:2]]}
+        elif system.startswith("You decide which sourced demand signals"):
+            ids = re.findall(r'"id": "([^"]+)"', user)
+            body = {"signals": [{"id": i, "product_demand": self.product_demand, "note": "fake verdict"} for i in ids]}
         elif "verify claims" in system:
             ids = re.findall(r'"id": "([^"]+)"', user)
             body = {"verdicts": [{"id": i, "supported": True, "note": ""} for i in ids]}
