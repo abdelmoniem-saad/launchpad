@@ -1,8 +1,7 @@
 services:
   ollama:
     image: ollama/ollama:0.40.16
-    ports:
-      - "11434:11434"
+    # No host port: the app reaches Ollama on the compose network, so a local Ollama on 11434 never clashes.
     volumes:
       - ollama:/root/.ollama
     healthcheck:
@@ -22,7 +21,7 @@ services:
     restart: "no"
 
   searxng:
-    image: searxng/searxng:latest
+    image: searxng/searxng:2026.11.17-b99cf7496
     volumes:
       - ./searxng/settings.yml:/etc/searxng/settings.yml:ro
     environment:
