@@ -4,24 +4,21 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Digital crossword puzzle p
 
 ## Conclusion
 
-The medieval tax law crossword pack scores as well as the broader pet‑health alternatives, but its niche focus and low demand signal uncertainty; the founder should test demand before committing fully.
+The medieval tax law theme scores lowest and is unlikely to generate sufficient demand among professional dog groomers; the dog nutrition and grooming technique themes are equally viable but still modest in potential.
 
 ## Supporting points
 
-- All four options receive identical weighted scores (3.35) based on demand, competition, founder fit, and effort. (ASSUMPTION)
-- The founder’s strongest fit is with the medieval tax law theme, yet the niche nature may limit demand and revenue potential. (ASSUMPTION)
-- Broader themes (pet health trivia, nutrition, modern grooming) could attract more customers but would require the founder to learn new content, conflicting with the 3‑hour weekly limit. (ASSUMPTION)
-- The founder’s position acknowledges that sticking with the medieval theme means accepting lower demand, while shifting themes could raise demand but increase effort. (ASSUMPTION)
+- Both dog nutrition and grooming technique options have the highest weighted scores (3.9) and align better with groomers’ interests, supporting higher demand and engagement. (SOURCED: C1.2-1, C1.2-2, C1.2-3)
+- The medieval tax law option has the lowest weighted score (3.35) and may dilute the fun value and relevance to the target audience, increasing risk of low demand. (SOURCED: C1.2-1, C1.2-2, C1.2-3)
 
-Strategy architect recommendation: **REPEAT**. Given the equal weighted scores but differing demand and founder fit, the prudent next step is to run a minimal demand test (e.g., a small survey or prototype) to confirm whether professional dog groomers are interested in medieval tax law crosswords before investing further time and resources.
+Strategy architect recommendation: **REPEAT**. Given the modest scores and potential misalignment with the target audience, the founder should conduct a quick market test (e.g., survey or prototype) for the dog nutrition and grooming technique themes before committing resources. If demand remains unclear, pivot to a more universally appealing theme or stop the project.
 
 ## Work
 
 - **options:**
-  - name: Digital crossword puzzle packs about medieval tax law for professional dog groomers; is_founder_idea: True; demand: 2; competition: 4; founder_fit: 5; effort: 3
-  - name: Digital crossword puzzle packs about modern dog grooming techniques; is_founder_idea: False; demand: 3; competition: 3; founder_fit: 4; effort: 3
-  - name: Digital crossword puzzle packs about general pet health trivia; is_founder_idea: False; demand: 4; competition: 2; founder_fit: 3; effort: 4
-  - name: Digital crossword puzzle packs about dog nutrition and diet; is_founder_idea: False; demand: 4; competition: 2; founder_fit: 3; effort: 4
+  - name: Digital crossword puzzle packs about medieval tax law for professional dog groomers; is_founder_idea: True; demand: 2; competition: 3; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2', 'C1.2-3']
+  - name: Digital crossword puzzle packs about dog nutrition for professional dog groomers; is_founder_idea: False; demand: 3; competition: 4; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2', 'C1.2-3']
+  - name: Digital crossword puzzle packs about grooming techniques for professional dog groomers; is_founder_idea: False; demand: 3; competition: 4; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2', 'C1.2-3']
 
 ## Calculator results (quant modeler)
 
@@ -29,44 +26,46 @@ Strategy architect recommendation: **REPEAT**. Given the equal weighted scores b
 {
   "ranked_options": [
     {
+      "name": "Digital crossword puzzle packs about dog nutrition for professional dog groomers",
+      "is_founder_idea": false,
+      "demand": 3,
+      "competition": 4,
+      "founder_fit": 5,
+      "effort": 4,
+      "claim_ids": [
+        "C1.2-1",
+        "C1.2-2",
+        "C1.2-3"
+      ],
+      "weighted_score": 3.9
+    },
+    {
+      "name": "Digital crossword puzzle packs about grooming techniques for professional dog groomers",
+      "is_founder_idea": false,
+      "demand": 3,
+      "competition": 4,
+      "founder_fit": 5,
+      "effort": 4,
+      "claim_ids": [
+        "C1.2-1",
+        "C1.2-2",
+        "C1.2-3"
+      ],
+      "weighted_score": 3.9
+    },
+    {
       "name": "Digital crossword puzzle packs about medieval tax law for professional dog groomers",
       "is_founder_idea": true,
       "demand": 2,
-      "competition": 4,
-      "founder_fit": 5,
-      "effort": 3,
-      "claim_ids": [],
-      "weighted_score": 3.35
-    },
-    {
-      "name": "Digital crossword puzzle packs about general pet health trivia",
-      "is_founder_idea": false,
-      "demand": 4,
-      "competition": 2,
-      "founder_fit": 3,
-      "effort": 4,
-      "claim_ids": [],
-      "weighted_score": 3.35
-    },
-    {
-      "name": "Digital crossword puzzle packs about dog nutrition and diet",
-      "is_founder_idea": false,
-      "demand": 4,
-      "competition": 2,
-      "founder_fit": 3,
-      "effort": 4,
-      "claim_ids": [],
-      "weighted_score": 3.35
-    },
-    {
-      "name": "Digital crossword puzzle packs about modern dog grooming techniques",
-      "is_founder_idea": false,
-      "demand": 3,
       "competition": 3,
-      "founder_fit": 4,
-      "effort": 3,
-      "claim_ids": [],
-      "weighted_score": 3.25
+      "founder_fit": 5,
+      "effort": 4,
+      "claim_ids": [
+        "C1.2-1",
+        "C1.2-2",
+        "C1.2-3"
+      ],
+      "weighted_score": 3.35
     }
   ],
   "weights": "demand 0.35, competition 0.2, founder fit 0.25, effort 0.2"
@@ -77,15 +76,26 @@ Strategy architect recommendation: **REPEAT**. Given the equal weighted scores b
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can realistically execute the medieval tax law theme because it aligns with their crossword design skill and fun value, but the niche is very narrow and may limit demand. The alternative themes (modern grooming, general pet health, nutrition) are more likely to attract a broader audience, but the founder would need to invest time learning new content areas, which conflicts with their 3‑hour weekly limit. | The medieval tax law idea is too niche and may not generate enough interest to justify the effort. The founder should consider a broader theme that still uses crossword design but covers topics the groomers are more likely to care about, such as grooming techniques or pet health. | If the founder sticks with the medieval theme, they must accept a lower demand score and potentially lower revenue. If they shift to a broader theme, they can increase demand but will need to allocate additional hours to research content. |
+| founder_fit | The founder’s skill set is limited to crossword design and they have only 3 hours per week. All options are within skill set, but the medieval tax law theme is a stretch in terms of relevance to groomers and may dilute the fun value. The founder should prioritize themes that align more directly with grooming to keep the product engaging and reduce the risk of low demand. | The medieval tax law theme may not resonate with groomers, potentially lowering demand. The founder should focus on themes that are clearly relevant to the target audience to maximize engagement. | If the founder insists on the medieval tax law theme, they should allocate additional time or outsource content research to avoid overextending their limited hours. |
 
 ## Open disagreements for the founder
 
-- The founder’s pushback argues the medieval theme is too niche and may not generate enough interest; the founder’s position counters that the founder’s skill set aligns well with this niche.
+- Founder_fit department argues that the medieval tax law theme may not resonate with groomers and suggests focusing on more directly relevant themes to maximize engagement. The founder’s limited hours and skill set could further constrain the feasibility of the medieval theme.
 
 ## Claims ledger
 
-No claims could be sourced in this step; everything above is ASSUMPTION.
+| ID | Claim | Label | Source |
+|---|---|---|---|
+| C1.2-1 | The US pet grooming and boarding market is valued at approximately $14 to $15 billion in 2026. | SOURCED | https://groomboard.com/blog/pet-grooming-industry-statistics-2026 |
+| C1.2-2 | The global pet grooming market is estimated at $19.5 billion and is projected to grow to $46.7 billion by 2036 at a 9.1% CAGR. | SOURCED | https://groomboard.com/blog/pet-grooming-industry-statistics-2026 |
+| C1.2-3 | There are an estimated 120,000 to 150,000 pet groomers working in the United States. | SOURCED | https://groomboard.com/blog/pet-grooming-industry-statistics-2026 |
+| C1.2-4 | The pet grooming industry is growing at 7 to 9% annually, driven by rising pet ownership, increasing pet spending, and the trend toward treating pets as family members. | SOURCED | https://groomboard.com/blog/pet-grooming-industry-statistics-2026 |
+| C1.2-5 | The global pet grooming services market size was valued at USD 6.9 billion in 2024 and is projected to grow to USD 10.3 billion by 2030, at a CAGR of 7.3% from 2025 to 2030. | SOURCED | https://www.grandviewresearch.com/industry-analysis/pet-grooming-services-market |
+| C1.2-6 | The global pet grooming services market size was valued at USD 20.52 billion in 2026 and is estimated to grow to USD 30.05 billion by 2032, at a CAGR of 6.58% during the forecast period (2027-2032). | SOURCED | https://www.mordorintelligence.com/industry-reports/global-pet-grooming-services-market |
+| C1.2-7 | The market size of global dog grooming will be estimated at USD 1.5 billion in 2025 and is expected to grow to between USD 1.6 billion in 2026 and about USD 2.7 billion by 2035, with a current CAGR of 6.1% during the period of 2026 to 2035. | SOURCED | https://www.custommarketinsights.com/report/dog-grooming-market/ |
+| C1.2-8 | The U.S. pet grooming and boarding industry is worth $11.3 billion in 2026. | SOURCED | https://groomify.ai/blog/pet-grooming-industry-statistics-2026 |
+| C1.2-9 | There are 198,616 pet grooming and boarding businesses in the U.S. in 2026, up 4.6% from 2025. | SOURCED | https://groomify.ai/blog/pet-grooming-industry-statistics-2026 |
+| C1.2-10 | 51% of dog owners groom their dogs at home, and spending on salon and mobile grooming declined in 2025. | SOURCED | https://groomify.ai/blog/pet-grooming-industry-statistics-2026 |
 
 ## Founder checkpoint
 

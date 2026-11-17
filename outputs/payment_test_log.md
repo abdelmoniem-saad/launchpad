@@ -1,6 +1,6 @@
 # Payment and delivery test log (MOCKED)
 
-Run: 2026-11-17T19:39:44Z with `python -m app.payment_test`.
+Run: 2026-11-17T19:47:07Z with `python -m app.payment_test`.
 Provider: MOCKED payment provider (test mode, in-process). Fee schedule 2.9% + $0.30 per payment is an ASSUMPTION used only by the mock.
 No real money moved, no card data was used, and the download links are MOCKED placeholders. Opening the store and the refund were decided by the founder at the prompt.
 
@@ -15,7 +15,7 @@ Product: Revision tracker Notion template pack, price set by the founder: $19.00
 | 3 | Founder decision on opening the store | approve | approved, store open at $19.00 | PASS |
 | 4 | Card number offered at checkout | rejected | rejected (opaque buyer ids only) | PASS |
 | 5 | Access before payment | none | none | PASS |
-| 6 | Payment webhook grants delivery | access granted | processed, link mock://download/3UirxmatyrrgLAzD (MOCKED) | PASS |
+| 6 | Payment webhook grants delivery | access granted | processed, link mock://download/lIdh3tUnJaNONnaw (MOCKED) | PASS |
 | 7 | Second order paid and delivered | access granted | processed | PASS |
 | 8 | Same payment webhook delivered twice | ignored, one grant | duplicate, 1 grant(s) | PASS |
 | 9 | Forged payment webhook | rejected, no access | rejected, access none | PASS |
@@ -28,9 +28,9 @@ Product: Revision tracker Notion template pack, price set by the founder: $19.00
 
 | Order | Status | Gross | Fee | Refund | Net | Access |
 |---|---|---|---|---|---|---|
-| ord_4d0c80f8 | paid | $19.00 | $0.85 | $0.00 | $18.15 | active |
-| ord_ad9c6766 | refunded | $19.00 | $0.85 | $19.00 | -$0.85 | revoked |
-| ord_f0fe5880 | pending | $0.00 | $0.00 | $0.00 | $0.00 | none |
+| ord_024d311f | refunded | $19.00 | $0.85 | $19.00 | -$0.85 | revoked |
+| ord_2d18a152 | paid | $19.00 | $0.85 | $0.00 | $18.15 | active |
+| ord_750001e9 | pending | $0.00 | $0.00 | $0.00 | $0.00 | none |
 
 | Total | Our ledger | Provider payout report |
 |---|---|---|

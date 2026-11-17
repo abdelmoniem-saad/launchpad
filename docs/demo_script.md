@@ -21,7 +21,7 @@ The point to land: launchpad is a consulting firm that keeps the founder in char
 2. **Evidence gate** (`phase1_gate_evidence.md`): the go / pivot / stop rule, decided in code.
 3. **Demand test (2.2)**: the founder locks the waitlist target before any results exist; it cannot be changed afterwards.
 4. **Approval inbox**: agents can only propose (publish, send, hire). Approving creates a one-time token in the UI, and the action is only written to `outputs/` as MOCKED.
-5. **STOP cases**: the strong brief pauses at the demand gate (`phase2_gate_final_recommendation.md`) because no real waitlist result exists yet, and the system will not invent one; the weak brief (`*_weak.md`) pivots once at the evidence gate before reaching the same STOP; the crypto brief (`*_excluded.md`) is refused at intake.
+5. **STOP cases**: the strong brief pauses at the demand gate (`phase2_gate_final_recommendation.md`) because no real waitlist result exists yet, and the system will not invent one; the weak brief (`*_weak.md`) reaches the same demand-gate STOP; the crypto brief (`*_excluded.md`) is refused at intake.
 
 ## 2:15-2:45 Back to the live run
 Show the first checkpoint if it has arrived: approve / edit / redo with feedback / stop.

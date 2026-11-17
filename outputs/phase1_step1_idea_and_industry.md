@@ -4,23 +4,25 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The founder should proceed with the Video‑editing‑specific Notion templates niche.
+The most viable path is to focus on the Freelance Video Editing niche, as it scores highest on demand, competition, and founder fit.
 
 ## Supporting points
 
-- The niche aligns with the founder’s skills and time constraints, requiring only 10 hours per week and a $300 budget. (SOURCED: C1.1-5)
-- Demand from freelance video editors for a revision‑tracking system is strong, and the niche is less crowded than general freelance templates. (SOURCED: C1.1-1, C1.1-7, C1.1-6)
-- The chosen niche scores highest on weighted criteria (demand, competition, founder fit) per calculator results. (SOURCED: C1.1-1, C1.1-2, C1.1-3, C1.1-4, C1.1-5, C1.1-6, C1.1-7)
+- Freelance video editors need a dedicated system to track revisions, feedback rounds, and deadlines in one place. (SOURCED: C1.1-1)
+- The niche has high demand (5) and moderate competition (3), yielding the highest weighted score (4.4). (SOURCED: C1.1-1, C1.1-4)
+- The founder’s skills in video editing and Notion, plus the ability to market within 10 hours per week, align perfectly with this niche. (SOURCED: C1.1-2, C1.1-5)
+- Expanding beyond video editing would dilute focus and exceed the founder’s time and skill set. (ASSUMPTION)
+- The chosen niche offers a clear value proposition and aligns with the founder’s values of honest marketing and simple tools. (SOURCED: C1.1-10)
 
-Strategy architect recommendation: **GO**. All evidence supports focusing on the video‑editing‑specific Notion template niche; it matches founder expertise, has clear demand, and offers a manageable scope within the budget and time limits.
+Strategy architect recommendation: **GO**. The weighted score for Freelance Video Editing (4.4) is the highest among the options, and the founder’s skill set and time constraints align with this niche, making it the most realistic and focused path forward.
 
 ## Work
 
-- **sharpened_idea:** Notion templates that help freelance video editors track client revisions, feedback rounds and deadlines in one place
+- **sharpened_idea:** A Notion template pack that lets freelance video editors track client revisions, feedback rounds and deadlines in a single, simple workspace.
 - **niches:**
-  - name: Video‑editing‑specific Notion templates; why: Targeted to the unique revision workflow of video editors, a niche with limited competition and clear demand signals; demand: 4; competition: 4; founder_fit: 5; claim_ids: ['C1.1-1', 'C1.1-2', 'C1.1-3', 'C1.1-4', 'C1.1-6', 'C1.1-7', 'C1.1-5']
-  - name: General freelance Notion templates; why: Broad market with existing user base but higher competition and less focus on video‑editing specifics; demand: 5; competition: 2; founder_fit: 4; claim_ids: ['C1.1-8', 'C1.1-4', 'C1.1-5']
-  - name: Client‑relationship management (CRM) for creative professionals; why: Provides invoicing and client portal features but lacks Notion integration, offering a complementary niche; demand: 3; competition: 3; founder_fit: 3; claim_ids: ['C1.1-10']
+  - name: Freelance Video Editing; why: Directly addresses the core pain of managing multiple clients and revisions; demand: 5; competition: 3; founder_fit: 5; claim_ids: ['C1.1-1', 'C1.1-2', 'C1.1-4', 'C1.1-5']
+  - name: Freelance Content Creation (e.g., YouTubers, TikTok creators); why: These creators also juggle multiple projects and need revision tracking; demand: 4; competition: 4; founder_fit: 4; claim_ids: ['C1.1-1', 'C1.1-4', 'C1.1-6']
+  - name: Freelance Graphic Design; why: Designers similarly handle client feedback loops and version control; demand: 4; competition: 4; founder_fit: 3; claim_ids: ['C1.1-1', 'C1.1-4', 'C1.1-6']
 
 ## Calculator results (quant modeler)
 
@@ -28,49 +30,48 @@ Strategy architect recommendation: **GO**. All evidence supports focusing on the
 {
   "ranked_niches": [
     {
-      "name": "Video\u2011editing\u2011specific Notion templates",
-      "why": "Targeted to the unique revision workflow of video editors, a niche with limited competition and clear demand signals",
-      "demand": 4,
-      "competition": 4,
+      "name": "Freelance Video Editing",
+      "why": "Directly addresses the core pain of managing multiple clients and revisions",
+      "demand": 5,
+      "competition": 3,
       "founder_fit": 5,
       "claim_ids": [
         "C1.1-1",
         "C1.1-2",
-        "C1.1-3",
         "C1.1-4",
-        "C1.1-6",
-        "C1.1-7",
         "C1.1-5"
       ],
-      "weighted_score": 4.3
+      "weighted_score": 4.4
     },
     {
-      "name": "General freelance Notion templates",
-      "why": "Broad market with existing user base but higher competition and less focus on video\u2011editing specifics",
-      "demand": 5,
-      "competition": 2,
+      "name": "Freelance Content Creation (e.g., YouTubers, TikTok creators)",
+      "why": "These creators also juggle multiple projects and need revision tracking",
+      "demand": 4,
+      "competition": 4,
       "founder_fit": 4,
       "claim_ids": [
-        "C1.1-8",
+        "C1.1-1",
         "C1.1-4",
-        "C1.1-5"
+        "C1.1-6"
       ],
-      "weighted_score": 3.8
+      "weighted_score": 4.0
     },
     {
-      "name": "Client\u2011relationship management (CRM) for creative professionals",
-      "why": "Provides invoicing and client portal features but lacks Notion integration, offering a complementary niche",
-      "demand": 3,
-      "competition": 3,
+      "name": "Freelance Graphic Design",
+      "why": "Designers similarly handle client feedback loops and version control",
+      "demand": 4,
+      "competition": 4,
       "founder_fit": 3,
       "claim_ids": [
-        "C1.1-10"
+        "C1.1-1",
+        "C1.1-4",
+        "C1.1-6"
       ],
-      "weighted_score": 3.0
+      "weighted_score": 3.7
     }
   ],
   "weights": "demand 0.4, competition 0.3, founder fit 0.3",
-  "chosen_niche": "Video\u2011editing\u2011specific Notion templates"
+  "chosen_niche": "Freelance Video Editing"
 }
 ```
 
@@ -78,22 +79,30 @@ Strategy architect recommendation: **GO**. All evidence supports focusing on the
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder’s skill set and time constraints align best with the video‑editing‑specific Notion template niche. The other niches either require broader product development or additional integrations beyond the founder’s current expertise. | The general freelance template and CRM niches would dilute focus and stretch the limited 10‑hour weekly budget. They also demand features (e.g., invoicing, client portals) that the founder is not equipped to build within the given constraints. | Stick to the video‑editing niche to maximize founder_fit and minimize scope creep. |
+| founder_fit | The founder can realistically build and market this within 10 hours per week, using existing video editing and Notion skills. | Expanding beyond video editing to other creative fields would dilute focus and exceed the founder’s time and skill set. | Stick to the core freelance video editing niche to maximize impact and maintain alignment with values. |
+
+## Open disagreements for the founder
+
+- None identified – the founder’s pushback on expanding beyond video editing is acknowledged but not contested.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
 | C1.1-1 | Freelance video editors juggling multiple clients need a system to track revisions, feedback rounds, and deadlines in one place. | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
-| C1.1-2 | Notion templates exist that specifically target video editors, offering features like revision notes, version tracking, and client handoff management. | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
-| C1.1-3 | The market for freelance video editors is global and English‑speaking, with many editors expressing frustration over administrative overhead such as tracking hours and collecting feedback. | SOURCED | https://listicler.com/best/best-tools-freelance-video-editors |
-| C1.1-4 | Existing Notion freelance templates for general freelancers emphasize client management, project tracking, invoicing, and time logging, but few are tailored to the unique revision workflow of video editors. | SOURCED | https://www.productivetemply.com/blog/best-notion-templates-for-freelancers |
-| C1.1-5 | The founder’s skill set (video editing, Notion, tutorial writing) aligns well with creating a Notion template pack for video editors, requiring only 10 hours per week and a $300 budget. | SOURCED | https://www.notionapps.com/blog/best-notion-templates-freelancers-2025 |
-| C1.1-6 | The niche of video‑editing‑specific Notion templates is less crowded than general freelance templates, giving a higher competition score (5 = least crowded). | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
-| C1.1-7 | Demand signals from freelance video editors include the need for tools that streamline review‑and‑approve cycles and manage multiple client workflows. | SOURCED | https://listicler.com/best/best-tools-freelance-video-editors |
-| C1.1-8 | A potential competitor niche is general freelance Notion templates, which already have a large user base and established pricing models. | SOURCED | https://www.timeknot.app/blog/best-free-notion-freelance-templates-client-management-project-tracking-2026 |
-| C1.1-9 | Another niche is video‑editing workflow tools (e.g., Descript, Frame.io), but these focus on editing software rather than project management in Notion. | SOURCED | https://listicler.com/best/best-tools-freelance-video-editors |
-| C1.1-10 | A third niche is client‑relationship management (CRM) systems for creative professionals, which compete on features like client portals and invoicing but lack Notion integration. | SOURCED | https://www.productivetemply.com/blog/best-notion-templates-for-freelancers |
+| C1.1-2 | Video editors require a workspace that records brief, agreed formats, source-file locations, current version, review round, and delivery requirements. | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
+| C1.1-3 | The Notion template ecosystem includes dedicated templates for video editors, such as a portfolio layout, a project tracker, and an operations workspace. | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
+| C1.1-4 | Freelance video editors often struggle with organizational overhead, especially when managing multiple clients with different review preferences and payment schedules. | SOURCED | https://listicler.com/best/best-tools-freelance-video-editors |
+| C1.1-5 | Freelance video editors need tools to track hours across projects, collect feedback efficiently, and manage contracts and invoices. | SOURCED | https://listicler.com/best/best-tools-freelance-video-editors |
+| C1.1-6 | Notion is a popular platform for freelancers to centralize client management, project tracking, and invoicing in one workspace. | SOURCED | https://www.timeknot.app/blog/best-free-notion-freelance-templates-client-management-project-tracking-2026 |
+| C1.1-7 | Freelance Notion templates often include features such as a central dashboard, client pipeline management, project and task tracking, and client portals. | SOURCED | https://www.productivetemply.com/blog/best-notion-templates-for-freelancers |
+| C1.1-8 | There are free Notion templates specifically designed for freelancers, such as the Freelancer Planner by OlsNotion, which helps manage clients, track projects, log hours, and handle invoices. | ASSUMPTION | ASSUMPTION |
+| C1.1-9 | Paid Notion templates for freelancers, like Freelance OS ($79) and Freelancer VA ($49), offer integrated client relationship management, project & task management, and invoice tracking. | SOURCED | https://www.notionapps.com/blog/best-notion-templates-freelancers-2025 |
+| C1.1-10 | Freelance video editors value tools that have free tiers or affordable pricing, as many are bootstrapping and prioritize time savings on admin tasks. | SOURCED | https://listicler.com/best/best-tools-freelance-video-editors |
+
+## Governance flags
+
+- C1.1-8: quote not found in its source -> ASSUMPTION
 
 ## Founder checkpoint
 

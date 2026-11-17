@@ -4,64 +4,83 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Digital crossword puzzle p
 
 ## Conclusion
 
-No defensible conclusion: the firm could not support one with evidence.
+The lean canvas is viable for a low‑budget, single‑pack pilot that tests demand among U.S. professional dog groomers, but the theme should be more relevant than medieval tax law to attract initial users.
+
+## Supporting points
+
+- The global dog grooming market is large and growing (USD 1.5 billion in 2025, projected USD 2.7 billion by 2035) and North America dominates it (40% share in 2025). (SOURCED: C2.1-3, C2.1-5)
+- Professional groomers are widely available across various service settings, providing a clear target audience. (SOURCED: C2.1-4)
+- The founder’s 3 hrs/week availability and crossword design skill fit the proposed scope, but the plan must stay focused on a single pack to avoid overcommitment. (ASSUMPTION)
+- The projected monthly cost (USD 15) is well below the USD 50 budget, but any expansion (additional themes, premium hosting, larger ad spend) would exceed it. (ASSUMPTION)
+- Demand for a medieval tax law theme is unlikely; a more relevant theme (e.g., dog nutrition or grooming techniques) is needed to generate interest. (ASSUMPTION)
+- The free‑pack strategy can generate initial interest, but reach will be limited without paid ads; the small ad budget should target U.S. grooming groups only. (ASSUMPTION)
+- Revenue can be generated via a modest download fee (USD 5–10) and optional subscription, but the primary goal is validation, not scaling. (ASSUMPTION)
+- The founder’s unique crossword skill provides an unfair advantage in creating a niche, low‑competition product. (ASSUMPTION)
+- The lack of mandatory educational requirements for groomers means there is a gap in formal training, supporting the need for engaging learning tools. (SOURCED: C2.1-9, C2.1-10)
+
+Strategy architect recommendation: **GO**. The plan aligns with budget and founder capacity, addresses a sizable market, and has a clear validation goal. The main risk is theme relevance; adjusting the theme to a more immediately useful topic will increase the likelihood of user engagement and conversion. No immediate need to pivot or repeat, but monitor download and conversion metrics closely to decide on scaling.
 
 ## Work
 
-- **problem:** Professional dog groomers lack engaging, niche educational content that aligns with their professional development and brand differentiation needs.
-- **customer_segments:** Professional dog groomers worldwide who seek continuing education, brand differentiation, or fun team-building activities.
-- **unique_value_proposition:** A downloadable, themed crossword puzzle pack that blends medieval tax law trivia with pet-care relevance, offering a fun, low-effort learning tool that groomers can use for CEU credit or client engagement.
+- **problem:** Professional dog groomers lack engaging, industry‑specific learning tools that blend fun with skill development.
+- **customer_segments:** Professional dog groomers (U.S. mobile and salon‑based)
+- **unique_value_proposition:** A single, themed crossword pack that turns routine training into a playful, bite‑size learning activity, designed by a crossword expert and tailored to grooming workflows.
 - **solution:**
-  - Create a single, downloadable PDF crossword pack (≈30 puzzles) themed around medieval tax law concepts adapted to dog grooming contexts.
-  - Include a brief guide linking each puzzle to practical grooming or business insights.
-  - Offer the pack as a free download for initial demand testing, with a paid upgrade for premium formatting or additional puzzles.
+  - Create one 20‑question crossword pack focused on a relevant theme (e.g., dog nutrition or grooming techniques).
+  - Publish the pack as a downloadable PDF and a simple web app for mobile use.
+  - Offer the pack for free to a small cohort of groomers for feedback, then charge a modest fee for broader distribution.
 - **channels:**
-  - Direct outreach via LinkedIn groups for dog groomers.
-  - Email list building through a simple landing page with a lead magnet (free puzzle).
-  - Content marketing on niche pet-care blogs and forums.
+  - Direct outreach via grooming industry forums and LinkedIn groups
+  - Email list building through a landing page offering the free pack
+  - Paid social ads targeting U.S. grooming professionals (budget‑constrained)
 - **revenue_streams:**
-  - Paid premium puzzle packs (one-time download).
-  - Potential future upsell of bundled CEU-certified content.
+  - One‑time download fee (USD 5–10) after initial free trial
+  - Optional subscription for quarterly themed packs
+  - Affiliate links to grooming supplies within the pack
 - **cost_structure:**
-  - $30 for PDF design and layout (freelancer).
-  - $10 for landing page hosting and email service.
-  - $5 for minimal paid advertising to test demand.
+  - Founder’s 3 hrs/week of crossword design (no external cost)
+  - Minimal web hosting (USD 5/month)
+  - Small paid ad spend (USD 10/month)
+  - PDF creation tools (free)
 - **key_metrics:**
-  - Number of downloads of free pack.
-  - Conversion rate from free to paid premium pack.
-  - Engagement time per puzzle (via embedded analytics).
-- **unfair_advantage:** Founder’s unique crossword design skill and niche focus on medieval tax law creates a distinct, hard-to-replicate product that can be quickly iterated with minimal overhead.
+  - Number of downloads of the free pack
+  - Conversion rate to paid pack
+  - Engagement time per pack
+  - Feedback score from groomers
+- **unfair_advantage:** Founder’s unique crossword design skill and the niche focus on professional groomers create a low‑competition entry point.
 
 ## Department positions and pushback
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can realistically produce a single PDF pack within the 3‑hour weekly limit and the $50 budget. | The idea requires a paid advertising spend that may exceed the $50 budget if not carefully controlled. | Limit initial ad spend to $10 and rely on organic outreach to stay within budget. |
-| marketing | Demand can be tested with a free download offer and minimal paid ads. | The niche theme may not attract enough traffic; positioning must emphasize the CEU or brand differentiation angle to be searchable. | Add a short, SEO‑optimized landing page copy that highlights CEU value to improve organic reach. |
-| finance | All projected costs fit within the $50 budget. | Any additional features (e.g., interactive web app) would exceed the budget and founder’s capacity. | Stick to a static PDF and avoid paid hosting beyond the landing page. |
+| founder_fit | The plan aligns with the founder’s 3 hrs/week availability and crossword design skill. | The founder cannot commit to multiple themes or extensive marketing; focus must stay on a single pack. | Accept a modest revenue target and prioritize learning validation over rapid scaling. |
+| marketing | The free pack and niche targeting can generate initial interest, but reach is limited without paid ads. | Demand for medieval tax law is unlikely; a more relevant theme is needed to test reach. | Allocate the small ad budget to U.S. grooming groups only, accepting lower volume. |
+| finance | Total projected cost (USD 15/month) is well below the USD 50 budget. | Any additional features or broader distribution would exceed the budget. | Keep the product simple and avoid premium hosting or extensive ad campaigns. |
 
 ## Open disagreements for the founder
 
-- Report had no conclusion; treat this step as weak.
+- Marketing: theme relevance and ad reach
+- Founder: scope of multiple themes
+- Finance: potential cost overruns if features expand
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C2.1-1 | Pet care services, including grooming, are a growing segment of the pet care market, with the Boarding, Daycare & Grooming subsegment underpinning M&A gains to date. | SOURCED | https://www.capstonepartners.com/insights/report-pet-care-market-update/ |
-| C2.1-2 | The global pet care market is projected to reach USD224.5 billion in 2026, indicating significant overall market size for pet-related services. | SOURCED | https://www.euromonitor.com/the-world-market-for-pet-care/report |
-| C2.1-3 | Pet ownership growth and higher spending per pet are key drivers of demand in the pet care market, supporting the expansion of services such as grooming. | SOURCED | https://www.researchandmarkets.com/reports/5610077/pet-care-market-outlook-2026-2034-market-share |
-| C2.1-4 | Premiumization and subscription services are emerging trends in pet care, suggesting that professional groomers may be interested in premium or themed offerings. | SOURCED | https://www.researchandmarkets.com/reports/5610077/pet-care-market-outlook-2026-2034-market-share |
-| C2.1-5 | Digital channels are now the main way customers find, compare, and choose pet care products and services, implying that digital content such as crossword packs could reach groomers online. | SOURCED | https://www.promodo.com/blog/pet-industry-benchmarks |
-| C2.1-6 | The pet care eCommerce market is expected to reach $147.59 billion by 2030, growing at an average annual rate of 7.8% between 2025 and 2030. | ASSUMPTION | ASSUMPTION |
-| C2.1-7 | Pet care sales increased by $8.38 billion in 2022, a 15% rise from the previous year, indicating strong consumer spending in the sector. | SOURCED | https://nielseniq.com/global/en/insights/education/2022/pet-category-omni-opportunities/ |
-| C2.1-8 | Online-only pet care sales jumped $4.5 billion in 2022, a 26% increase year-over-year, showing the importance of digital sales channels for pet services. | SOURCED | https://nielseniq.com/global/en/insights/education/2022/pet-category-omni-opportunities/ |
-| C2.1-9 | The grooming subsegment is part of the broader pet care services that have attracted M&A activity, suggesting that professional groomers operate in a market with active investment and competition. | SOURCED | https://www.capstonepartners.com/insights/report-pet-care-market-update/ |
-| C2.1-10 | Premium segments in pet care are the fastest growing, but expansion is narrowing, indicating that groomers may be looking for differentiated, niche offerings to stand out. | SOURCED | https://www.euromonitor.com/the-world-market-for-pet-care/report |
+| C2.1-1 | The global pet grooming services market size was valued at USD 20.52 billion in 2026 and is estimated to grow to USD 30.05 billion by 2032, at a CAGR of 6.58% during the forecast period (2027‑2032). | SOURCED | https://www.mordorintelligence.com/industry-reports/global-pet-grooming-services-market |
+| C2.1-2 | Dogs account for 86.20% of the global pet grooming services market share in 2026. | SOURCED | https://www.mordorintelligence.com/industry-reports/global-pet-grooming-services-market |
+| C2.1-3 | The global dog grooming market was estimated at USD 1.5 billion in 2025 and is expected to grow to about USD 2.7 billion by 2035, with a current CAGR of 6.1% during 2026‑2035. | SOURCED | https://www.custommarketinsights.com/report/dog-grooming-market/ |
+| C2.1-4 | Professional dog grooming is generally available at many places, such as pet grooming salons, mobile grooming units, veterinary practices, or other pet care centers. | SOURCED | https://www.custommarketinsights.com/report/dog-grooming-market/ |
+| C2.1-5 | In 2025, North America will dominate the global dog grooming market with an estimated market share of 40%. | SOURCED | https://www.custommarketinsights.com/report/dog-grooming-market/ |
+| C2.1-6 | The dog grooming market stood at USD 12.83 billion in 2025 and was projected to reach USD 20.36 billion by 2032, reflecting a CAGR of 6.8%. | SOURCED | https://pmarketresearch.com/worldwide-dog-grooming-market-research/ |
+| C2.1-7 | Professional grooming services accounted for 48.0% market share in 2025 in North America. | SOURCED | https://pmarketresearch.com/worldwide-dog-grooming-market-research/ |
+| C2.1-8 | The pet grooming services market in Asia Pacific is anticipated to grow at the fastest CAGR of 8.92% during the forecast period. | SOURCED | https://www.grandviewresearch.com/industry-analysis/pet-grooming-services-market |
+| C2.1-9 | The industry remains largely unregulated in many parts of the world, including the United States, raising concerns about safety and well‑being of animals. | ASSUMPTION | ASSUMPTION |
+| C2.1-10 | There are no mandatory educational or licensing requirements for pet groomers in most places, allowing anyone to start offering grooming services. | SOURCED | https://designerpawssalon.com/the-unregulated-world-of-pet-grooming-a-call-for-change/ |
 
 ## Governance flags
 
-- C2.1-6: not supported by its source -> ASSUMPTION (The provided source text does not contain the eCommerce market size or growth rate figures.)
+- C2.1-9: quote not found in its source -> ASSUMPTION
 
 ## Founder checkpoint
 

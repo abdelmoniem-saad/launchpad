@@ -4,7 +4,7 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Digital crossword puzzle p
 
 ## Conclusion
 
-Demand test: no result yet waitlist signups against a locked target of 0 in 7 days. Gate recommendation: REPEAT.
+Demand test: no result yet waitlist signups against a locked target of 10 in 7 days. Gate recommendation: REPEAT.
 
 ## Supporting points
 
@@ -21,9 +21,9 @@ Strategy architect recommendation: **REPEAT**. compared in code against the lock
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | Approve outreach drafts that fit within 3 hours/week and rely on existing skills | The email to The Daily Groomer requires research on their partnership process, which may exceed available hours | Prioritize the Groomers Forum outreach first, as it aligns more directly with the founder’s niche and requires less research |
-| marketing | Support outreach to communities with active engagement | The proposed outreach to Reddit r/doggrooming is not included; community engagement there may be low for niche educational content | Focus on email and contact form outreach where response likelihood is higher |
-| finance | Ensure outreach costs stay within $50 budget | No direct costs identified; ensure no paid ads are planned | Allocate $10 for potential email service subscription if needed |
+| founder_fit |  |  |  |
+| marketing |  |  |  |
+| finance |  |  |  |
 
 ## Founder checkpoint
 

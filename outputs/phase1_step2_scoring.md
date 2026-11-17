@@ -4,24 +4,23 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The founder’s Notion template pack scores highest and aligns best with the founder’s skills and time budget, making it the recommended option to test with a waitlist.
+The Notion revision‑tracking template pack is the strongest option and should proceed.
 
 ## Supporting points
 
-- The founder’s idea has the highest weighted score (4.05) and best founder fit (5) while remaining within the 10‑hour weekly and $300 budget constraints. (SOURCED: C1.2-1, C1.2-2, C1.2-3, C1.2-4, C1.2-5)
-- The alternative spreadsheet option has a lower score (3.7) due to high competition and effort, and lacks founder fit evidence. (ASSUMPTION)
-- Generic Notion templates score 3.6, but demand is lower and competition higher than the founder’s niche pack. (SOURCED: C1.2-1, C1.2-2)
-- The standalone web app scores lowest (2.95) and would exceed the founder’s skill set and time budget. (ASSUMPTION)
+- The Notion pack scores highest overall (4.6) due to strong demand, founder fit, and manageable effort. (SOURCED: C1.2-1, C1.2-2)
+- It aligns with the founder’s skills (video editing, Notion, writing tutorials) and weekly hours (10 hrs). (ASSUMPTION)
+- The Google Sheets alternative is less compelling: lower weighted score (3.75) and offers less differentiation from existing tools. (SOURCED: C1.2-1, C1.2-2)
+- The standalone web app is infeasible within the 10‑hour weekly limit and conflicts with the founder’s value of simple tools. (SOURCED: C1.2-4, C1.2-5)
 
-Strategy architect recommendation: **GO**. The founder’s idea has the strongest alignment with skills, budget, and market demand, and the calculator confirms its highest weighted score. The evidence for Notion’s suitability is sourced and robust, while the alternatives either lack sufficient demand or exceed resource constraints. Therefore, proceed with the Notion template pack and launch a waitlist to validate interest.
+Strategy architect recommendation: **GO**. The Notion template pack has the highest weighted score, meets founder fit and effort constraints, and addresses a clear need for freelance video editors to track revisions and deadlines. The alternative options either score lower or conflict with core constraints. Therefore, proceeding with the Notion pack is the best next step.
 
 ## Work
 
 - **options:**
-  - name: Video‑editing‑specific Notion template pack (founder idea); is_founder_idea: True; demand: 4; competition: 3; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2', 'C1.2-3', 'C1.2-4', 'C1.2-5']
-  - name: Generic project‑management Notion templates for freelancers; is_founder_idea: False; demand: 3; competition: 4; founder_fit: 3; effort: 5; claim_ids: ['C1.2-1', 'C1.2-2']
-  - name: Video‑editing workflow spreadsheet (Google Sheets); is_founder_idea: False; demand: 2; competition: 5; founder_fit: 4; effort: 5
-  - name: Standalone revision‑tracking web app (no Notion); is_founder_idea: False; demand: 3; competition: 4; founder_fit: 2; effort: 3
+  - name: Notion revision‑tracking template pack; is_founder_idea: True; demand: 5; competition: 4; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2']
+  - name: Google Sheets milestone tracker with email reminders; is_founder_idea: False; demand: 4; competition: 3; founder_fit: 3; effort: 5; claim_ids: ['C1.2-1', 'C1.2-2']
+  - name: Standalone web app for revision workflow (similar to VidChops); is_founder_idea: False; demand: 4; competition: 2; founder_fit: 2; effort: 2; claim_ids: ['C1.2-4', 'C1.2-5']
 
 ## Calculator results (quant modeler)
 
@@ -29,53 +28,43 @@ Strategy architect recommendation: **GO**. The founder’s idea has the stronges
 {
   "ranked_options": [
     {
-      "name": "Video\u2011editing\u2011specific Notion template pack (founder idea)",
+      "name": "Notion revision\u2011tracking template pack",
       "is_founder_idea": true,
-      "demand": 4,
-      "competition": 3,
+      "demand": 5,
+      "competition": 4,
       "founder_fit": 5,
       "effort": 4,
       "claim_ids": [
         "C1.2-1",
-        "C1.2-2",
-        "C1.2-3",
-        "C1.2-4",
-        "C1.2-5"
+        "C1.2-2"
       ],
-      "weighted_score": 4.05
+      "weighted_score": 4.6
     },
     {
-      "name": "Video\u2011editing workflow spreadsheet (Google Sheets)",
+      "name": "Google Sheets milestone tracker with email reminders",
       "is_founder_idea": false,
-      "demand": 2,
-      "competition": 5,
-      "founder_fit": 4,
-      "effort": 5,
-      "claim_ids": [],
-      "weighted_score": 3.7
-    },
-    {
-      "name": "Generic project\u2011management Notion templates for freelancers",
-      "is_founder_idea": false,
-      "demand": 3,
-      "competition": 4,
+      "demand": 4,
+      "competition": 3,
       "founder_fit": 3,
       "effort": 5,
       "claim_ids": [
         "C1.2-1",
         "C1.2-2"
       ],
-      "weighted_score": 3.6
+      "weighted_score": 3.75
     },
     {
-      "name": "Standalone revision\u2011tracking web app (no Notion)",
+      "name": "Standalone web app for revision workflow (similar to VidChops)",
       "is_founder_idea": false,
-      "demand": 3,
-      "competition": 4,
+      "demand": 4,
+      "competition": 2,
       "founder_fit": 2,
-      "effort": 3,
-      "claim_ids": [],
-      "weighted_score": 2.95
+      "effort": 2,
+      "claim_ids": [
+        "C1.2-4",
+        "C1.2-5"
+      ],
+      "weighted_score": 2.7
     }
   ],
   "weights": "demand 0.35, competition 0.2, founder fit 0.25, effort 0.2"
@@ -86,21 +75,30 @@ Strategy architect recommendation: **GO**. The founder’s idea has the stronges
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder’s skill set and weekly hours align best with the Notion template pack. The generic Notion templates and spreadsheet alternatives require less niche knowledge but also offer lower demand and higher competition. The standalone web app would exceed the founder’s skill set and time budget. | The founder can only realistically deliver the Notion template pack within the 10‑hour weekly budget and 300 USD budget. The other options either do not leverage the founder’s video‑editing expertise or would require additional development resources. | If the founder wants to diversify, they could consider a simple spreadsheet later, but it would not capitalize on their unique video‑editing perspective. |
+| founder_fit | The Notion template pack aligns with the founder’s skills and weekly hours. The Google Sheets option is easier to build but requires less of the founder’s unique video‑editing expertise, which may dilute the value proposition. The web app would demand significant development effort and time beyond the 10‑hour weekly limit, and would conflict with the founder’s value of simple tools. | Reject the web app due to high effort and misalignment with founder values. Consider the Google Sheets option only if it can be built within 10 hours and still offer a clear advantage over the Notion pack. | If the founder wants to pursue the web app, they must allocate additional hours or outsource development, which would exceed the budget and conflict with the founder’s values. |
 
 ## Open disagreements for the founder
 
-- The founder’s position emphasizes that only the Notion template pack fits the 10‑hour weekly budget; the product‑management team might argue that a spreadsheet could be simpler to launch quickly.
+- The founder_fit department rejects the web app due to high effort and misalignment with founder values; no other department disputes the Notion pack’s viability.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C1.2-1 | Notion offers customizable project templates that can be tailored to industry-specific workflows, including video and film. | SOURCED | https://www.notion.com/templates/category/video-and-film |
-| C1.2-2 | Notion’s composable approach allows users to create custom workflows that evolve as projects change. | SOURCED | https://www.notion.com/templates/category/video-and-film |
-| C1.2-3 | Notion templates create linked databases that enable filtering, visualizing, and adapting workflows, unlike static spreadsheets. | SOURCED | https://www.notion.com/templates/category/video-and-film |
-| C1.2-4 | A free Notion template called “Video Editing Projects” exists that helps editors collect ideas, plan timelines, and track editing steps. | SOURCED | https://nimblegot.com/templates/free-video-editing-projects-for-notion/ |
-| C1.2-5 | The “Video Editing Projects” template includes task lists for managing edits, revisions, and delivery steps, a content calendar, and a notes space for client input. | SOURCED | https://nimblegot.com/templates/free-video-editing-projects-for-notion/ |
+| C1.2-1 | Freelance video editors need detailed project briefs that include style, tone, technical specs, and deadlines to align work with brand guidelines. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-2 | Freelancers benefit from clear milestones and regular check‑ins to review rough cuts and provide early feedback. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-3 | Platforms like Contra offer a brief‑to‑version workflow that turns creative direction into delivered cut iterations. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
+| C1.2-4 | VidChops provides a revision checklist that turns client notes into consistent fine‑cut adjustments across deliveries. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
+| C1.2-5 | Bark offers milestone‑based task handoff that groups edits into reviewable deliverables instead of open‑ended custom projects. | ASSUMPTION | ASSUMPTION |
+| C1.2-6 | Upwork’s fee structure shifted to a variable 0‑15% rate per contract, with an average effective fee of 12‑13% for most freelancers. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
+| C1.2-7 | Fiverr pivoted to AI video infrastructure, with demand for AI video creators surging 66% in six months. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
+| C1.2-8 | 59% of video marketers produce video in‑house, 32% use a mix, and only 10% fully outsource, down from 24% pure outsourcing in 2024. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
+| C1.2-9 | Freelance video editors face high foreign‑exchange costs when receiving US dollar payments in India, with 2‑3% FX spread and additional bank charges. | SOURCED | https://grey.co/blog/freelance-video-editing-platforms |
+| C1.2-10 | Contra’s commission‑free model appeals to marketing teams needing managed revision cycles for consistent marketing and creator edits. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
+
+## Governance flags
+
+- C1.2-5: quote not found in its source -> ASSUMPTION
 
 ## Founder checkpoint
 
