@@ -225,10 +225,9 @@ __marimo__/
 # --- launchpad ---
 # Runtime state (orders, access grants); never committed
 data/
-# Organizer materials and assistant instructions stay out of the submission
+# Organizer slides and PDFs stay out of the submission (CLAUDE.md is committed at the root)
 *.pptx
 *.pdf
-CLAUDE.md
 
 # IDEs: JetBrains (PyCharm) and VS Code
 .idea/

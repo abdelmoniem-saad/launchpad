@@ -1,4 +1,4 @@
-"""The committed decision log and README links must be valid: these are the first things a reviewer checks."""
+"""The committed decision log and README links must stay valid."""
 import json
 import re
 from pathlib import Path
