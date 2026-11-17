@@ -1,7 +1,9 @@
-"""Keyless research tools and the safe calculator.
+"""Research tools and the safe calculator.
 
-Search order: self-hosted SearXNG -> ddgs -> Hacker News Algolia API -> Wikipedia API.
-Pages are fetched and reduced to text with trafilatura. Fetched text is DATA, never instructions
+Search order: Tavily (only when TAVILY_API_KEY is set) -> self-hosted SearXNG -> ddgs -> Hacker News
+Algolia API -> Wikipedia API. Without a Tavily key everything stays keyless.
+Pages are fetched and reduced to text with trafilatura; Tavily returns page text with its results,
+so those pages need no second download. Fetched text is DATA, never instructions
 (guardrails.sanitize_source strips injected instructions before any model sees it).
 Calculator: plain Python arithmetic on validated numbers. Model text is never evaluated.
 """
@@ -19,17 +21,19 @@ import requests
 SEARXNG_URL = os.environ.get("SEARXNG_URL", "")
 UA = {"User-Agent": "Mozilla/5.0 (compatible; launchpad-research/1.0)"}
 MAX_QUERIES, MAX_PAGES = 3, 5
+PAGE_CHARS = 3500
 LOGIN_HINTS = ("login", "signin", "sign-in", "/auth", "accounts.")
+TAVILY_URL = "https://api.tavily.com/search"
 
 
-def _cache_dir() -> Path:
+def _cache_path(kind: str, key: str) -> Path:
     p = Path(os.environ.get("SEARCH_CACHE_DIR", "data/search_cache"))
     p.mkdir(parents=True, exist_ok=True)
-    return p
+    return p / f"{kind}_{hashlib.sha1(key.encode()).hexdigest()[:16]}.json"
 
 
 def _cached(kind: str, key: str, fn):
-    path = _cache_dir() / f"{kind}_{hashlib.sha1(key.encode()).hexdigest()[:16]}.json"
+    path = _cache_path(kind, key)
     if path.exists():
         data = json.loads(path.read_text("utf-8"))
         data["cached"] = True
@@ -39,6 +43,29 @@ def _cached(kind: str, key: str, fn):
         path.write_text(json.dumps(data), "utf-8")
     data["cached"] = False
     return data
+
+
+def search_backend() -> str:
+    return "Tavily (fallback: keyless search)" if os.environ.get("TAVILY_API_KEY") else "keyless (SearXNG / ddgs)"
+
+
+def _tavily(q: str) -> list[dict]:
+    """Tavily search (1 credit per basic search). Page text arrives with the results and is cached
+    as the fetched page, so fetch() does not download it again."""
+    r = requests.post(TAVILY_URL, timeout=30,
+                      headers={"Authorization": f"Bearer {os.environ['TAVILY_API_KEY']}"},
+                      json={"query": q, "search_depth": "basic", "max_results": 8, "include_raw_content": "text"})
+    r.raise_for_status()
+    out = []
+    for x in r.json().get("results", []):
+        url, text = x.get("url"), (x.get("raw_content") or "").strip()
+        if not url:
+            continue
+        page = _cache_path("page", url)
+        if text and not page.exists():
+            page.write_text(json.dumps({"url": url, "text": text[:PAGE_CHARS]}), "utf-8")
+        out.append({"url": url, "title": x.get("title", ""), "snippet": x.get("content", ""), "engine": "tavily"})
+    return out
 
 
 def _searxng(q: str) -> list[dict]:
@@ -84,9 +111,11 @@ def _wikipedia(q: str) -> list[dict]:
 
 
 def search(q: str) -> dict:
+    use_tavily = bool(os.environ.get("TAVILY_API_KEY"))
+
     def run():
         errors = []
-        engines = ([_searxng] if SEARXNG_URL else []) + [_ddgs, _hn, _wikipedia]
+        engines = ([_tavily] if use_tavily else []) + ([_searxng] if SEARXNG_URL else []) + [_ddgs, _hn, _wikipedia]
         for engine in engines:
             try:
                 res = [x for x in engine(q) if not any(h in x["url"].lower() for h in LOGIN_HINTS)]
@@ -95,10 +124,11 @@ def search(q: str) -> dict:
             except Exception as exc:  # noqa: BLE001
                 errors.append(f"{engine.__name__}: {exc}")
         return {"query": q, "results": [], "errors": errors}
-    return _cached("search", q, run)
+    # separate cache key, so results cached from keyless search are not reused once Tavily is on
+    return _cached("search", f"tavily:{q}" if use_tavily else q, run)
 
 
-def fetch(url: str, limit: int = 3500) -> dict:
+def fetch(url: str, limit: int = PAGE_CHARS) -> dict:
     def run():
         try:
             import trafilatura

@@ -63,6 +63,7 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 - **Default, keyless:** `qwen3:8b` (Apache-2.0, open weights) via Ollama. Set `LOCAL_MODEL` to use `qwen3:4b` on small laptops or `gpt-oss:20b` (Apache-2.0) on bigger machines.
 - **Optional fast mode:** the Groq free tier with `openai/gpt-oss-120b` (open weights), only when `GROQ_API_KEY` is set. Calls are rate-limited, and any error falls back to the local model.
 - **Web research, keyless:** self-hosted SearXNG, with the `ddgs` package, the Hacker News Algolia API and the Wikipedia API as fallbacks; page text is extracted with `trafilatura`.
+- **Optional search API:** [Tavily](https://tavily.com), only when `TAVILY_API_KEY` is set. It is tried first and returns page text with each result (1 credit per search on its free tier); any Tavily error falls back to the keyless search above.
 - No paid API, account or card is needed.
 
 ## Cost per run
