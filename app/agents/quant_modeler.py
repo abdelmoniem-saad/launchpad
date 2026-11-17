@@ -1,6 +1,8 @@
 """firm.quant_modeler: every number goes through the calculator. The model never does the maths."""
 from __future__ import annotations
 
+import re
+
 from app import decision_log as dl
 from app import tools
 
@@ -35,11 +37,69 @@ def compute(step: dict, work: dict, state: dict) -> dict:
         elif kind == "blueprint_cost":
             out = tools.total_cost(work.get("roles", []), brief.get("budget_usd"))
         elif kind == "pricing":
-            median = ((state.get("work_memory") or {}).get("price_stats") or {}).get("median")
-            out = ({"pricing_tiers": tools.pricing_options(median), "basis": f"sourced competitor median ${median}/month"}
-                   if median else {"pricing_tiers": [], "basis": "no sourced competitor prices: tiers left to the founder (ASSUMPTION)"})
+            out = _pricing(work, state)
     except (TypeError, ValueError, KeyError) as exc:
         out = {"error": f"calculator rejected the inputs: {exc}"}
     if kind:
         dl.log(AGENT, f"calculator {kind} step {step['id']}", model=None, cost=0)
+    return out
+
+
+def _quoted(price, quote: str) -> bool:
+    """True when the price figure itself appears in the quoted source text (e.g. 12, 12.0 or 12.00)."""
+    v = float(price)
+    forms = {f"{v:g}", f"{v:.2f}"} | ({f"{int(v)}"} if v.is_integer() else set())
+    return any(re.search(rf"(?<![\d.]){re.escape(f)}(?![\d])", quote) for f in forms)
+
+
+def label_price_points(work: dict, quant: dict) -> dict:
+    """Mark each proposed price point so the report never shows an unsourced price as a finding."""
+    counted = {(p["product"], p["price_usd"]) for p in quant.get("counted_price_points", [])}
+    points = []
+    for p in work.get("price_points", []) if isinstance(work.get("price_points"), list) else []:
+        try:
+            key = (p.get("product"), float(p.get("price_usd")))
+        except (TypeError, ValueError):
+            key = None
+        points.append({**p, "status": "SOURCED (counted)" if key in counted
+                       else "ASSUMPTION: not found in a verified source quote, ignored by the calculator"})
+    return {**work, "price_points": points} if points else work
+
+
+def _pricing(work: dict, state: dict) -> dict:
+    """Tiers from price points backed by a SOURCED claim whose quote contains the price; billing types never mixed."""
+    claims = {c["id"]: c for c in state.get("claims", [])}
+    pages = state.get("sources_text") or {}
+    groups: dict[str, list] = {}
+    counted, rejected = [], []
+    for p in work.get("price_points", []) if isinstance(work.get("price_points"), list) else []:
+        c = claims.get(str(p.get("claim_id") or ""), {})
+        quote = " ".join(str(c.get("quote") or "").split())
+        on_page = bool(quote) and quote in " ".join(str(pages.get(c.get("source_url"), "")).split())
+        try:
+            ok = c.get("type") == "SOURCED" and on_page and float(p.get("price_usd")) > 0 and _quoted(p["price_usd"], quote)
+        except (TypeError, ValueError):
+            ok = False
+        if ok:
+            billing = str(p.get("billing") or "one_time")
+            groups.setdefault(billing, []).append(float(p["price_usd"]))
+            counted.append({"product": p.get("product"), "price_usd": float(p["price_usd"]), "billing": billing,
+                            "claim_id": c["id"], "source_url": c.get("source_url")})
+        else:
+            rejected.append(p.get("product"))
+    out: dict = {"counted_price_points": counted, "not_counted": rejected,
+                 "rule": "A price counts only if its claim is SOURCED (after verification), its quote is on the fetched page, "
+                         "and the quote contains that price."}
+    if groups:
+        billing, prices = max(groups.items(), key=lambda kv: len(kv[1]))
+        stats = tools.price_stats(prices)
+        out.update({"price_stats": stats, "billing": billing, "pricing_tiers": tools.pricing_options(stats["median"]),
+                    "basis": f"0.6x / 1x / 1.6x the median of {stats['count']} sourced {billing} price(s): ${stats['median']}"})
+        return out
+    median = ((state.get("work_memory") or {}).get("price_stats") or {}).get("median")
+    if median:
+        out.update({"pricing_tiers": tools.pricing_options(median), "billing": "monthly",
+                    "basis": f"no price sourced in this step; step 1.3's sourced competitor median ${median}/month"})
+    else:
+        out.update({"pricing_tiers": [], "basis": "no sourced prices: tiers left to the founder (ASSUMPTION)"})
     return out

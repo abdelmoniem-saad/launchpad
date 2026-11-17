@@ -1,7 +1,8 @@
 """Phase and step definitions, the department roster per phase, and which gate each step uses.
 
-Phases 1-2 are LIVE (real web research + verification). Phases 3-6 are MOCKED: the firm writes
-drafts with the same governance, but nothing is built, sold, delivered or published.
+Phases 1-2 and the phase 4 pricing step are LIVE (real web research + verification). The rest of
+phases 3-6 is MOCKED: the firm writes drafts with the same governance, but nothing is built, sold,
+delivered or published.
 """
 from __future__ import annotations
 
@@ -92,11 +93,20 @@ STEPS = [
      "title": "MVP spec, user docs draft and test plan (MOCKED)", "queries": [],
      "task": "Write the MVP spec (at most 5 core features, out of scope list), a short user docs draft and a test plan.",
      "work_keys": '{"core_features": [str], "out_of_scope": [str], "user_docs_draft": str, "test_plan": [str]}', "quant": None},
-    {"id": "4.1", "phase": 4, "name": "pricing_and_policies", "live": False,
-     "title": "Pricing options, draft terms, privacy and refund policies (MOCKED, no payments)", "queries": [],
-     "task": "Draft terms of service, privacy policy and refund policy summaries in plain language. Core features must not be paywalled. "
-             "Pricing tiers are computed by the calculator from the market median; comment on them.",
-     "work_keys": '{"tier_notes": str, "terms_summary": str, "privacy_summary": str, "refund_policy": str}', "quant": "pricing"},
+    {"id": "4.1", "phase": 4, "name": "pricing", "live": True,
+     "title": "Pricing: sourced price points and calculator tiers (no payments)",
+     "queries": ["{niche} price", "{niche} template pricing", "{customer} pay for {niche}"],
+     "task": "Find the prices that comparable products publish in the sources (one entry per product, with the claim_id of the claim "
+             "that quotes the price; never a price that is not in the sources) and say whether each is one-time or monthly. "
+             "Pricing tiers are computed by the calculator from the sourced prices, never by you; comment on them. "
+             "Say which features stay free: core features must never be paywalled. No payment setup of any kind.",
+     "work_keys": '{"price_points": [{"product": str, "price_usd": number, "billing": "one_time|monthly|yearly", "claim_id": str}], "free_features": [str], "tier_notes": str}',
+     "quant": "pricing"},
+    {"id": "4.2", "phase": 4, "name": "policies", "live": False,
+     "title": "Draft terms, privacy and refund policies (MOCKED, not legal advice)", "queries": [],
+     "task": "Draft terms of service, privacy policy and refund policy summaries in plain language, labelled as drafts that are not "
+             "legal advice and must be reviewed by the founder (and a lawyer where needed) before use.",
+     "work_keys": '{"terms_summary": str, "privacy_summary": str, "refund_policy": str}', "quant": None},
     {"id": "5.1", "phase": 5, "name": "launch_drafts", "live": False,
      "title": "Store page and launch post drafts; delivery (MOCKED)", "queries": [],
      "task": "Draft the store page and one launch post in the founder's own name, and describe how buyers would receive the product "

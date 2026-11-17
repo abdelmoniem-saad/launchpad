@@ -1,6 +1,6 @@
 """Parent graph: brief intake -> completeness check (founder interview) -> excluded-product check
 -> every step (step subgraph) -> founder checkpoint (interrupt) -> gate -> go / repeat / pivot / stop
--> engagement close-out. Phases 1-2 are LIVE; phases 3-6 are MOCKED drafts.
+-> engagement close-out. Phases 1-2 and step 4.1 (pricing) are LIVE; steps 3.1, 4.2, 5.1 and 6.1 are MOCKED drafts.
 """
 from __future__ import annotations
 
@@ -146,7 +146,7 @@ def close_out(state: EngagementState) -> dict:
     idx = min(state.get("step_index", 0), len(STEPS) - 1)
     phase = STEPS[idx]["phase"] if stopped else STEPS[-1]["phase"]
     outcome = gates.STOP if stopped else "completed"
-    reasons = [state.get("stop_reason", "")] if stopped else ["All steps approved by the founder. Phases 3-6 are MOCKED drafts."]
+    reasons = [state.get("stop_reason", "")] if stopped else ["All steps approved by the founder. Steps 3.1, 4.2, 5.1 and 6.1 are MOCKED drafts."]
     outputs.write_final(state, phase, outcome, reasons)
     rep = outputs.write_cost(state)
     dl.log("firm.engagement_manager", f"engagement_close_out: {outcome}", outcome=outcome,

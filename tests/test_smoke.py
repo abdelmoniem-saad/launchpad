@@ -53,6 +53,9 @@ def test_full_run_names_log_and_cost(env):
     for n in names:
         assert re.match(r"^(phase\d_(step\d_[a-z0-9_]+|gate_[a-z0-9_]+)\.(md|json)|cost_report\.json)$", n), n
     assert "phase1_gate_evidence.json" in names and "phase2_gate_demand.json" in names
+    assert "phase4_step1_pricing.md" in names and "phase4_step2_policies.md" in names
+    assert "Status: **LIVE**" in (out / "phase4_step1_pricing.md").read_text()
+    assert "Status: **MOCKED**" in (out / "phase4_step2_policies.md").read_text()
     cost = json.loads((out / "cost_report.json").read_text())
     assert cost["cost_usd"] == 0 and cost["calls"] > 0
     entries = dl.entries()

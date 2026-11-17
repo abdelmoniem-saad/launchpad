@@ -20,6 +20,7 @@ from app.phases import STEPS, roster
 from app.state import EngagementState
 
 MAX_NEGOTIATION_ROUNDS = 2  # review + one negotiation round
+CLAIM_BASED_QUANT = {"price_stats", "pricing"}  # calculators that only count SOURCED claims
 
 
 def _step(state) -> dict:
@@ -135,7 +136,13 @@ def verify(state: EngagementState) -> dict:
         kp["label"] = "SOURCED" if any(types.get(i) == "SOURCED" for i in kp.get("claim_ids", [])) else "ASSUMPTION"
     dl.log("governance.verification_gate", f"tier1_verify step {step['id']}: {sum(c['type'] == 'SOURCED' for c in mine)}/{len(mine)} sourced",
            sources=[c["source_url"] for c in mine if c["type"] == "SOURCED"])
-    return {"claims": claims, "verification_flags": flags, "report": report}
+    out = {"claims": claims, "verification_flags": flags, "report": report}
+    if step.get("quant") in CLAIM_BASED_QUANT and not state.get("step_blocked"):
+        # recompute so a claim downgraded by verification can no longer feed the calculator
+        out["quant"] = quant_modeler.compute(step, state.get("work", {}), {**state, "claims": claims})
+        if step.get("quant") == "pricing":
+            out["work"] = quant_modeler.label_price_points(state.get("work", {}), out["quant"])
+    return out
 
 
 def health(state: EngagementState) -> dict:
