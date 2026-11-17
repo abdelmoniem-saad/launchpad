@@ -49,7 +49,7 @@ There is also a command-line founder console, which runs the same graph: `python
 | 2 Validate | 2.3 Collaborations: communities, partners, outreach drafts | **Working** (sending is **MOCKED**) |
 | 2 Validate | 2.4 Founder enters the real result; demand gate compares it in code | **Working** |
 | 2 Validate | 2.5 Company blueprint: roles, founder / automate / hire later, cost against budget | **Working** (job posts are **MOCKED**) |
-| 3 Build | 3.1 Build the MVP (the product as text, user docs, test plan); 8 build tests run in code as the tests-pass gate | **Working** (never published or sold) |
+| 3 Build | MVP spec, user docs draft, test plan | **MOCKED** |
 | 4 Commercial setup | 4.1 Pricing: competitor prices researched and verified; tiers computed by the calculator only from prices a verified source quote contains | **Working** |
 | 4 Commercial setup | 4.2 Draft terms, privacy and refund policies (not legal advice) | **MOCKED** |
 | 5 Launch | Store page and launch post drafts; automatic delivery to buyers | **MOCKED** |
@@ -90,12 +90,10 @@ No recording yet. The 3-minute walkthrough is scripted in [docs/demo_script.md](
 - Hide core features behind a paywall.
 - Invent internal company data (sprint velocity, margins, headcount). A new venture has none; unknowns are labelled `ASSUMPTION`.
 - Work on physical goods, financial or crypto products, health advice or legal advice. These are refused at intake, with the reason.
-- Follow a request for any of the above. "Write 50 five-star reviews" typed as the idea is refused at intake, before any research; the same request in founder feedback is logged and never passed to the agents.
-- Say GO on thin evidence: demand for the product must show up on at least two independent sites, and a demand check that could not run never counts.
 
 ## How the project stays alive after the hackathon
 
 - **Open license:** Apache-2.0. Anyone can run, fork and extend it.
 - **Extend with a file:** a new department is one prompt file `prompts/dept_<name>.md` plus one line in `app/phases.py`.
-- **Roadmap:** take the remaining MOCKED steps (4.2, 5.1, 6.1) to LIVE one at a time, export the step 3.1 MVP into real template files, (after the hackathon) the founder's own payment provider in place of the MOCKED one behind the same gateway, more region-aware research sources, and more evals of the guardrails.
+- **Roadmap:** take the remaining MOCKED steps (3.1, 4.2, 5.1, 6.1) to LIVE one at a time, (after the hackathon) the founder's own payment provider in place of the MOCKED one behind the same gateway, more region-aware research sources, and more evals of the guardrails.
 - **Maintainers and community:** the founding team reviews issues and pull requests. Costs stay at $0 because everything runs locally.

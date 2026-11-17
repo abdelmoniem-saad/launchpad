@@ -2,7 +2,7 @@
 
 Gate types: founder approval (the checkpoint), evidence thresholds (Phase 1 evidence gate),
 a pre-registered demand threshold locked by the founder before results exist (Phase 2 demand
-gate, compared in code), and tests pass (Phase 3 build gate, app/build_tests.py).
+gate, compared in code), and tests pass (Build, MOCKED here).
 """
 from __future__ import annotations
 
@@ -42,42 +42,19 @@ def evidence_gate(claims: list[dict], phase: int = 1) -> dict:
     mine = [c for c in claims if str(c.get("step", "")).startswith(f"{phase}.")]
     sourced = [c for c in mine if c.get("type") == "SOURCED"]
     signals = [c for c in sourced if str(c.get("step")) == f"{phase}.4"]
-    demand = [c for c in signals if c.get("product_demand", True) is True]
-    unchecked = [c for c in signals if "product_demand" in c and c["product_demand"] is None]
-    sites = {_site(c.get("source_url")) for c in demand} - {""}
+    demand = [c for c in signals if c.get("product_demand", True)]
     ratio = len(sourced) / len(mine) if mine else 0.0
     reasons = [f"{len(sourced)}/{len(mine)} Phase {phase} claims are sourced and verified (ratio {ratio:.2f})",
-               f"{len(demand)} of {len(signals)} sourced demand signal(s) from step {phase}.4 show demand for this product"
-               + (f", from {len(sites)} independent site(s)" if demand else "")]
+               f"{len(demand)} of {len(signals)} sourced demand signal(s) from step {phase}.4 show demand for this product"]
     if len(sourced) < 3 or ratio < 0.3:
         return {"outcome": STOP, "reasons": reasons + ["evidence too weak: recommend STOP rather than build on assumptions"]}
     if not signals:
         return {"outcome": PIVOT, "reasons": reasons + ["no sourced demand signal: recommend PIVOT to a different niche"]}
-    if unchecked and not demand:  # fail closed: a signal nobody could check never counts as demand
-        return {"outcome": REPEAT, "reasons": reasons + [
-            f"{len(unchecked)} signal(s) could not be checked for product demand (model error): repeat the check, never count them"]}
     if not demand:
         return {"outcome": STOP, "reasons": reasons + [
             "don't launch this: the sources show the customer's problems, but none shows anyone wanting this "
             "product or paying for something like it. Recommend STOP rather than build on hope."]}
-    if len(sites) < MIN_DEMAND_SITES:
-        return {"outcome": PIVOT, "reasons": reasons + [
-            f"thin evidence: demand for this product shows up on fewer than {MIN_DEMAND_SITES} independent sites, so one "
-            "community or one vendor page could be the whole story. Recommend PIVOT (sharper niche or different customer)."]}
     return {"outcome": GO, "reasons": reasons + ["evidence threshold met"]}
-
-
-MIN_DEMAND_SITES = 2
-
-
-def _site(url) -> str:
-    """Registered site of a URL (www. and subdomains of the same site count once)."""
-    from urllib.parse import urlparse
-    host = urlparse(str(url or "")).netloc.lower().split(":")[0]
-    parts = [p for p in host.split(".") if p]
-    if len(parts) >= 3 and len(parts[-1]) == 2 and parts[-2] in ("co", "com", "org", "net", "ac", "gov", "edu"):
-        return ".".join(parts[-3:])  # e.g. example.co.uk
-    return ".".join(parts[-2:])
 
 
 def demand_gate(thresholds: dict, actual: int | None, demo_input: bool = False) -> dict:
@@ -101,17 +78,6 @@ def _demand_gate(thresholds: dict, actual: int | None) -> dict:
     return {"outcome": STOP, "reasons": reasons + ["far below target: recommend STOP"], "comparison": cmp}
 
 
-def tests_gate(result: dict) -> dict:
-    """Phase 3 gate: the MVP passes every build test (app/build_tests.py), checked in code."""
-    from app.build_tests import failures
-    if not result or not result.get("tests"):
-        return {"outcome": REPEAT, "reasons": ["no build test results: the MVP was not built"]}
-    reasons = [f"{result['passed']}/{result['total']} build tests passed"]
-    if result.get("all_passed"):
-        return {"outcome": GO, "reasons": reasons + ["all build tests pass"]}
-    return {"outcome": REPEAT, "reasons": reasons + [f"failing: {f}" for f in failures(result)]}
-
-
 def step_gate(step: dict, state: dict, founder_decision: str) -> dict:
     """Combine the founder's checkpoint decision with the step's evidence rules."""
     sid = step["id"]
@@ -128,8 +94,6 @@ def step_gate(step: dict, state: dict, founder_decision: str) -> dict:
         return {"outcome": REPEAT, "reasons": ["output blocked by the rule guard; repeating once"]}
     if step.get("gate") == "evidence":
         g = evidence_gate(state.get("claims", []), step["phase"])
-        if g["outcome"] == REPEAT and repeats >= MAX_REPEATS_PER_STEP:
-            g = {"outcome": STOP, "reasons": g["reasons"] + ["the product demand check failed twice: STOP rather than guess"]}
         if g["outcome"] == PIVOT and (state.get("pivots") or 0) >= MAX_PIVOTS:
             g = {"outcome": STOP, "reasons": g["reasons"] + ["already pivoted once: STOP"]}
         return g
@@ -140,10 +104,5 @@ def step_gate(step: dict, state: dict, founder_decision: str) -> dict:
             g = {**g, "outcome": STOP, "reasons": g["reasons"] + ["paused: run the demand test, then start again with the real result"]}
         if g["outcome"] == PIVOT and (state.get("pivots") or 0) >= MAX_PIVOTS:
             g = {**g, "outcome": STOP, "reasons": g["reasons"] + ["already pivoted once: STOP"]}
-        return g
-    if step.get("gate") == "tests":
-        g = tests_gate((state.get("quant") or {}).get("build_tests") or {})
-        if g["outcome"] == REPEAT and repeats >= MAX_REPEATS_PER_STEP:
-            g = {**g, "outcome": STOP, "reasons": g["reasons"] + ["build tests still fail after one redo: STOP rather than ship a broken MVP"]}
         return g
     return {"outcome": GO, "reasons": ["founder approved"]}

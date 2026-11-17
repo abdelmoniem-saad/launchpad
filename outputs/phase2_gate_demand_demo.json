@@ -4,20 +4,20 @@
   "outcome": "go",
   "reasons": [
     "DEMO INPUT: this result is hypothetical, entered to demonstrate the gate and later phases; no real demand test was run, so demand is NOT validated",
-    "locked target 24 waitlist signups in 7 days; actual 24 (100%)",
+    "locked target 20 waitlist signups in 14 days; actual 20 (100%)",
     "threshold met"
   ],
   "comparison": {
-    "target": 24,
-    "actual": 24,
+    "target": 20,
+    "actual": 20,
     "ratio": 1.0,
     "met": true
   },
   "thresholds": {
     "metric": "waitlist signups",
-    "target": 24,
-    "days": 7,
-    "basis": "200 visitors x 0.12 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical small niche waitlist conversion rates (C2.2-1) and industry benchmarks (C2.2-3)",
+    "target": 20,
+    "days": 14,
+    "basis": "200 visitors x 0.1 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on C2.2-6, C2.2-7, C2.2-8, C2.2-4",
     "locked": true
   },
   "founder_decision": "approve"

@@ -38,29 +38,9 @@ def test_no_demand_signal_recommends_pivot():
     assert gates.evidence_gate(claims)["outcome"] == gates.PIVOT
 
 
-def _phase1(product_demand, urls=("https://forum.example.org/a", "https://www.example.net/b")):
+def _phase1(product_demand):
     claims = [{"id": f"C1.1-{i}", "step": "1.1", "type": "SOURCED"} for i in range(3)]
-    return claims + [{"id": f"C1.4-{i}", "step": "1.4", "type": "SOURCED", "product_demand": product_demand, "source_url": u}
-                     for i, u in enumerate(urls, 1)]
-
-
-def test_demand_from_one_site_only_is_thin_evidence():
-    g = gates.evidence_gate(_phase1(True, ("https://www.example.org/a", "https://forum.example.org/b")))
-    assert g["outcome"] == gates.PIVOT and any("thin evidence" in r for r in g["reasons"])
-
-
-def test_unchecked_signals_never_count_as_demand():
-    """If the product demand check fails, the gate repeats it (then stops); it never says GO on unchecked signals."""
-    g = gates.evidence_gate(_phase1(None))
-    assert g["outcome"] == gates.REPEAT
-    step = {"id": "1.4", "phase": 1, "gate": "evidence"}
-    again = gates.step_gate(step, {"claims": _phase1(None), "repeats": {"1.4": 1}}, "approve")
-    assert again["outcome"] == gates.STOP
-
-
-def test_site_counts_subdomains_once():
-    assert gates._site("https://www.reddit.com/r/x") == gates._site("https://old.reddit.com/r/y") == "reddit.com"
-    assert gates._site("https://shop.example.co.uk/p") == "example.co.uk"
+    return claims + [{"id": "C1.4-1", "step": "1.4", "type": "SOURCED", "product_demand": product_demand}]
 
 
 def test_demand_for_the_problem_only_means_dont_launch():

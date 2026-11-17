@@ -6,27 +6,27 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-Demand test: 24 waitlist signups against a locked target of 24 in 7 days. Gate recommendation: GO.
+Demand test: 20 waitlist signups against a locked target of 20 in 14 days. Gate recommendation: GO.
 
 ## Supporting points
 
 - DEMO INPUT: this result is hypothetical, entered to demonstrate the gate and later phases; no real demand test was run, so demand is NOT validated (DEMO INPUT (hypothetical))
-- locked target 24 waitlist signups in 7 days; actual 24 (100%) (DEMO INPUT (hypothetical))
+- locked target 20 waitlist signups in 14 days; actual 20 (100%) (DEMO INPUT (hypothetical))
 - threshold met (DEMO INPUT (hypothetical))
 
 Strategy architect recommendation: **GO**. compared in code against the locked threshold
 
 ## Work
 
-- **founder_entered_result:** 24
+- **founder_entered_result:** 20
 - **note:** DEMO INPUT: this result is hypothetical, entered to demonstrate the gate and later phases; no real demand test was run, so demand is NOT validated
 
 ## Calculator results (quant modeler)
 
 ```json
 {
-  "target": 24,
-  "actual": 24,
+  "target": 20,
+  "actual": 20,
   "ratio": 1.0,
   "met": true
 }
@@ -36,9 +36,9 @@ Strategy architect recommendation: **GO**. compared in code against the locked t
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit |  |  |  |
-| marketing |  |  |  |
-| finance |  |  |  |
+| founder_fit | The outreach drafts are within the founder’s skill set (writing, Notion, video editing) and require only a few hours per week. The founder can send these messages without exceeding the 10‑hour weekly limit. |  |  |
+| marketing | The selected communities are relevant and likely to have active members. However, the outreach messages are generic and may not trigger high engagement without a clear value proposition or incentive. | Suggest adding a brief, tangible benefit (e.g., free trial of the template pack) to increase response rates. | Adding a small incentive would increase cost but could improve conversion. |
+| finance | All outreach activities are free to execute and stay well within the $300 budget. |  |  |
 
 ## Founder checkpoint
 
@@ -49,5 +49,5 @@ Decision: **approve**
 Outcome: **GO**
 
 - DEMO INPUT: this result is hypothetical, entered to demonstrate the gate and later phases; no real demand test was run, so demand is NOT validated
-- locked target 24 waitlist signups in 7 days; actual 24 (100%)
+- locked target 20 waitlist signups in 14 days; actual 20 (100%)
 - threshold met

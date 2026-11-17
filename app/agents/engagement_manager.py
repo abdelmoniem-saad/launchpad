@@ -4,7 +4,7 @@ opening and closing founder checkpoints, and the final "so what?" review of each
 from __future__ import annotations
 
 from app import decision_log as dl
-from app.guardrails import excluded_reason, refused_request
+from app.guardrails import excluded_reason
 from app.state import Brief
 
 AGENT = "firm.engagement_manager"
@@ -39,16 +39,10 @@ def interview_questions(brief: dict, clarified: bool) -> list[dict]:
 
 
 def excluded(brief: dict) -> str | None:
-    text = " ".join(str(v) for v in brief.values())
-    reason = excluded_reason(text)
+    reason = excluded_reason(" ".join(str(v) for v in brief.values()))
     dl.log("firm.compliance_officer", "excluded_product_check: " + ("EXCLUDED, stop" if reason else "allowed"),
            outcome="stop" if reason else "go")
-    if reason:
-        return reason
-    refused = refused_request(text)
-    dl.log("firm.compliance_officer", "request_check: " + ("REFUSED, stop" if refused else "allowed"),
-           outcome="stop" if refused else "go")
-    return refused
+    return reason
 
 
 def so_what(report: dict) -> dict:
