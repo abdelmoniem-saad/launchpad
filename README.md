@@ -12,7 +12,12 @@ docker compose up
 
 Then open **http://localhost:8501**, fill in the brief and start the engagement. The first start downloads the model (`qwen3:8b`, about 5 GB), so it takes a while. Plan for about 8 GB of free RAM and 10 GB of disk.
 
-**How long a run takes.** The local model is slow without a GPU: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour. With a GPU it is minutes: the committed demo run took about 2.5 minutes with `gpt-oss:20b` on a 16 GB GPU. For a fast run without a GPU, put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)); any Groq error falls back to the local model.
+**How long a run takes.** Pick one of these to finish a full run in minutes:
+
+- **GPU:** `docker compose -f docker-compose.yml -f compose.gpu.yml up` gives the bundled Ollama an NVIDIA GPU. The committed demo run took about 2.5 minutes with `gpt-oss:20b` on a 16 GB GPU.
+- **No GPU:** put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)) and run `docker compose up`. The model is then the open-weight `openai/gpt-oss-120b` on Groq's free tier; any Groq error falls back to the local model.
+
+Plain `docker compose up` without either runs the model on the CPU, which is slow: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour.
 
 **Already running Ollama on your machine?** Reuse it instead of the bundled container (pull the model there first):
 
@@ -50,7 +55,7 @@ There is also a command-line founder console, which runs the same graph: `python
 | 5 Launch | Store page and launch post drafts; automatic delivery to buyers | **MOCKED** |
 | 6 Operate and learn | Support replies, metrics plan, persevere-or-pivot memo | **MOCKED** |
 | Governance | Founder checkpoint after every step; action gateway with one-time tokens; Tier 1 rule guard; Tier 2 claim check; team health check; decision log; cost report | **Working** |
-| Payments | Founder opens the store; checkout; a signed webhook triggers delivery; duplicate webhooks ignored; founder-approved refund revokes access; reconciliation against the payout report. Run with `python -m app.payment_test`, log in [outputs/payment_test_log.md](outputs/payment_test_log.md) | **Working** against a **MOCKED** payment provider (no real money, no card data) |
+| Payments | Founder opens the store; checkout; a signed webhook triggers delivery; duplicate webhooks ignored; founder-approved refund revokes access; reconciliation against the payout report. Run with `python -m app.payment_test`, log in [outputs/payment_test_log.md](outputs/payment_test_log.md) | **MOCKED**: a simulated payment provider inside the app. No payments of any kind, not even sandbox; no real money, no card data |
 | Demo run to phase 6 (`outputs/*_demo.*`) | No real waitlist test was run, so the step 2.4 result in this run is a hypothetical `--demo-result`, labelled DEMO INPUT in the gate, every later step file and the decision log. The `outputs/*` and `*_weak` runs leave 2.4 blank and stop honestly at the demand gate | **MOCKED** input |
 
 **MOCKED** means drafts only: whatever the founder approves is written to `outputs/` with a MOCKED label. Nothing is actually published, sent, charged, signed or contacted.
