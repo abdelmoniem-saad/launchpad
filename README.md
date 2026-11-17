@@ -51,6 +51,7 @@ There is also a command-line founder console, which runs the same graph: `python
 | 6 Operate and learn | Support replies, metrics plan, persevere-or-pivot memo | **MOCKED** |
 | Governance | Founder checkpoint after every step; action gateway with one-time tokens; Tier 1 rule guard; Tier 2 claim check; team health check; decision log; cost report | **Working** |
 | Payments | Founder opens the store; checkout; a signed webhook triggers delivery; duplicate webhooks ignored; founder-approved refund revokes access; reconciliation against the payout report. Run with `python -m app.payment_test`, log in [outputs/payment_test_log.md](outputs/payment_test_log.md) | **Working** against a **MOCKED** payment provider (no real money, no card data) |
+| Demo run to phase 6 (`outputs/*_demo.*`) | No real waitlist test was run, so the step 2.4 result in this run is a hypothetical `--demo-result`, labelled DEMO INPUT in the gate, every later step file and the decision log. The `outputs/*` and `*_weak` runs leave 2.4 blank and stop honestly at the demand gate | **MOCKED** input |
 
 **MOCKED** means drafts only: whatever the founder approves is written to `outputs/` with a MOCKED label. Nothing is actually published, sent, charged, signed or contacted.
 
@@ -67,7 +68,7 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 
 ## Cost per run
 
-**About $0.00 per run** (local model). The committed demo run (strong brief, phases 1-2) made 27 model calls and used about 71k tokens with `gpt-oss:20b`, and took about 2 minutes end to end on a 16 GB GPU (81 seconds of model time; the rest is web research). Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
+**About $0.00 per run** (local model). The committed strong-brief run (phases 1-2, stopping at the demand gate) made 29 model calls and used about 79k tokens with `gpt-oss:20b`, and took about 2 minutes end to end on a 16 GB GPU. The full six-phase `*_demo` run made 56 calls, used about 138k tokens and took about 4.5 minutes. Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
 
 ## What our system will NOT do
 

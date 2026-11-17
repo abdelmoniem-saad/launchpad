@@ -59,8 +59,10 @@ def collect(state: EngagementState) -> dict:
                       "question": f"Enter the real number of {t.get('metric', 'signups')} after {t.get('days')} days (leave blank if the test has not run)."})
     raw = (data or {}).get("actual")
     actual = int(raw) if raw not in (None, "") else None
-    dl.log("firm.engagement_manager", f"founder_entered_results step {step['id']}: {actual}", approved_by="founder")
-    return {"evidence": {**(state.get("evidence") or {}), "actual": actual}}
+    demo = bool((data or {}).get("demo_input")) and actual is not None
+    dl.log("firm.engagement_manager", f"founder_entered_results step {step['id']}: {actual}" + (f" ({gates.DEMO_NOTE})" if demo else ""),
+           approved_by="founder", demo_input=demo)
+    return {"evidence": {**(state.get("evidence") or {}), "actual": actual, "demo_input": demo}}
 
 
 def write(state: EngagementState) -> dict:

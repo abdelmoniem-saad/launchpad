@@ -54,6 +54,9 @@ def render_step(state, step, decision: dict | None = None, gate: dict | None = N
     lines = [f"# Phase {step['phase']} ({PHASE_NAMES[step['phase']]}), step {step['id']}: {step['title']}", "",
              f"Status: **{label}**. Model: `{config.model_name()}`. Brief: {state['brief'].get('idea', '')}", "",
              "## Conclusion", "", report.get("conclusion", ""), ""]
+    if (state.get("evidence") or {}).get("demo_input") and step["phase"] >= 2 and step["id"] >= "2.4":
+        lines[4:4] = ["> **DEMO INPUT:** the step 2.4 waitlist result in this run is hypothetical; no real demand test was run, "
+                      "so everything from step 2.4 on is a demonstration, not validated demand.", ""]
     if report.get("key_points"):
         lines += ["## Supporting points", ""]
         for kp in report["key_points"]:

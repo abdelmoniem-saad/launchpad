@@ -51,7 +51,7 @@ STEPS = [
      "quant": "price_stats"},
     {"id": "1.4", "phase": 1, "name": "demand_and_interviews", "live": True, "gate": "evidence",
      "title": "Demand signals and a Mom Test interview script",
-     "queries": ["{niche} reddit", "\"looking for\" {niche} {customer}", "{customer} frustrated with {niche}"],
+     "queries": ["{idea} reddit", "{customer} \"looking for\" {niche}", "{customer} frustrated with {idea}"],
      "task": "List demand signals found in the sources (people describing the problem, asking for solutions, paying for workarounds). "
              "Label them as signals, never as signups. Write a Mom Test interview script: questions about past behaviour, "
              "no pitching, no hypotheticals; and who to interview.",

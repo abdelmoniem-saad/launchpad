@@ -11,6 +11,8 @@ from app.tools import compare_threshold
 GO, REPEAT, PIVOT, STOP = "go", "repeat", "pivot", "stop"
 MAX_REPEATS_PER_STEP = 1
 MAX_PIVOTS = 1
+DEMO_NOTE = ("DEMO INPUT: this result is hypothetical, entered to demonstrate the gate and later phases; "
+             "no real demand test was run, so demand is NOT validated")
 
 
 class ThresholdLocked(Exception):
@@ -21,7 +23,10 @@ def lock_threshold(thresholds: dict, proposal: dict) -> dict:
     """Founder locks the demand threshold. Once locked it cannot change."""
     if thresholds.get("locked"):
         raise ThresholdLocked("threshold already locked; it cannot be changed after locking")
-    return {**proposal, "target": int(proposal["target"]), "days": int(proposal.get("days", 14)), "locked": True}
+    target = int(proposal["target"])
+    if target < 1:
+        raise ValueError("a demand threshold must be at least 1; a target of 0 can never fail")
+    return {**proposal, "target": target, "days": int(proposal.get("days", 14)), "locked": True}
 
 
 def change_threshold(thresholds: dict, new: dict) -> dict:
@@ -52,7 +57,14 @@ def evidence_gate(claims: list[dict], phase: int = 1) -> dict:
     return {"outcome": GO, "reasons": reasons + ["evidence threshold met"]}
 
 
-def demand_gate(thresholds: dict, actual: int | None) -> dict:
+def demand_gate(thresholds: dict, actual: int | None, demo_input: bool = False) -> dict:
+    g = _demand_gate(thresholds, actual)
+    if demo_input and actual is not None:
+        g = {**g, "reasons": [DEMO_NOTE] + g["reasons"], "demo_input": True}
+    return g
+
+
+def _demand_gate(thresholds: dict, actual: int | None) -> dict:
     if not thresholds.get("locked"):
         return {"outcome": STOP, "reasons": ["no locked threshold: a target must be locked before results exist"]}
     if actual is None:
@@ -86,7 +98,8 @@ def step_gate(step: dict, state: dict, founder_decision: str) -> dict:
             g = {"outcome": STOP, "reasons": g["reasons"] + ["already pivoted once: STOP"]}
         return g
     if step.get("gate") == "demand":
-        g = demand_gate(state.get("thresholds") or {}, (state.get("evidence") or {}).get("actual"))
+        ev = state.get("evidence") or {}
+        g = demand_gate(state.get("thresholds") or {}, ev.get("actual"), bool(ev.get("demo_input")))
         if g["outcome"] == REPEAT and repeats >= MAX_REPEATS_PER_STEP:
             g = {**g, "outcome": STOP, "reasons": g["reasons"] + ["paused: run the demand test, then start again with the real result"]}
         if g["outcome"] == PIVOT and (state.get("pivots") or 0) >= MAX_PIVOTS:

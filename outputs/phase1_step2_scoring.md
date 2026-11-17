@@ -4,23 +4,23 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The Notion revision‑tracking template pack is the strongest option and should proceed.
+The Notion revision‑tracking template pack for freelance video editors is the strongest option and should proceed.
 
 ## Supporting points
 
-- The Notion pack scores highest overall (4.6) due to strong demand, founder fit, and manageable effort. (SOURCED: C1.2-1, C1.2-2)
-- It aligns with the founder’s skills (video editing, Notion, writing tutorials) and weekly hours (10 hrs). (ASSUMPTION)
-- The Google Sheets alternative is less compelling: lower weighted score (3.75) and offers less differentiation from existing tools. (SOURCED: C1.2-1, C1.2-2)
-- The standalone web app is infeasible within the 10‑hour weekly limit and conflicts with the founder’s value of simple tools. (SOURCED: C1.2-4, C1.2-5)
+- It scores highest overall (4.05) due to strong demand, moderate competition, excellent founder fit, and manageable effort. (SOURCED: C1.2-1, C1.2-3)
+- The founder’s core skills (video editing, Notion, writing tutorials) align perfectly with this idea, keeping the 10‑hour weekly budget realistic. (ASSUMPTION)
+- Alternative SaaS requires backend development and ongoing maintenance, exceeding the founder’s skill set and time constraints. (ASSUMPTION)
+- Project‑management‑tool templates are feasible but would dilute focus on Notion and risk higher effort if not built from existing templates. (SOURCED: C1.2-7, C1.2-8)
 
-Strategy architect recommendation: **GO**. The Notion template pack has the highest weighted score, meets founder fit and effort constraints, and addresses a clear need for freelance video editors to track revisions and deadlines. The alternative options either score lower or conflict with core constraints. Therefore, proceeding with the Notion pack is the best next step.
+Strategy architect recommendation: **GO**. The weighted score, founder fit, and low effort make the Notion template pack the most viable path to test market interest via a waitlist.
 
 ## Work
 
 - **options:**
-  - name: Notion revision‑tracking template pack; is_founder_idea: True; demand: 5; competition: 4; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2']
-  - name: Google Sheets milestone tracker with email reminders; is_founder_idea: False; demand: 4; competition: 3; founder_fit: 3; effort: 5; claim_ids: ['C1.2-1', 'C1.2-2']
-  - name: Standalone web app for revision workflow (similar to VidChops); is_founder_idea: False; demand: 4; competition: 2; founder_fit: 2; effort: 2; claim_ids: ['C1.2-4', 'C1.2-5']
+  - name: Notion revision‑tracking template pack for freelance video editors; is_founder_idea: True; demand: 4; competition: 3; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-3']
+  - name: Online video editing workflow SaaS with built‑in revision tracking; is_founder_idea: False; demand: 4; competition: 2; founder_fit: 2; effort: 2; claim_ids: ['C1.2-4', 'C1.2-5']
+  - name: Template pack for project management tools (e.g., Trello, Asana) tailored to video editors; is_founder_idea: False; demand: 3; competition: 4; founder_fit: 3; effort: 3; claim_ids: ['C1.2-7', 'C1.2-8']
 
 ## Calculator results (quant modeler)
 
@@ -28,33 +28,33 @@ Strategy architect recommendation: **GO**. The Notion template pack has the high
 {
   "ranked_options": [
     {
-      "name": "Notion revision\u2011tracking template pack",
+      "name": "Notion revision\u2011tracking template pack for freelance video editors",
       "is_founder_idea": true,
-      "demand": 5,
-      "competition": 4,
+      "demand": 4,
+      "competition": 3,
       "founder_fit": 5,
       "effort": 4,
       "claim_ids": [
         "C1.2-1",
-        "C1.2-2"
+        "C1.2-3"
       ],
-      "weighted_score": 4.6
+      "weighted_score": 4.05
     },
     {
-      "name": "Google Sheets milestone tracker with email reminders",
+      "name": "Template pack for project management tools (e.g., Trello, Asana) tailored to video editors",
       "is_founder_idea": false,
-      "demand": 4,
-      "competition": 3,
+      "demand": 3,
+      "competition": 4,
       "founder_fit": 3,
-      "effort": 5,
+      "effort": 3,
       "claim_ids": [
-        "C1.2-1",
-        "C1.2-2"
+        "C1.2-7",
+        "C1.2-8"
       ],
-      "weighted_score": 3.75
+      "weighted_score": 3.2
     },
     {
-      "name": "Standalone web app for revision workflow (similar to VidChops)",
+      "name": "Online video editing workflow SaaS with built\u2011in revision tracking",
       "is_founder_idea": false,
       "demand": 4,
       "competition": 2,
@@ -75,30 +75,30 @@ Strategy architect recommendation: **GO**. The Notion template pack has the high
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The Notion template pack aligns with the founder’s skills and weekly hours. The Google Sheets option is easier to build but requires less of the founder’s unique video‑editing expertise, which may dilute the value proposition. The web app would demand significant development effort and time beyond the 10‑hour weekly limit, and would conflict with the founder’s value of simple tools. | Reject the web app due to high effort and misalignment with founder values. Consider the Google Sheets option only if it can be built within 10 hours and still offer a clear advantage over the Notion pack. | If the founder wants to pursue the web app, they must allocate additional hours or outsource development, which would exceed the budget and conflict with the founder’s values. |
+| founder_fit | The founder’s core skills are video editing, Notion, and writing tutorials. The Notion template idea aligns perfectly with these skills and the 10‑hour weekly budget. The SaaS alternative would require backend development, API integration, and ongoing maintenance—outside the founder’s skill set and time constraints. The project‑management‑tool templates are feasible but would dilute focus on Notion, which is the chosen format. Therefore, the founder supports the Notion template pack and rejects the SaaS option, while remaining open to the project‑management‑tool templates if they can be built quickly. | Reject the SaaS alternative due to lack of development skills and high effort. Push the project‑management‑tool templates to a lower priority if they require more than 10 hours per week. | Accept the project‑management‑tool templates only if they can be assembled from existing Notion templates with minimal custom work, keeping effort within the 10‑hour weekly limit. |
 
 ## Open disagreements for the founder
 
-- The founder_fit department rejects the web app due to high effort and misalignment with founder values; no other department disputes the Notion pack’s viability.
+- None identified; all departments agree on prioritizing the Notion template pack.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C1.2-1 | Freelance video editors need detailed project briefs that include style, tone, technical specs, and deadlines to align work with brand guidelines. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
-| C1.2-2 | Freelancers benefit from clear milestones and regular check‑ins to review rough cuts and provide early feedback. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
-| C1.2-3 | Platforms like Contra offer a brief‑to‑version workflow that turns creative direction into delivered cut iterations. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
-| C1.2-4 | VidChops provides a revision checklist that turns client notes into consistent fine‑cut adjustments across deliveries. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
-| C1.2-5 | Bark offers milestone‑based task handoff that groups edits into reviewable deliverables instead of open‑ended custom projects. | ASSUMPTION | ASSUMPTION |
-| C1.2-6 | Upwork’s fee structure shifted to a variable 0‑15% rate per contract, with an average effective fee of 12‑13% for most freelancers. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
-| C1.2-7 | Fiverr pivoted to AI video infrastructure, with demand for AI video creators surging 66% in six months. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
-| C1.2-8 | 59% of video marketers produce video in‑house, 32% use a mix, and only 10% fully outsource, down from 24% pure outsourcing in 2024. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
-| C1.2-9 | Freelance video editors face high foreign‑exchange costs when receiving US dollar payments in India, with 2‑3% FX spread and additional bank charges. | SOURCED | https://grey.co/blog/freelance-video-editing-platforms |
-| C1.2-10 | Contra’s commission‑free model appeals to marketing teams needing managed revision cycles for consistent marketing and creator edits. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
+| C1.2-1 | Freelance video editors need clear brief details such as style, tone, technical specs, deadlines, and reference videos to align with client expectations. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-2 | Clients should provide brand style guides, assets, and past videos to help editors match brand guidelines. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-3 | Regular check‑ins and progress updates should be scheduled with milestones and meetings to review rough cuts and give early feedback. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-4 | The platform used to hire editors matters less than how the brief is written and how the editor is vetted. | SOURCED | https://www.moonb.io/blog/platforms-hire-video-editors |
+| C1.2-5 | A great editor on a messy marketplace can outperform a mediocre one on a premium network. | SOURCED | https://www.moonb.io/blog/platforms-hire-video-editors |
+| C1.2-6 | Video is now a core marketing tool, with 91% of businesses using it and planning to spend more. | SOURCED | https://www.moonb.io/blog/platforms-hire-video-editors |
+| C1.2-7 | Freelancer.com is best for teams that can define deliverables and validate samples per deliverable. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
+| C1.2-8 | VidChops is best for marketing teams needing repeatable edit revisions and publish-ready audio and captions. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
+| C1.2-9 | Contra offers a brief-to-version revision workflow that turns creative direction into delivered cut iterations. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
+| C1.2-10 | Bark provides milestone-based project handling that lets hiring teams enforce acceptance criteria across iterative video revisions. | ASSUMPTION | ASSUMPTION |
 
 ## Governance flags
 
-- C1.2-5: quote not found in its source -> ASSUMPTION
+- C1.2-10: quote not found in its source -> ASSUMPTION
 
 ## Founder checkpoint
 

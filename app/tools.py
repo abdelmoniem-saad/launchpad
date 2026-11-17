@@ -153,8 +153,19 @@ def price_stats(prices: list) -> dict:
     return {"count": len(vals), "min": min(vals), "median": round(statistics.median(vals), 2), "max": max(vals)}
 
 
+DEFAULT_WAITLIST_TARGET = 30  # ASSUMPTION used only when the visitor or conversion estimate is unusable
+
+
 def threshold_target(visitors: float, conversion_pct: float) -> int:
-    return int(round(_num(visitors, 0) * _num(conversion_pct, 0, 100) / 100))
+    """visitors x conversion %. A conversion below 1 is read as a fraction (0.05 means 5%). Returns 0 when
+    either input is missing or not a number, so the caller can fall back to a labelled ASSUMPTION."""
+    try:
+        v, c = _num(visitors, 0), _num(conversion_pct, 0, 100)
+    except (TypeError, ValueError):
+        return 0
+    if 0 < c < 1:
+        c *= 100
+    return max(1, int(round(v * c / 100))) if v and c else 0
 
 
 def compare_threshold(target: int, actual: int) -> dict:

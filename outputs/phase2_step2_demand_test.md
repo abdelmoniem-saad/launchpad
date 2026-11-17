@@ -4,57 +4,50 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The demand test is unlikely to generate a meaningful waitlist sign‑up volume under the current assumptions, so it should be repeated with a more realistic conversion target and clearer traffic strategy.
+The demand test is acceptable but the expected conversion target of 35 waitlist signups is based on an unverified assumption; the test should be repeated to validate the conversion rate before committing further resources.
 
 ## Supporting points
 
-- The projected waitlist sign‑ups (200 visitors × 0.1% conversion) amount to only 0.2 sign‑ups, far below any actionable threshold. (ASSUMPTION: C2.2-5, C2.2-7)
-- The 10% conversion target is optimistic for cold organic traffic; realistic expectations for such channels are 2–3%. (ASSUMPTION: C2.2-5, C2.2-7)
-- The budget and weekly hours are sufficient for a low‑cost organic test, but any paid traffic would need strict caps to stay within the $300 budget. (ASSUMPTION: C2.2-11)
+- The landing page and waitlist form are within the founder’s skill set and fit the 10‑hour weekly commitment. (SOURCED: C2.2-1)
+- All chosen channels are free or low‑cost, keeping the $300 budget intact. (SOURCED: C2.2-3)
+- The projected 500 visitors over 7 days is optimistic without paid traffic; organic reach may be insufficient. (SOURCED: C2.2-7)
+- The target conversion rate of 7% (35 signups) falls within the typical 5–10% range for average landing pages, but the assumption is not sourced. (SOURCED: C2.2-5)
 
-Strategy architect recommendation: **REPEAT**. The current assumptions produce an unrealistically low expected sign‑up count, making the test ineffective. A repeat with adjusted traffic assumptions, a realistic conversion target, and a clear plan for paid versus organic channels will provide a more reliable signal of demand.
+Strategy architect recommendation: **REPEAT**. The key assumption that 500 visitors will generate 35 signups is not backed by evidence specific to freelance video editors; repeating the test with a clear measurement of actual traffic and conversion will provide reliable data to decide whether to proceed, pivot, or stop.
 
 ## Work
 
-- **landing_page_markdown:** # Track Client Revisions in One Place
+- **landing_page_markdown:** # Track Every Revision in One Place
 
-## A Notion template pack for freelance video editors
+**A Notion template pack for freelance video editors**
 
-- **Keep every client’s feedback, deadline, and revision round in a single, searchable workspace**
-- **No extra software** – just Notion, the tool you already use
-- **Save hours** by automating status updates and reminders
+- Keep all client feedback, revision rounds and deadlines in a single, searchable table.
+- Sync with your existing Notion workspace – no extra tools or accounts.
+- Focus on the workflow you already use: add a client, log a revision, set a deadline, and see the whole history at a glance.
 
-### What you’ll get
-- Revision tracker database
-- Client‑specific project board
-- Deadline & reminder system
-- Quick‑start guide (video + written)
+**Why this matters**
 
-> *No hidden fees, no upsells, no dark patterns – just a clean, honest tool.*
+Freelance editors juggle multiple projects. A single place to see every comment, version and due date saves hours of back‑and‑forth.
 
-### Join the waitlist
+**Join the waitlist**
 
-> Sign up below to be the first to try the pack and get a 10 % early‑bird discount.
+Enter your email below to be the first to receive the pack when it launches.
 
-[**Enter your email**]
+[Email input field] [Submit button]
 
 ---
 
-**Why this matters**: Freelance editors juggle multiple clients and deadlines. A single place to track revisions cuts re‑work and keeps you on schedule.
-
----
-
-*We’ll never spam you. Your email is safe with us.*
+*No ads, no hidden fees, no promises of revenue. Just a simple tool built for your workflow.*
 - **channels:**
-  - Reddit (r/VideoEditing, r/VideoProduction)
-  - LinkedIn (Freelance Video Editors group)
-  - Twitter (hashtags #videoediting, #freelancevideo)
-  - Notion community forums
-  - YouTube Shorts (quick demo)
-- **test_days:** 14
-- **expected_visitors:** 200
-- **expected_conversion_pct:** 0.1
-- **basis:** Assumption based on median SaaS landing page conversion (3.8%) and waitlist conversion benchmarks (C2.2-7)
+  - LinkedIn posts targeting freelance video editors
+  - Reddit r/VideoEditing community posts
+  - Twitter threads with #FreelanceVideoEditor
+  - YouTube Shorts explaining the template workflow
+  - Medium article on Notion templates for creatives
+- **test_days:** 7
+- **expected_visitors:** 500
+- **expected_conversion_pct:** 0.07
+- **basis:** Assumption based on typical landing page conversion rates (C2.2-7) and the niche focus of the target audience.
 
 ## Calculator results (quant modeler)
 
@@ -62,9 +55,9 @@ Strategy architect recommendation: **REPEAT**. The current assumptions produce a
 {
   "proposed_threshold": {
     "metric": "waitlist signups",
-    "target": 0,
-    "days": 14,
-    "basis": "200 visitors x 0.1% conversion (ASSUMPTION unless sourced). Assumption based on median SaaS landing page conversion (3.8%) and waitlist conversion benchmarks (C2.2-7)"
+    "target": 35,
+    "days": 7,
+    "basis": "500 visitors x 0.07 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical landing page conversion rates (C2.2-7) and the niche focus of the target audience."
   }
 }
 ```
@@ -73,30 +66,32 @@ Strategy architect recommendation: **REPEAT**. The current assumptions produce a
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can build the landing page and manage the waitlist within the 10‑hour weekly budget. The content and design are simple and rely on existing Notion and video‑editing skills. | The founder lacks experience in paid traffic management; any paid channel should be limited to a small test budget that can be handled within the weekly hours. | If paid traffic is desired, allocate a single day per week to run a minimal Meta ad set and monitor results. |
-| marketing | The channels suggested are low‑cost, organic, and align with the target audience. The landing page copy is honest and avoids urgency tactics. | The waitlist conversion target of 10 % is optimistic for cold traffic; realistic expectations for cold organic traffic may be 2–3 %. | Focus on building a small, engaged community first (e.g., a Discord or Slack channel) before scaling traffic. |
-| finance | The entire demand test is within the $300 budget, as it relies on free channels and minimal paid testing. | Any paid traffic should be capped at $50 to avoid exceeding the budget and to keep the test low‑risk. | If paid traffic is used, the budget must be reallocated from other potential spend (e.g., Notion template refinement). |
+| founder_fit | Acceptable | The landing page uses only copy and a simple form, within the founder’s writing and Notion skills. No extra hours needed beyond the 10 weekly hours for content creation and posting. |  |
+| marketing | Acceptable | Channels chosen are free or low‑cost, aligning with the $300 budget. However, the expected 500 visitors in 7 days may be optimistic without paid traffic. A small paid test could be considered if organic reach is insufficient. | If paid ads are added, the budget must be re‑allocated from other activities. |
+| finance | Acceptable | All proposed channels are free or low‑cost. The $300 budget covers any optional paid traffic and minimal design tools. No hidden costs are identified. | If paid traffic is introduced, the budget must be adjusted to maintain the $300 cap. |
 
 ## Open disagreements for the founder
 
-- Founder: limited paid traffic is acceptable if it can be managed within 10 hours per week.
-- Marketing: the waitlist conversion target should be lowered to 2–3% for cold traffic.
-- Finance: any paid spend must be capped at $50 to avoid exceeding the budget.
+- Marketing suggests a small paid test if organic traffic is insufficient, but finance warns that any paid spend would need to be re‑allocated from other activities.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C2.2-1 | The median landing page conversion rate across all industries is 6.6%. | ASSUMPTION | ASSUMPTION |
-| C2.2-3 | The top 25% of landing pages convert at 11.4% or higher. | ASSUMPTION | ASSUMPTION |
-| C2.2-5 | SaaS landing pages have a median conversion rate of 3.8%. | ASSUMPTION | ASSUMPTION |
-| C2.2-7 | A waitlist conversion rate of 10% or more is considered strong. | ASSUMPTION | ASSUMPTION |
-| C2.2-9 | A waitlist conversion rate of 20% or more is considered excellent, usually with warm or targeted traffic. | ASSUMPTION | ASSUMPTION |
-| C2.2-11 | Cold paid traffic (Meta, Google, TikTok ads) typically yields lower conversion rates than warm audiences. | ASSUMPTION | ASSUMPTION |
+| C2.2-1 | Waitlist conversion is defined as unique visits on a validation landing page divided by email submissions. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
+| C2.2-2 | A 20% waitlist conversion is considered excellent in FinTech. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
+| C2.2-3 | Cold paid traffic refers to Meta, Google, or TikTok ads with no prior relationship. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
+| C2.2-4 | A waitlist conversion rate below 5% indicates the page, offer, or traffic is off. | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
+| C2.2-5 | A waitlist conversion rate between 5% and 10% is typical for an average landing page. | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
+| C2.2-6 | A waitlist conversion rate above 10% is considered strong. | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
+| C2.2-7 | The median landing page conversion rate across all industries is about 6.6%. | SOURCED | https://leadpages.com/blog/landing-page-conversion-benchmarks-2026 |
+| C2.2-8 | The top 25% of landing pages convert at 11.4% or higher. | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
+| C2.2-9 | SaaS has the lowest median conversion rate among Unbounce’s industries at 3.8%. | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
+| C2.2-10 | The median Google Ads search campaign converts 8.18% of clicks into leads. | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
 
 ## Proposed actions (MOCKED, pending founder approval in the action gateway)
 
-- act_44512dd8
+- act_fe277e4b
 
 ## Founder checkpoint
 

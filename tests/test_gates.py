@@ -50,3 +50,29 @@ def test_demand_for_the_problem_only_means_dont_launch():
 
 def test_demand_for_the_product_passes():
     assert gates.evidence_gate(_phase1(True))["outcome"] == gates.GO
+
+
+def test_demo_input_is_labelled_everywhere(env):
+    """A hypothetical 2.4 result is allowed only as a labelled DEMO INPUT, in the gate, step files and log."""
+    from pathlib import Path
+    from app import decision_log as dl
+    from app.gates import DEMO_NOTE
+    from tests.test_smoke import drive, start
+    graph, cfg, res = start(env)
+    res, _ = drive(graph, cfg, res, lambda p: {"actual": 150, "demo_input": True} if p["type"] == "enter_results"
+                   else {"decision": "approve"})
+    gate = next(g for g in res["gate_history"] if g["step"] == "2.4")
+    assert gate["reasons"][0] == DEMO_NOTE
+    later = sorted(Path(env["out"]).glob("phase[3-6]_step*.md"))
+    assert later and all("DEMO INPUT" in p.read_text() for p in later)
+    assert any(e.get("demo_input") for e in dl.entries())
+
+
+def test_threshold_target_reads_fractions_and_never_locks_zero():
+    import pytest
+    from app.gates import lock_threshold
+    from app.tools import threshold_target
+    assert threshold_target(200, 0.05) == 10 and threshold_target(200, 5) == 10
+    assert threshold_target(0, 5) == 0 and threshold_target("lots", 5) == 0
+    with pytest.raises(ValueError):
+        lock_threshold({}, {"target": 0})

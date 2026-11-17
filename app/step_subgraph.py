@@ -181,16 +181,18 @@ def actions(state: EngagementState) -> dict:
 
 def results(state: EngagementState) -> dict:
     step = step_of(state)
-    actual = (state.get("evidence") or {}).get("actual")
-    g = gates.demand_gate(state.get("thresholds") or {}, actual)
+    ev = state.get("evidence") or {}
+    actual, demo = ev.get("actual"), bool(ev.get("demo_input"))
+    g = gates.demand_gate(state.get("thresholds") or {}, actual, demo)
     t = state.get("thresholds") or {}
     report = {"conclusion": f"Demand test: {actual if actual is not None else 'no result yet'} {t.get('metric', '')} against a locked target of "
                             f"{t.get('target')} in {t.get('days')} days. Gate recommendation: {g['outcome'].upper()}.",
-              "key_points": [{"text": r, "claim_ids": [], "label": "FOUNDER-ENTERED"} for r in g["reasons"]],
+              "key_points": [{"text": r, "claim_ids": [], "label": "DEMO INPUT (hypothetical)" if demo else "FOUNDER-ENTERED"} for r in g["reasons"]],
               "open_disagreements": [], "recommendation": g["outcome"], "rationale": "compared in code against the locked threshold"}
     dl.log("governance.demand_gate", f"compare step {step['id']}: {g['reasons'][0]}", outcome=g["outcome"])
     return {"report": report, "quant": g.get("comparison", {}),
-            "work": {"founder_entered_result": actual, "note": "Entered by the founder; the system never invents signups."}}
+            "work": {"founder_entered_result": actual,
+                     "note": gates.DEMO_NOTE if demo else "Entered by the founder; the system never invents signups."}}
 
 
 def build():

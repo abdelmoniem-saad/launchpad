@@ -31,10 +31,15 @@ def compute(step: dict, work: dict, state: dict) -> dict:
                    "note": "Only competitor prices backed by a verified, sourced claim are counted."}
         elif kind == "threshold":
             target = tools.threshold_target(work.get("expected_visitors", 0), work.get("expected_conversion_pct", 0))
+            basis = (f"{work.get('expected_visitors')} visitors x {work.get('expected_conversion_pct')} conversion "
+                     f"(a value below 1 is read as a fraction; ASSUMPTION unless sourced). {work.get('basis', '')}")
+            if target < 1:
+                target = tools.DEFAULT_WAITLIST_TARGET
+                basis = (f"ASSUMPTION: the visitor or conversion estimate was missing or not a number "
+                         f"({work.get('expected_visitors')!r} x {work.get('expected_conversion_pct')!r}), so a default target of "
+                         f"{target} signups is proposed; the founder should adjust it before locking.")
             out = {"proposed_threshold": {"metric": "waitlist signups", "target": target,
-                                          "days": int(work.get("test_days") or 14),
-                                          "basis": f"{work.get('expected_visitors')} visitors x {work.get('expected_conversion_pct')}% "
-                                                   f"conversion (ASSUMPTION unless sourced). {work.get('basis', '')}"}}
+                                          "days": int(work.get("test_days") or 14), "basis": basis}}
         elif kind == "blueprint_cost":
             out = tools.total_cost(work.get("roles", []), brief.get("budget_usd"))
         elif kind == "pricing":

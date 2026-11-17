@@ -9,9 +9,9 @@
   "comparison": null,
   "thresholds": {
     "metric": "waitlist signups",
-    "target": 0,
-    "days": 14,
-    "basis": "200 visitors x 0.1% conversion (ASSUMPTION unless sourced). Assumption based on median SaaS landing page conversion (3.8%) and waitlist conversion benchmarks (C2.2-7)",
+    "target": 35,
+    "days": 7,
+    "basis": "500 visitors x 0.07 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical landing page conversion rates (C2.2-7) and the niche focus of the target audience.",
     "locked": true
   },
   "founder_decision": "approve"

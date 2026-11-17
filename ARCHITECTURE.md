@@ -83,6 +83,8 @@ Support added. Support reply templates, a metrics plan with a decision threshold
 
 The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, when the sources show the customer's problems but no one wanting this product (a product demand check over the step 1.4 signals), or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
 
+The system never fills in the demand-test result. For a demonstration before any real test has run, the CLI accepts `--demo-result N`: the gate still compares it in code, but the result is recorded as **DEMO INPUT** (hypothetical, demand not validated) in the gate reasons, in every step file from 2.4 on and in `decision_log.json` (`demo_input: true`). The committed `*_demo` run uses this to show phases 3-6; the other runs leave 2.4 blank and stop at the demand gate.
+
 ## Sale to cash
 
 Built in code against a **MOCKED** payment provider (an in-process simulation; no real money, no card data, and no real or sandbox payment system). `python -m app.payment_test` runs the whole path with the founder approving at the prompts and writes `outputs/payment_test_log.md`; `tests/test_payments.py` covers each rule below.

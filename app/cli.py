@@ -1,6 +1,6 @@
 """Command-line founder console (same graph as the Streamlit UI).
 
-  python -m app.cli --brief briefs/<name>.json [--out outputs] [--fresh-log] [--full]
+  python -m app.cli --brief briefs/<name>.json [--out outputs] [--label NAME] [--fresh-log] [--full] [--demo-result N]
 
 At every checkpoint the founder types approve / edit / redo / stop. Proposed actions are listed
 and only run (MOCKED) when the founder types `approve` for that action here.
@@ -60,6 +60,9 @@ def handle_actions(run_dir: str) -> None:
             approval.founder_reject(a["id"])
 
 
+DEMO_RESULT: int | None = None
+
+
 def answer(payload: dict, run_dir: str) -> dict:
     kind = payload.get("type")
     if kind == "brief_interview":
@@ -75,6 +78,10 @@ def answer(payload: dict, run_dir: str) -> dict:
             else:
                 answers[q["field"]] = ask("  > ")
         return answers
+    if kind == "enter_results" and DEMO_RESULT is not None:
+        print(f"\n{payload['question']}\n  DEMO INPUT: using the hypothetical result {DEMO_RESULT} (no real demand test was run); "
+              "every file from step 2.4 on is labelled as a demonstration.")
+        return {"actual": DEMO_RESULT, "demo_input": True}
     if kind == "enter_results":
         print("\n" + payload["question"])
         print("  This is how many real people joined the waitlist when you ran the demand test from step 2.2.\n"
@@ -105,7 +112,12 @@ def main(argv=None) -> int:
     ap.add_argument("--label", default="", help="suffix for output file names, e.g. 'weak' for a second demo run")
     ap.add_argument("--fresh-log", action="store_true")
     ap.add_argument("--full", action="store_true", help="full mode: parallel department reviews + negotiation")
+    ap.add_argument("--demo-result", type=int, default=None,
+                    help="DEMO ONLY: a hypothetical step 2.4 result, labelled as such in every output, to show phases 3-6 "
+                         "before a real demand test has run")
     args = ap.parse_args(argv)
+    global DEMO_RESULT
+    DEMO_RESULT = args.demo_result
     if args.fresh_log:
         dl.reset()
     brief = json.loads(Path(args.brief).read_text("utf-8"))

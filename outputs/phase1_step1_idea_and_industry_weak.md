@@ -4,24 +4,22 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Digital crossword puzzle p
 
 ## Conclusion
 
-The founder should focus on the Professional dog grooming industry niche, as it best aligns with the founder’s skill set and time constraints, but the narrow target may limit demand.
+The founder should target Middle School History Teachers as the primary niche for the medieval tax law crossword packs.
 
 ## Supporting points
 
-- The founder can execute the idea within 3 hours per week using existing crossword design skill. (ASSUMPTION: C1.1-1)
-- The Professional dog grooming industry niche scores highest on weighted score (3.9) due to founder fit and demand, outweighing competition. (ASSUMPTION: C1.1-1)
-- The niche is narrow, which could limit overall market size and revenue potential. (ASSUMPTION)
-- Expanding to the broader Pet care education market would increase demand but requires additional content beyond crossword design, exceeding the founder’s current skill set. (ASSUMPTION: C1.1-5)
+- Middle school history teachers need engaging, printable resources that cover medieval law concepts. (SOURCED: C1.1-1, C1.1-2, C1.1-3)
+- The AI Crossword Puzzle Generator can produce themed puzzles quickly, fitting the founder’s 3‑hour weekly capacity. (SOURCED: C1.1-4, C1.1-5, C1.1-6)
 
-Strategy architect recommendation: **REPEAT**. The chosen niche aligns with founder capabilities and budget, but the evidence of limited demand is weak. A small pilot test (e.g., one puzzle pack) should be launched to validate interest before scaling. If the pilot shows low uptake, pivot to a broader niche or stop.
+Strategy architect recommendation: **GO**. The weighted score for Middle School History Teachers (3.7) is highest, the founder can realistically produce content within the time budget, and the evidence for demand and fit is sourced. The alternative niches have lower scores and higher competition, making them less suitable for an initial launch. The recommendation is to proceed with the teacher niche and monitor demand; if uptake is low, pivot to hobbyists as a secondary market.
 
 ## Work
 
-- **sharpened_idea:** Create digital crossword puzzle packs that teach medieval tax law concepts tailored for professional dog groomers.
+- **sharpened_idea:** Digital crossword puzzle packs themed around medieval tax law, designed for educational or hobbyist audiences
 - **niches:**
-  - name: Professional dog grooming industry; why: Directly targets the founder’s stated customer group; demand: 3; competition: 4; founder_fit: 5; claim_ids: ['C1.1-1']
-  - name: Pet care education market; why: Expands to a broader audience interested in pet‑related learning tools; demand: 3; competition: 3; founder_fit: 4; claim_ids: ['C1.1-5']
-  - name: Historical/legal education niche; why: Leverages medieval tax law theme for history or law students; demand: 2; competition: 2; founder_fit: 3; claim_ids: ['C1.1-2', 'C1.1-3']
+  - name: Middle school history teachers; why: Existing medieval law crosswords are used in classrooms; teachers need engaging, printable resources; demand: 4; competition: 3; founder_fit: 4; claim_ids: ['C1.1-1', 'C1.1-2', 'C1.1-3']
+  - name: Adult history hobbyists; why: There is a niche market of history enthusiasts who enjoy themed puzzles for leisure; demand: 3; competition: 4; founder_fit: 3; claim_ids: ['C1.1-4', 'C1.1-5', 'C1.1-6']
+  - name: Corporate compliance training; why: Companies sometimes use gamified content to teach tax or regulatory concepts to staff; demand: 2; competition: 5; founder_fit: 2; claim_ids: ['C1.1-4', 'C1.1-5', 'C1.1-6']
 
 ## Calculator results (quant modeler)
 
@@ -29,42 +27,47 @@ Strategy architect recommendation: **REPEAT**. The chosen niche aligns with foun
 {
   "ranked_niches": [
     {
-      "name": "Professional dog grooming industry",
-      "why": "Directly targets the founder\u2019s stated customer group",
-      "demand": 3,
-      "competition": 4,
-      "founder_fit": 5,
-      "claim_ids": [
-        "C1.1-1"
-      ],
-      "weighted_score": 3.9
-    },
-    {
-      "name": "Pet care education market",
-      "why": "Expands to a broader audience interested in pet\u2011related learning tools",
-      "demand": 3,
+      "name": "Middle school history teachers",
+      "why": "Existing medieval law crosswords are used in classrooms; teachers need engaging, printable resources",
+      "demand": 4,
       "competition": 3,
       "founder_fit": 4,
       "claim_ids": [
-        "C1.1-5"
+        "C1.1-1",
+        "C1.1-2",
+        "C1.1-3"
+      ],
+      "weighted_score": 3.7
+    },
+    {
+      "name": "Adult history hobbyists",
+      "why": "There is a niche market of history enthusiasts who enjoy themed puzzles for leisure",
+      "demand": 3,
+      "competition": 4,
+      "founder_fit": 3,
+      "claim_ids": [
+        "C1.1-4",
+        "C1.1-5",
+        "C1.1-6"
       ],
       "weighted_score": 3.3
     },
     {
-      "name": "Historical/legal education niche",
-      "why": "Leverages medieval tax law theme for history or law students",
+      "name": "Corporate compliance training",
+      "why": "Companies sometimes use gamified content to teach tax or regulatory concepts to staff",
       "demand": 2,
-      "competition": 2,
-      "founder_fit": 3,
+      "competition": 5,
+      "founder_fit": 2,
       "claim_ids": [
-        "C1.1-2",
-        "C1.1-3"
+        "C1.1-4",
+        "C1.1-5",
+        "C1.1-6"
       ],
-      "weighted_score": 2.3
+      "weighted_score": 2.9
     }
   ],
   "weights": "demand 0.4, competition 0.3, founder fit 0.3",
-  "chosen_niche": "Professional dog grooming industry"
+  "chosen_niche": "Middle school history teachers"
 }
 ```
 
@@ -72,27 +75,22 @@ Strategy architect recommendation: **REPEAT**. The chosen niche aligns with foun
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | Founder can execute the idea within 3 hours per week using existing crossword design skill. | The niche of professional dog groomers is too narrow and may not generate enough interest to justify the effort; the pet care education market requires additional content creation beyond crossword design, which exceeds the founder’s skill set. | Focus on the pet care education niche but limit scope to a single puzzle pack to stay within budget and time constraints. |
+| founder_fit | The founder can realistically produce a small batch of crosswords each week using the AI generator and his design skills. | The niche of middle school teachers aligns best with the founder’s time (3 hrs/week) and fun value, while corporate training would require additional research and marketing effort beyond the founder’s capacity. | Focus on middle school teachers first; if demand is low, consider hobbyists as a secondary niche. |
 
 ## Open disagreements for the founder
 
-- Founder_fit department argues the niche is too narrow to justify effort; suggests pivoting to pet care education but limiting scope to a single puzzle pack to stay within budget and time constraints.
+- The founder’s capacity may limit expansion into corporate compliance training, which requires additional research and marketing effort beyond the current skill set.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C1.1-1 | The founder’s idea is to create digital crossword puzzle packs themed around medieval tax law for professional dog groomers. | ASSUMPTION | ASSUMPTION |
-| C1.1-2 | A medieval law crossword puzzle is available for download and can be customized for different audiences. | SOURCED | https://brightsprout.com/crossword/medieval-law-crossword-puzzle |
-| C1.1-3 | An AI-powered crossword puzzle generator can create themed puzzles from user-provided topics and vocabulary. | SOURCED | https://www.template.net/ai-crossword-puzzle-generator |
-| C1.1-4 | The generator allows users to upload reference material to generate relevant words and clues for a specific theme. | SOURCED | https://www.template.net/ai-crossword-puzzle-generator |
-| C1.1-5 | PuzzleSales.com sells a variety of crossword and word puzzle products, including themed crosswords. | ASSUMPTION | ASSUMPTION |
-| C1.1-6 | BestCrosswords.com hosts an archive of over 8,000 themed crossword puzzles from leading constructors. | SOURCED | https://www.bestcrosswords.com/themed-crossword-puzzles/archive |
-
-## Governance flags
-
-- C1.1-1: not supported by its source -> ASSUMPTION (The source text describes a medieval law crossword for middle‑school history students; it does not mention a founder’s idea, medieval tax law, or professional dog groomers.)
-- C1.1-5: not supported by its source -> ASSUMPTION (The source lists products such as Cross Code, Wordsearch, etc., but does not state that PuzzleSales.com sells themed crosswords; the claim is not directly supported.)
+| C1.1-1 | The medieval law crossword puzzle is designed for middle school history students. | SOURCED | https://brightsprout.com/crossword/medieval-law-crossword-puzzle |
+| C1.1-2 | The crossword includes vocabulary such as natural law, canon law, royal law, manorial courts, and guild hierarchy. | SOURCED | https://brightsprout.com/crossword/medieval-law-crossword-puzzle |
+| C1.1-3 | The puzzle can be printed for classroom use, homework packets, or sub plans. | SOURCED | https://brightsprout.com/crossword/medieval-law-crossword-puzzle |
+| C1.1-4 | The AI Crossword Puzzle Generator can transform topics, words, and reference material into structured crossword puzzle designs. | SOURCED | https://www.template.net/ai-crossword-puzzle-generator |
+| C1.1-5 | The generator allows users to upload reference material and generate relevant words and clues around a chosen topic. | SOURCED | https://www.template.net/ai-crossword-puzzle-generator |
+| C1.1-6 | The generator offers theme-focused crossword design to build puzzles around specific themes, lessons, celebration, etc. | SOURCED | https://www.template.net/ai-crossword-puzzle-generator |
 
 ## Founder checkpoint
 

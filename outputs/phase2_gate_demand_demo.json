@@ -1,0 +1,24 @@
+{
+  "step": "2.4",
+  "gate": "demand",
+  "outcome": "go",
+  "reasons": [
+    "DEMO INPUT: this result is hypothetical, entered to demonstrate the gate and later phases; no real demand test was run, so demand is NOT validated",
+    "locked target 16 waitlist signups in 14 days; actual 16 (100%)",
+    "threshold met"
+  ],
+  "comparison": {
+    "target": 16,
+    "actual": 16,
+    "ratio": 1.0,
+    "met": true
+  },
+  "thresholds": {
+    "metric": "waitlist signups",
+    "target": 16,
+    "days": 14,
+    "basis": "200 visitors x 0.08 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical landing page conversion rates (C2.2-4) and waitlist benchmarks (C2.2-6).",
+    "locked": true
+  },
+  "founder_decision": "approve"
+}
