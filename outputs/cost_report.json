@@ -1,36 +1,36 @@
 {
   "cost_usd": 0.0,
   "model": "ollama/gpt-oss:20b",
-  "calls": 29,
-  "tokens_in": 64528,
-  "tokens_out": 13983,
-  "tokens_total": 78511,
-  "wall_clock_seconds": 102.3,
+  "calls": 31,
+  "tokens_in": 61103,
+  "tokens_out": 13994,
+  "tokens_total": 75097,
+  "wall_clock_seconds": 106.7,
   "by_agent": {
     "firm.market_researcher": {
       "calls": 7,
-      "tokens": 25172,
-      "seconds": 38.0
+      "tokens": 23982,
+      "seconds": 32.6
     },
     "firm.strategy_architect": {
       "calls": 7,
-      "tokens": 14068,
-      "seconds": 26.9
+      "tokens": 14309,
+      "seconds": 28.3
     },
     "firm.synthesis_lead": {
-      "calls": 7,
-      "tokens": 12661,
-      "seconds": 18.2
+      "calls": 8,
+      "tokens": 14595,
+      "seconds": 21.1
     },
     "governance.verification_gate": {
-      "calls": 7,
-      "tokens": 25687,
-      "seconds": 15.7
+      "calls": 8,
+      "tokens": 21193,
+      "seconds": 22.0
     },
-    "governance.demand_relevance": {
+    "firm.compliance_officer": {
       "calls": 1,
-      "tokens": 923,
-      "seconds": 3.4
+      "tokens": 1018,
+      "seconds": 2.6
     }
   },
   "pricing_note": "Local Ollama and Groq free tier are priced at $0."

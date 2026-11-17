@@ -4,50 +4,54 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The demand test is acceptable but the expected conversion target of 35 waitlist signups is based on an unverified assumption; the test should be repeated to validate the conversion rate before committing further resources.
+The demand test is acceptable to proceed; we expect to reach the 10‑signup threshold based on 200 visitors and a 5% conversion assumption.
 
 ## Supporting points
 
-- The landing page and waitlist form are within the founder’s skill set and fit the 10‑hour weekly commitment. (SOURCED: C2.2-1)
-- All chosen channels are free or low‑cost, keeping the $300 budget intact. (SOURCED: C2.2-3)
-- The projected 500 visitors over 7 days is optimistic without paid traffic; organic reach may be insufficient. (SOURCED: C2.2-7)
-- The target conversion rate of 7% (35 signups) falls within the typical 5–10% range for average landing pages, but the assumption is not sourced. (SOURCED: C2.2-5)
+- Landing page and waitlist are ready and aligned with founder’s skills and budget. (SOURCED: C2.2-1)
+- Targeted free social channels are chosen to reach freelance video editors globally. (ASSUMPTION)
+- Expected traffic of 200 visitors in 7 days is optimistic but within reach of organic reach for niche audiences. (ASSUMPTION)
+- A 5% conversion rate (10 signups) is a conservative benchmark derived from industry waitlist conversion norms. (SOURCED: C2.2-1)
 
-Strategy architect recommendation: **REPEAT**. The key assumption that 500 visitors will generate 35 signups is not backed by evidence specific to freelance video editors; repeating the test with a clear measurement of actual traffic and conversion will provide reliable data to decide whether to proceed, pivot, or stop.
+Strategy architect recommendation: **GO**. The plan meets the founder’s skill set and budget constraints, and the calculated threshold of 10 signups is achievable under the stated assumptions. However, the traffic estimate is optimistic; if traffic falls short, the founder may need to consider a minimal paid boost or adjust expectations. The step is viable to test demand, so proceed with the launch of the landing page and waitlist campaign.
 
 ## Work
 
 - **landing_page_markdown:** # Track Every Revision in One Place
 
-**A Notion template pack for freelance video editors**
+## A Notion template pack for freelance video editors
 
-- Keep all client feedback, revision rounds and deadlines in a single, searchable table.
-- Sync with your existing Notion workspace – no extra tools or accounts.
-- Focus on the workflow you already use: add a client, log a revision, set a deadline, and see the whole history at a glance.
+- **Keep every client’s feedback, revision round and deadline in a single view**
+- **No extra software** – just Notion, the tool you already use
+- **Save time** by automating status updates and reminders
 
-**Why this matters**
+### How it works
+1. **Add a client** – name, contact, project brief
+2. **Create a revision round** – set due dates, attach files, add comments
+3. **Track progress** – see which round is pending, in‑progress or completed
+4. **Export** – download a PDF summary for your records
 
-Freelance editors juggle multiple projects. A single place to see every comment, version and due date saves hours of back‑and‑forth.
+### Sign up to receive the pack
+Enter your email below to receive the template pack once it is ready.
 
-**Join the waitlist**
-
-Enter your email below to be the first to receive the pack when it launches.
-
-[Email input field] [Submit button]
+[Email input field] [Submit]
 
 ---
 
-*No ads, no hidden fees, no promises of revenue. Just a simple tool built for your workflow.*
+**No hidden fees, no subscription.** Just a one‑time download once the product is ready.
+
+---
+
+*We respect your privacy – your email will only be used to send the template pack.*
 - **channels:**
-  - LinkedIn posts targeting freelance video editors
-  - Reddit r/VideoEditing community posts
-  - Twitter threads with #FreelanceVideoEditor
-  - YouTube Shorts explaining the template workflow
-  - Medium article on Notion templates for creatives
+  - LinkedIn posts (free)
+  - Twitter thread (free)
+  - Reddit r/VideoEditing (free)
+  - YouTube Shorts (free)
 - **test_days:** 7
-- **expected_visitors:** 500
-- **expected_conversion_pct:** 0.07
-- **basis:** Assumption based on typical landing page conversion rates (C2.2-7) and the niche focus of the target audience.
+- **expected_visitors:** 200
+- **expected_conversion_pct:** 0.05
+- **basis:** Assumptions based on typical reach of free social posts and the niche size; conversion % derived from industry benchmarks for sign‑ups (C2.2-1, C2.2-2).
 
 ## Calculator results (quant modeler)
 
@@ -55,9 +59,9 @@ Enter your email below to be the first to receive the pack when it launches.
 {
   "proposed_threshold": {
     "metric": "waitlist signups",
-    "target": 35,
+    "target": 10,
     "days": 7,
-    "basis": "500 visitors x 0.07 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical landing page conversion rates (C2.2-7) and the niche focus of the target audience."
+    "basis": "200 visitors x 0.05 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumptions based on typical reach of free social posts and the niche size; conversion % derived from industry benchmarks for waitlist sign\u2011ups (C2.2-1, C2.2-2)."
   }
 }
 ```
@@ -66,32 +70,26 @@ Enter your email below to be the first to receive the pack when it launches.
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | Acceptable | The landing page uses only copy and a simple form, within the founder’s writing and Notion skills. No extra hours needed beyond the 10 weekly hours for content creation and posting. |  |
-| marketing | Acceptable | Channels chosen are free or low‑cost, aligning with the $300 budget. However, the expected 500 visitors in 7 days may be optimistic without paid traffic. A small paid test could be considered if organic reach is insufficient. | If paid ads are added, the budget must be re‑allocated from other activities. |
-| finance | Acceptable | All proposed channels are free or low‑cost. The $300 budget covers any optional paid traffic and minimal design tools. No hidden costs are identified. | If paid traffic is introduced, the budget must be adjusted to maintain the $300 cap. |
+| founder_fit | Acceptable | The landing page uses only Notion and writing skills the founder has. The 10‑hour weekly budget is sufficient for content creation and posting on free channels. No new tools or skills are required. |  |
+| marketing | Acceptable | The channels chosen are free and align with the target audience. However, the expected 200 visitors in 7 days is optimistic for organic reach alone; a small paid boost could improve numbers but would exceed the budget. | Consider allocating a small portion of the $300 budget to a one‑time LinkedIn Sponsored Post if organic reach falls short. |
+| finance | Acceptable | All proposed activities are within the $300 budget. No paid traffic is planned, so costs remain zero. The waitlist conversion assumption (5%) is a conservative estimate and does not imply revenue. | If the waitlist conversion falls below 5%, the founder may need to revisit the value proposition or add a paid channel, which would require re‑allocation of funds. |
 
 ## Open disagreements for the founder
 
-- Marketing suggests a small paid test if organic traffic is insufficient, but finance warns that any paid spend would need to be re‑allocated from other activities.
+- Marketing believes the 200‑visitor estimate is optimistic for organic reach alone; a small paid boost could improve numbers but would exceed the current budget.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
 | C2.2-1 | Waitlist conversion is defined as unique visits on a validation landing page divided by email submissions. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
-| C2.2-2 | A 20% waitlist conversion is considered excellent in FinTech. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
+| C2.2-2 | A 20% waitlist conversion in FinTech is considered incredible. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
 | C2.2-3 | Cold paid traffic refers to Meta, Google, or TikTok ads with no prior relationship. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
-| C2.2-4 | A waitlist conversion rate below 5% indicates the page, offer, or traffic is off. | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
-| C2.2-5 | A waitlist conversion rate between 5% and 10% is typical for an average landing page. | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
-| C2.2-6 | A waitlist conversion rate above 10% is considered strong. | SOURCED | https://dev.to/aymaneonlinedev/waitlist-benchmarks-conversion-referral-email-rates-2026-hbm |
-| C2.2-7 | The median landing page conversion rate across all industries is about 6.6%. | SOURCED | https://leadpages.com/blog/landing-page-conversion-benchmarks-2026 |
-| C2.2-8 | The top 25% of landing pages convert at 11.4% or higher. | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
-| C2.2-9 | SaaS has the lowest median conversion rate among Unbounce’s industries at 3.8%. | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
-| C2.2-10 | The median Google Ads search campaign converts 8.18% of clicks into leads. | SOURCED | https://christopholivierconsulting.com/conversion-rate-benchmarks/ |
+| C2.2-4 | Warm audience means your LinkedIn followers, community, or referrals. | SOURCED | https://lemonpage.ai/blog/waitlist-conversion-benchmarks-by-industry |
 
 ## Proposed actions (MOCKED, pending founder approval in the action gateway)
 
-- act_fe277e4b
+- act_d1856b1a
 
 ## Founder checkpoint
 

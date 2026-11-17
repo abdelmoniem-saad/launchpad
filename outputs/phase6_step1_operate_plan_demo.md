@@ -13,32 +13,41 @@ Strategy architect recommendation: **GO**. Phase is MOCKED; drafts only, nothing
 ## Work
 
 - **support_replies:**
-  - Hello! Thanks for reaching out. I’m currently focused on building a simple Notion template pack for freelance video editors. I’ll review your message and get back to you within 48 hours. In the meantime, feel free to check out the FAQ on the landing page for quick answers.
-  - Hi there! I’m working on a free Notion template pack that helps editors track revisions and deadlines. If you’re looking for a quick fix, try the demo template on the site. If you have a specific question, let me know and I’ll reply within 48 hours.
-  - Thank you for contacting me. I’m currently gathering feedback for the upcoming template pack. I’ll respond to your query within 48 hours. If you’d like to join the waitlist, you can sign up on the landing page and receive updates directly.
+  - Hello {{name}},
+
+Thank you for reaching out about the Notion Revision Tracker Pack. I’m currently reviewing your message and will get back to you within 48 hours. In the meantime, if you’re looking for quick help, you can check our FAQ section here: {{faq_link}}.
+
+Best,
+Founder
 - **metrics_plan:**
-  - metric: Unique waitlist sign‑ups; threshold: ≥16 within 14 days
-  - metric: Landing page conversion rate; threshold: ≥8% (based on 200 visitors)
-- **persevere_or_pivot_memo:** If the landing page achieves at least 16 unique waitlist sign‑ups within 14 days and the conversion rate is ≥8%, proceed to develop the template pack and launch a free delivery. If either metric falls below the threshold, pivot to refining the value proposition and outreach messaging before re‑testing.
+  - metric: Waitlist Sign‑ups; threshold: ≥20 within 14 days
+  - metric: Email Open Rate; threshold: ≥30%
+  - metric: Support Ticket Response Time; threshold: ≤24 hours
+- **persevere_or_pivot_memo:** If waitlist sign‑ups reach the 20‑user threshold within 14 days and the email open rate stays above 30%, we will proceed to build the template pack. If either metric falls below its threshold, we will pivot to a different product idea or refine the messaging before investing further.
 
 ## Department positions and pushback
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can manage the support replies within the 10‑hour weekly limit, as each reply is brief and can be drafted in 5‑10 minutes. The metrics plan is simple and aligns with the founder’s skill set. The persevere‑or‑pivot memo is realistic and does not require additional resources. |  |  |
-| marketing | The metrics focus on waitlist sign‑ups and conversion rate, which are appropriate for a demand test. The support replies are concise and avoid any hype or urgency language, staying true to honest marketing. | The landing page traffic assumption of 200 visitors may be optimistic; consider a more conservative estimate or a small paid boost to validate the conversion rate. | If paid traffic is added, budget must be re‑allocated from other activities. |
-| finance | All planned activities (support replies, metrics tracking, memo drafting) are within the $300 budget. No additional costs are projected. | If the landing page design or hosting requires external services, ensure the cost stays below $50 to remain within budget. | Any increase in paid traffic would reduce the remaining budget for product development. |
-| product | The support replies and metrics plan are lightweight and do not add scope to the product. The memo keeps the product focus on a single template pack. |  |  |
-| legal | The support replies do not collect personal data beyond email for the waitlist, which is minimal risk. The memo does not contain any terms that could mislead customers. | Ensure the waitlist sign‑up form includes a clear privacy notice and that the email address is stored securely. | Adding a more detailed privacy policy would require additional time but is recommended for compliance. |
-| sales | The memo does not introduce any pricing tiers, staying within the founder’s guidance to launch free. |  |  |
-| operations | Delivering a free template pack requires only a simple download link, which fits within the founder’s weekly hours. |  |  |
-| support | Three concise reply templates cover common inquiries and set realistic response times. The metrics plan tracks the key outcome of the support effort. |  |  |
+| founder_fit | Support replies must be simple and within the founder’s 10‑hour weekly budget. The templates above use minimal copy and rely on existing FAQ content to keep workload low. | The founder cannot handle more than 2–3 support tickets per week; any additional volume would exceed the 10‑hour limit. | Use automated email responses for common questions to reduce manual effort. |
+| marketing | The metrics plan focuses on waitlist sign‑ups and email engagement, which are core to the demand test. | The email open rate threshold of 30% is optimistic without prior list data; we should set a realistic baseline of 20% first. | Adjust the threshold after the first week of data collection. |
+| finance | All proposed actions fit within the $300 budget, as they rely on free or low‑cost tools. | If we add paid email marketing, the cost could exceed the budget. | Use free email service tiers and only upgrade if the sign‑up rate justifies the expense. |
+| product | The support templates and metrics plan are aligned with the minimal product scope. | Tracking support response time requires manual logging, which may exceed the founder’s weekly hours. | Automate response time tracking via the helpdesk platform’s built‑in metrics. |
+| legal | The templates avoid collecting unnecessary data and use plain‑language language. | The FAQ link must comply with privacy policy; ensure it does not request personal data beyond what is needed. | Add a brief privacy notice in the email footer. |
+| sales | The persevere-or-pivot memo sets clear thresholds for moving forward, preventing premature pricing decisions. | No pricing is discussed yet, which is fine for the validation phase. | Reserve pricing strategy for after the waitlist test. |
+| operations | Delivering support replies within 48 hours is feasible with the founder’s 10‑hour weekly commitment. | If ticket volume spikes, the founder may not meet the 48‑hour SLA. | Use a shared inbox and set up auto‑responses for high‑volume periods. |
+| support | The support reply templates and metrics plan provide a structured approach to customer service. | The response time metric requires manual logging, which could be burdensome. | Leverage the helpdesk’s built‑in response time tracking to automate the metric. |
 
 ## Open disagreements for the founder
 
-- The landing page traffic assumption of 200 visitors may be optimistic; consider a more conservative estimate or a small paid boost to validate the conversion rate.
-- If the landing page design or hosting requires external services, ensure the cost stays below $50 to remain within budget.
-- Ensure the waitlist sign‑up form includes a clear privacy notice and that the email address is stored securely.
+- The founder cannot handle more than 2–3 support tickets per week; any additional volume would exceed the 10‑hour limit.
+- The email open rate threshold of 30% is optimistic without prior list data; we should set a realistic baseline of 20% first.
+- If we add paid email marketing, the cost could exceed the budget.
+- Tracking support response time requires manual logging, which may exceed the founder’s weekly hours.
+- The FAQ link must comply with privacy policy; ensure it does not request personal data beyond what is needed.
+- No pricing is discussed yet, which is fine for the validation phase.
+- If ticket volume spikes, the founder may not meet the 48‑hour SLA.
+- The response time metric requires manual logging, which could be burdensome.
 
 ## Founder checkpoint
 

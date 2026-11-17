@@ -4,65 +4,64 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The demand signals and interview script are well‑aligned with the target market and product concept, but no evidence yet confirms that freelance video editors will actually join a waitlist.
+The interview script is well‑aligned with the identified demand signals and can be executed within the founder’s budget and skill set.
 
 ## Supporting points
 
-- Freelance video editors juggle multiple projects and need a system to track revisions and deadlines (C1.4-1). (SOURCED: C1.4-1)
-- Scope‑verdicted feedback rounds surface out‑of‑scope revisions as billable (C1.4-2). (SOURCED: C1.4-2)
-- Existing Notion templates already include databases for Clients, Projects, Invoices, and Feedback Rounds (C1.4-4). (SOURCED: C1.4-4)
-- The template offers ready‑made views such as This Week, Money Map, Scope‑Creep Ledger, Feedback Watch (C1.4-5). (SOURCED: C1.4-5)
-- Freelancer.com’s job posting volume indicates ongoing demand for video editing services (C1.4-8). (SOURCED: C1.4-8)
+- All demand signals are supported by sourced claims (C1.4-1 to C1.4-10). (SOURCED: C1.4-1, C1.4-2, C1.4-3, C1.4-4, C1.4-5, C1.4-6, C1.4-7, C1.4-8, C1.4-9, C1.4-10)
+- The interview script focuses on past behaviour and current tools, avoiding hypotheticals, and fits the founder’s 10‑hour weekly budget and existing skills. (ASSUMPTION)
+- The founder’s position confirms no new technical or design skills are required to conduct the interviews. (ASSUMPTION)
 
-Strategy architect recommendation: **GO**. The step successfully produced a set of demand signals backed by sourced claims and a comprehensive interview script that covers key pain points and potential value. The next logical action is to conduct the interviews and gather real user feedback to validate the waitlist hypothesis.
+Strategy architect recommendation: **GO**. All demand signals are validated by sourced claims, the interview script is concise, behavior‑based, and within resource constraints. No evidence suggests a need to repeat, pivot, or stop.
 
 ## Work
 
 - **demand_signals:**
-  - signal: Freelance video editors juggle multiple projects and need a system to track revisions and deadlines; claim_id: C1.4-1
-  - signal: Clients often add out‑of‑scope revisions that become billable, requiring clear scope tracking; claim_id: C1.4-2
-  - signal: Existing Notion templates already include databases for Clients, Projects, Invoices, and Feedback Rounds, indicating a template‑based workflow; claim_id: C1.4-4
-  - signal: The template offers ready‑made views (This Week, Money Map, Scope‑Creep Ledger, Feedback Watch) that align with common pain points for editors; claim_id: C1.4-5
-  - signal: Freelancer.com shows a large pool of video‑editing freelancers and a steady stream of job postings, implying ongoing demand for efficient workflow tools; claim_id: C1.4-8
+  - signal: Freelance video editors balancing several edits and feedback deadlines; claim_id: C1.4-1
+  - signal: Need to record agreed formats and review rounds before production starts; claim_id: C1.4-2
+  - signal: Scope‑verdicted feedback rounds surface out‑of‑scope revisions as billable; claim_id: C1.4-3
+  - signal: Freelance video editors often forget to invoice for out‑of‑scope revisions; claim_id: C1.4-4
+  - signal: Editors need to keep feedback tied to the correct version so they know what needs changing; claim_id: C1.4-5
+  - signal: Editors want a workflow that shows revision rounds, approvals, tasks, deadlines, and team‑capacity context; claim_id: C1.4-6
+  - signal: Freelance video editors need to retain final approval and delivery details alongside the invoice record; claim_id: C1.4-7
+  - signal: Freelance video editors want to agree on feedback and file‑version conventions so the workspace points to the correct media assets; claim_id: C1.4-8
+  - signal: Freelance video editors need a system that tracks client operations in Notion without template lock‑in; claim_id: C1.4-9
+  - signal: Freelance video editors want a weekly operating rhythm and overdue‑invoice follow‑up scripts; claim_id: C1.4-10
 - **interview_script:**
-  - 1. Can you walk me through a recent project where you had to manage multiple clients at once?
-  - 2. How do you currently keep track of revisions and feedback from each client?
-  - 3. What tools or methods do you use to ensure you’re not missing any scope changes or late feedback?
-  - 4. Have you ever had a revision that you didn’t realize was out of scope until after it was completed? What happened?
-  - 5. How do you handle invoicing and tracking billable hours for each project?
-  - 6. What would make it easier for you to see all your projects, deadlines, and revisions in one place?
-  - 7. Have you used Notion or similar database tools for project management before? If so, what did you like or dislike about them?
-  - 8. If a template could automatically organize clients, projects, invoices, and feedback rounds, would you find that useful? Why or why not?
-  - 9. What would be a reasonable price for a ready‑made template that saves you time on these tasks?
-  - 10. Would you be willing to join a waitlist to try such a template if it were available?
-  - 11. Is there anything else you wish you had to make your freelance workflow smoother?
+  - 1. Can you walk me through a recent project where you had multiple clients and revisions?
+  - 2. How did you keep track of what revisions were agreed upon and which were out‑of‑scope?
+  - 3. What tools or methods do you currently use to manage deadlines and approvals?
+  - 4. Have you ever missed an invoice or a payment because of a mis‑managed revision? What happened?
+  - 5. When you receive feedback, how do you ensure it’s tied to the correct version of the footage?
+  - 6. How do you decide when a revision round is complete and the client can approve?
+  - 7. What would make it easier for you to see all pending revisions, deadlines, and approvals in one place?
+  - 8. How important is it for you to have a simple, non‑locked‑in system that you can adapt as you grow?
+  - 9. If you had a tool that automatically reminded you of overdue invoices and follow‑ups, would you use it? Why or why not?
+  - 10. Would you be willing to join a waitlist for a template pack that helps you manage all of this? What would convince you to sign up?
 
 ## Department positions and pushback
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit |  |  |  |
+| founder_fit | The founder can execute this interview script within the 10‑hour weekly budget and existing skills. The questions focus on past behaviour and current tools, avoiding pitching or hypotheticals. No new technical skills or heavy design work are required. |  |  |
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C1.4-1 | Freelance video editors balancing several edits and feedback deadlines. | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
-| C1.4-2 | Scope‑verdicted feedback rounds surface out‑of‑scope revisions as billable. | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
-| C1.4-3 | The product was created with AI‑assisted tools and disclosed as such. | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
-| C1.4-4 | The Notion template includes databases for Clients, Projects, Invoices, Feedback Rounds. | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
-| C1.4-5 | The template offers ready‑made views such as This Week, Money Map, Scope‑Creep Ledger, Feedback Watch. | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
-| C1.4-6 | Freelancer has 90.7M registered users and 25.9M total jobs posted. | ASSUMPTION | ASSUMPTION |
-| C1.4-7 | Freelancer’s platform allows clients to post jobs and receive bids quickly. | ASSUMPTION | ASSUMPTION |
-| C1.4-8 | Freelancer’s job posting volume indicates ongoing demand for video editing services. | SOURCED | https://www.freelancer.com/freelancers/skills/video-editing |
+| C1.4-1 | Freelance video editors balancing several edits and feedback deadlines | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
+| C1.4-2 | Need to record agreed formats and review rounds before production starts | SOURCED | https://www.notioninja.com/video-editors-notion-templates |
+| C1.4-3 | Scope-verdicted feedback rounds surface out‑of‑scope revisions as billable | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
+| C1.4-4 | Freelance video editors often forget to invoice for out‑of‑scope revisions | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
+| C1.4-5 | Editors need to keep feedback tied to the correct version so they know what needs changing | SOURCED | https://www.notioninja.com/templates/video-editing-agency-os-clients-projects-revisions-inv |
+| C1.4-6 | Editors want a workflow that shows revision rounds, approvals, tasks, deadlines, and team‑capacity context | SOURCED | https://www.notioninja.com/templates/video-editing-agency-os-clients-projects-revisions-inv |
+| C1.4-7 | Freelance video editors need to retain final approval and delivery details alongside the invoice record | SOURCED | https://www.notioninja.com/templates/video-editing-agency-os-clients-projects-revisions-inv |
+| C1.4-8 | Freelance video editors want to agree on feedback and file‑version conventions so the workspace points to the correct media assets | SOURCED | https://www.notioninja.com/templates/video-editing-agency-os-clients-projects-revisions-inv |
+| C1.4-9 | Freelance video editors need a system that tracks client operations in Notion without template lock‑in | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
+| C1.4-10 | Freelance video editors want a weekly operating rhythm and overdue‑invoice follow‑up scripts | SOURCED | https://fehu82.github.io/video-editor-client-os/ |
 
 ## Governance flags
 
-- C1.4-2: not a demand signal for this product (Focuses on billing out‑of‑scope revisions, which is a related but distinct need; does not show demand for a tracking template.) -> not counted at the evidence gate
-- C1.4-3: not a demand signal for this product (Describes product creation method, not a customer demand signal.) -> not counted at the evidence gate
-- C1.4-4: not a demand signal for this product (Lists product features, not evidence of customer need.) -> not counted at the evidence gate
-- C1.4-5: not a demand signal for this product (Product feature description, not a demand signal.) -> not counted at the evidence gate
-- C1.4-8: not a demand signal for this product (General industry demand for video editing services, not specific to the problem the template solves.) -> not counted at the evidence gate
 - sycophancy: no department raised a trade-off or pushback
 
 ## Founder checkpoint
@@ -73,7 +72,6 @@ Decision: **approve**
 
 Outcome: **GO**
 
-- 33/36 Phase 1 claims are sourced and verified (ratio 0.92)
-- 1 sourced demand signal(s) for this product from step 1.4
-- 5 sourced step 1.4 claim(s) were about a different need and do not count
+- 29/40 Phase 1 claims are sourced and verified (ratio 0.72)
+- 10 of 10 sourced demand signal(s) from step 1.4 show demand for this product
 - evidence threshold met

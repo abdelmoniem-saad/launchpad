@@ -4,22 +4,22 @@ Status: **LIVE**. Model: `ollama/gpt-oss:20b`. Brief: Notion templates that help
 
 ## Conclusion
 
-The Notion template pack for freelance video editors is the strongest option and should proceed.
+Proceed with the Notion Revision Tracker Pack as the most viable option.
 
 ## Supporting points
 
-- High demand (5) and strong founder fit (5) justify moving forward with the Notion template pack. (SOURCED: C1.2-1, C1.2-3)
-- Competition is moderate (4) but manageable given the niche focus on revision tracking and feedback loops. (SOURCED: C1.2-1, C1.2-3)
-- Effort required (4) aligns with the founder’s 10‑hour weekly budget and existing skill set. (SOURCED: C1.2-1, C1.2-3)
+- The Notion Revision Tracker Pack scores highest overall (4.05) due to strong demand, moderate competition, excellent founder fit, and manageable effort. (SOURCED: C1.2-1, C1.2-2)
+- The alternative Video Editing Project Brief Template has a lower weighted score (3.6) and higher effort, making it less attractive. (SOURCED: C1.2-1)
+- The Revision Checklist App (standalone) scores lowest (2.55) and would require skills and time beyond the founder’s current capacity. (SOURCED: C1.2-4)
 
-Strategy architect recommendation: **GO**. The weighted score of 4.6 is the highest among alternatives, and the founder’s skill set and budget comfortably accommodate the effort required. The other options either exceed the founder’s capabilities or would dilute focus. Proceeding with the Notion template pack is the most viable path to test market interest via a waitlist.
+Strategy architect recommendation: **GO**. The Notion Revision Tracker Pack has the highest weighted score, aligns with the founder’s skill set and time constraints, and offers a simple, low‑effort solution that meets market demand. The alternatives score lower and either require more effort or additional development resources. Therefore, moving forward with the Notion pack is the best next step.
 
 ## Work
 
 - **options:**
-  - name: Notion templates for freelance video editors to track revisions, feedback rounds and deadlines; is_founder_idea: True; demand: 5; competition: 4; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-3']
-  - name: Online checklist tool for video editors to create and share detailed project briefs; is_founder_idea: False; demand: 4; competition: 3; founder_fit: 3; effort: 3; claim_ids: ['C1.2-1', 'C1.2-2']
-  - name: Automated revision workflow platform that integrates with video editing software; is_founder_idea: False; demand: 3; competition: 2; founder_fit: 2; effort: 5; claim_ids: ['C1.2-9', 'C1.2-10']
+  - name: Notion Revision Tracker Pack; is_founder_idea: True; demand: 4; competition: 3; founder_fit: 5; effort: 4; claim_ids: ['C1.2-1', 'C1.2-2']
+  - name: Video Editing Project Brief Template; is_founder_idea: False; demand: 3; competition: 4; founder_fit: 3; effort: 5; claim_ids: ['C1.2-1']
+  - name: Revision Checklist App (standalone); is_founder_idea: False; demand: 3; competition: 2; founder_fit: 2; effort: 3; claim_ids: ['C1.2-4']
 
 ## Calculator results (quant modeler)
 
@@ -27,43 +27,41 @@ Strategy architect recommendation: **GO**. The weighted score of 4.6 is the high
 {
   "ranked_options": [
     {
-      "name": "Notion templates for freelance video editors to track revisions, feedback rounds and deadlines",
+      "name": "Notion Revision Tracker Pack",
       "is_founder_idea": true,
-      "demand": 5,
-      "competition": 4,
+      "demand": 4,
+      "competition": 3,
       "founder_fit": 5,
       "effort": 4,
       "claim_ids": [
         "C1.2-1",
-        "C1.2-3"
-      ],
-      "weighted_score": 4.6
-    },
-    {
-      "name": "Online checklist tool for video editors to create and share detailed project briefs",
-      "is_founder_idea": false,
-      "demand": 4,
-      "competition": 3,
-      "founder_fit": 3,
-      "effort": 3,
-      "claim_ids": [
-        "C1.2-1",
         "C1.2-2"
       ],
-      "weighted_score": 3.35
+      "weighted_score": 4.05
     },
     {
-      "name": "Automated revision workflow platform that integrates with video editing software",
+      "name": "Video Editing Project Brief Template",
+      "is_founder_idea": false,
+      "demand": 3,
+      "competition": 4,
+      "founder_fit": 3,
+      "effort": 5,
+      "claim_ids": [
+        "C1.2-1"
+      ],
+      "weighted_score": 3.6
+    },
+    {
+      "name": "Revision Checklist App (standalone)",
       "is_founder_idea": false,
       "demand": 3,
       "competition": 2,
       "founder_fit": 2,
-      "effort": 5,
+      "effort": 3,
       "claim_ids": [
-        "C1.2-9",
-        "C1.2-10"
+        "C1.2-4"
       ],
-      "weighted_score": 2.95
+      "weighted_score": 2.55
     }
   ],
   "weights": "demand 0.35, competition 0.2, founder fit 0.25, effort 0.2"
@@ -74,30 +72,30 @@ Strategy architect recommendation: **GO**. The weighted score of 4.6 is the high
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can realistically build the Notion template pack within the 10‑hour weekly budget and existing skill set. The checklist tool would require additional UI design work beyond Notion, and the automated workflow platform would need software development skills the founder lacks and would exceed the budget and time constraints. | Reject the automated workflow platform; it conflicts with the founder’s skill set and budget. The checklist tool is borderline but would stretch the founder’s weekly hours and dilute focus. | Focus exclusively on the Notion template pack and consider the checklist tool as a future, separate project once the founder’s audience grows. |
+| founder_fit | The founder can execute the Notion pack with existing skills and time. The brief‑to‑version workflow and revision checklists are within scope. The standalone app would require additional development skills and time beyond the 10‑hour weekly limit. | The standalone app is too resource‑heavy and misaligned with the founder’s values of simple tools. | Focus on the Notion pack and consider a future app if budget and time allow. |
 
 ## Open disagreements for the founder
 
-- The checklist tool, while having decent demand and lower competition, would stretch the founder’s weekly hours and dilute focus; it is better reserved for a future project once an audience is established.
+- The founder_fit department notes that the standalone app is too resource‑heavy and misaligned with the founder’s values of simple tools, but this does not affect the decision to pursue the Notion pack.
 
 ## Claims ledger
 
 | ID | Claim | Label | Source |
 |---|---|---|---|
-| C1.2-1 | Freelance video editors need clear project briefs that include detailed descriptions, desired style, technical specs, and deadlines. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
-| C1.2-2 | Clients should provide brand style guides and examples to align the editor’s work with brand guidelines. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
-| C1.2-3 | Freelance video editors benefit from regular check‑ins and progress updates to ensure alignment and allow time for adjustments. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
-| C1.2-4 | The platform used to hire editors matters less than how the brief is written and how the editor is vetted. | SOURCED | https://www.moonb.io/blog/platforms-hire-video-editors |
-| C1.2-5 | A great editor on a messy marketplace beats a mediocre one on a premium network every time. | SOURCED | https://www.moonb.io/blog/platforms-hire-video-editors |
-| C1.2-6 | Video is not optional; 91% of businesses use video as a marketing tool and plan to spend more. | SOURCED | https://www.moonb.io/blog/platforms-hire-video-editors |
-| C1.2-7 | Freelancer.com is best for teams that can define deliverables clearly and validate samples because bid‑based matching plus portfolio review helps land editors aligned to a specific edit style and timeline. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
-| C1.2-8 | VidChops is best for marketing teams that need repeatable edit revisions and publish-ready audio and captions. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
-| C1.2-9 | Contra offers a brief‑to‑version revision workflow that turns creative direction into delivered cut iterations. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
-| C1.2-10 | Bark provides milestone‑based project handling that lets hiring teams enforce acceptance criteria across iterative video revisions. | ASSUMPTION | ASSUMPTION |
+| C1.2-1 | Freelance video editors need detailed project briefs that include technical specifications and brand guidelines to align work with client expectations. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-2 | Freelance video editors benefit from regular check‑ins and progress updates to ensure alignment and allow time for adjustments before final delivery. | SOURCED | https://contra.com/hire/english-speaking-video-editors |
+| C1.2-3 | Platforms like Contra provide a brief‑to‑version revision workflow that turns creative direction into clear cut iterations. | SOURCED | https://gitnux.org/service/freelance-video-editing/ |
+| C1.2-4 | VidChops offers revision checklists that help creators manage iterative feedback cycles. | SOURCED | https://worldmetrics.org/service/freelance-video-editing/ |
+| C1.2-5 | Bark provides milestone‑based task handoff that groups edits into reviewable deliverables instead of open‑ended custom projects. | ASSUMPTION | ASSUMPTION |
+| C1.2-6 | Upwork’s fee structure shifted to a variable 0‑15% rate per contract, with an average effective fee of 12‑13% for most freelancers. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
+| C1.2-7 | Fiverr’s AI Video Hub launched in March 2026, with demand for AI‑powered video editing spiking 66% in six months. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
+| C1.2-8 | 59% of video marketers produce video in‑house, 32% use a mix, and only 10% fully outsource, down from 24% pure outsourcing in 2024. | SOURCED | https://chatcut.io/blog/freelance-video-editing-platforms-2026 |
+| C1.2-9 | Freelance video editors in India lose money on international payments due to 2‑3% FX spread and intermediary deductions on SWIFT wires. | SOURCED | https://grey.co/blog/freelance-video-editing-platforms |
+| C1.2-10 | Receiving US dollar payments via ACH or Fedwire can cost the sender under $1 or $15‑$30, respectively, with minimal fees for the recipient if using a virtual USD account. | SOURCED | https://grey.co/blog/freelance-video-editing-platforms |
 
 ## Governance flags
 
-- C1.2-10: quote not found in its source -> ASSUMPTION
+- C1.2-5: quote not found in its source -> ASSUMPTION
 
 ## Founder checkpoint
 

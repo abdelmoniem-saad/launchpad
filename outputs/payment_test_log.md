@@ -1,7 +1,7 @@
 # Payment and delivery test log (MOCKED)
 
-Run: 2026-11-17T20:24:08Z with `python -m app.payment_test`.
-Provider: MOCKED payment provider (test mode, in-process). Fee schedule 2.9% + $0.30 per payment is an ASSUMPTION used only by the mock.
+Run: 2026-11-17T20:34:19Z with `python -m app.payment_test`.
+Provider: MOCKED payment provider (simulated, in-process). Fee schedule 2.9% + $0.30 per payment is an ASSUMPTION used only by the mock.
 No real money moved, no card data was used, and the download links are MOCKED placeholders. Opening the store and the refund were decided by the founder at the prompt.
 
 Product: Revision tracker Notion template pack, price set by the founder: $19.00
@@ -15,7 +15,7 @@ Product: Revision tracker Notion template pack, price set by the founder: $19.00
 | 3 | Founder decision on opening the store | approve | approved, store open at $19.00 | PASS |
 | 4 | Card number offered at checkout | rejected | rejected (opaque buyer ids only) | PASS |
 | 5 | Access before payment | none | none | PASS |
-| 6 | Payment webhook grants delivery | access granted | processed, link mock://download/uapYQdk5tJECgSSx (MOCKED) | PASS |
+| 6 | Payment webhook grants delivery | access granted | processed, link mock://download/fz7bTyEDPMjJ-cHx (MOCKED) | PASS |
 | 7 | Second order paid and delivered | access granted | processed | PASS |
 | 8 | Same payment webhook delivered twice | ignored, one grant | duplicate, 1 grant(s) | PASS |
 | 9 | Forged payment webhook | rejected, no access | rejected, access none | PASS |
@@ -28,9 +28,9 @@ Product: Revision tracker Notion template pack, price set by the founder: $19.00
 
 | Order | Status | Gross | Fee | Refund | Net | Access |
 |---|---|---|---|---|---|---|
-| ord_61621928 | refunded | $19.00 | $0.85 | $19.00 | -$0.85 | revoked |
-| ord_74b4f230 | paid | $19.00 | $0.85 | $0.00 | $18.15 | active |
-| ord_aa17d36b | pending | $0.00 | $0.00 | $0.00 | $0.00 | none |
+| ord_2e2b2bf6 | refunded | $19.00 | $0.85 | $19.00 | -$0.85 | revoked |
+| ord_5524ee71 | paid | $19.00 | $0.85 | $0.00 | $18.15 | active |
+| ord_c7504c83 | pending | $0.00 | $0.00 | $0.00 | $0.00 | none |
 
 | Total | Our ledger | Provider payout report |
 |---|---|---|

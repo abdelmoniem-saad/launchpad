@@ -13,55 +13,56 @@ Strategy architect recommendation: **GO**. Phase is MOCKED; drafts only, nothing
 ## Work
 
 - **core_features:**
-  - 1. Client Dashboard – a single Notion page listing all active clients with status tags (draft, revision, approved).
-  - 2. Revision Tracker – a linked database that records each revision request, notes, and due dates per client.
-  - 3. Deadline Calendar – a shared calendar view that syncs with the Revision Tracker to show upcoming deadlines and reminders.
-  - 4. Feedback Notes – a template for editors to paste client feedback directly into the Revision Tracker, auto‑linking to the relevant revision record.
-  - 5. Export Summary – a simple button that compiles the current client list, revisions, and deadlines into a PDF for quick sharing.
+  - 1. Revision Tracker Database – a Notion table to log each client, project, revision round, feedback notes, and due dates.
+  - 2. Client Dashboard – a linked view that shows active projects, upcoming deadlines, and revision status at a glance.
+  - 3. Template Instructions – a concise, step‑by‑step guide (PDF/Notion page) on how to set up and use the tracker.
+  - 4. Revision Reminder Automation – a simple Notion reminder (via reminders or linked calendar) that alerts the editor when a deadline is approaching.
+  - 5. Export/Share Option – a button or link that allows the editor to export the tracker as a PDF or share a view with the client.
 - **out_of_scope:**
-  - Custom Notion integrations or API automation
-  - Advanced analytics or reporting dashboards
-  - Multi‑language support
-  - Paid subscription or marketplace integration
-- **user_docs_draft:** # Revision‑Tracking Template Pack
+  - Custom integrations with external project‑management tools (e.g., Trello, Asana).
+  - Advanced analytics or reporting dashboards.
+  - Automated email notifications to clients.
+  - Full‑fledged client portal with authentication.
+- **user_docs_draft:** # Revision Tracker Pack – Quick Start Guide
 
-## What it does
-This Notion template pack lets you keep all your clients, revisions, and deadlines in one place. No more juggling spreadsheets or sticky notes.
+## 1. What is this? 
+A ready‑made Notion template that lets you track every revision round, feedback note, and deadline for all your freelance video‑editing projects in one place.
 
-## How to use it
-1. **Add a new client** – Click *Add Client* and fill in the name and contact.
-2. **Track revisions** – For each new revision request, click *Add Revision* under the client. Paste the client’s feedback, set a due date, and mark the status.
-3. **See deadlines** – Open the *Deadline Calendar* to view all upcoming due dates at a glance.
-4. **Export** – When you’re ready to share a status update, click *Export Summary* to generate a PDF.
+## 2. How to set it up
+1. **Duplicate the template** – Click the "Duplicate to my workspace" button.
+2. **Add your clients** – In the *Clients* table, enter each client’s name and contact.
+3. **Create a project** – In the *Projects* table, link to the client, set the start date, and add a brief description.
+4. **Track revisions** – For each revision round, add a new row in the *Revisions* table, link it to the project, note the feedback, and set the due date.
+5. **View your dashboard** – Open the *Dashboard* page to see all active projects, upcoming deadlines, and revision status.
 
-## Tips
-- Use the status tags (Draft, Revision, Approved) to quickly see where each project stands.
-- Keep the feedback notes concise; the template will auto‑link them to the revision record.
-- The calendar view can be filtered by client or status for focused work sessions.
+## 3. Tips
+- Use the *Reminder* column to get a Notion notification 2 days before a deadline.
+- Export the tracker as a PDF to share with clients.
+- Keep the template updated – add new columns if you need extra details.
 
 Happy editing!
 - **test_plan:**
-  - 1. Create a landing page with a clear headline and a waitlist sign‑up form.
-2. Run a 14‑day test using free social media posts and a small paid boost (≤$50) to drive traffic.
-3. Track unique sign‑ups; success is 16 or more unique emails.
-4. After the test, send a follow‑up email to all sign‑ups asking for a 5‑minute interview about their revision workflow.
-5. Use interview responses to validate the core features and refine the template pack.
+  - 1. Landing Page Test – Create a simple landing page with a clear headline, a short description of the template pack, and a waitlist sign‑up form.
+2. Outreach – Post the landing page link in 3–5 relevant freelance video‑editing communities (e.g., Reddit r/VideoEditing, Facebook groups, Discord servers).
+3. Conversion Goal – Aim for 20 unique waitlist sign‑ups within 14 days.
+4. Metrics – Track page views, click‑through rate to the sign‑up form, and the number of sign‑ups.
+5. Review – If the goal is met, proceed to create the template pack; if not, iterate the headline or offer a small incentive (e.g., a free 1‑hour tutorial call).
 
 ## Department positions and pushback
 
 | Department | Position | Pushback | Trade-off |
 |---|---|---|---|
-| founder_fit | The founder can build the five core features within 10 hours per week using existing Notion skills and writing tutorials for documentation. | Any feature requiring advanced Notion scripting or external integrations is out of scope due to lack of time and skill. | Focus on manual data entry and simple linked databases; postpone automation until a later phase. |
-| marketing | The demand test will rely on a clear value proposition and a simple landing page to attract freelance video editors. | The headline must explicitly mention revision tracking; generic terms like "workflow" may not convert. Also, the waitlist sign‑up form should be minimal to avoid friction. | Use a single email field and a short opt‑in text; add a follow‑up email later if needed. |
-| finance | The total budget must stay within $300, including $50 for paid traffic and $200 for hosting and domain costs. | Any additional tools or services that exceed the $300 cap are not allowed. | Use free Notion templates and free email marketing tools; avoid paid analytics or CRM. |
-| product | The product scope is limited to a single Notion template pack with five core features; no API or automation. | Adding a custom Notion integration would exceed the founder’s weekly hours and budget. | Implement manual linking and simple database views; defer automation to a future iteration.}} |
+| founder_fit | The core features are within the founder’s skill set (Notion, video editing, writing). The weekly hours (10) are sufficient for duplicating the template, writing the guide, and setting up the landing page. The out‑of‑scope items (integrations, automation) are excluded to stay true to the founder’s values of simplicity and honesty. | The reminder automation may require scripting or external tools, which the founder does not have time or skill for. It should be omitted or replaced with a native Notion reminder. | If a reminder is essential, the founder could spend 2 extra hours on a simple Notion formula, but this would reduce time available for outreach. |
+| marketing | The test plan focuses on a waitlist to validate demand, aligning with the founder’s goal of learning if editors will join a waitlist. | The landing page headline and copy must be testable; the current draft is generic. A more compelling value proposition (e.g., “Save 3 hours per project”) should be added to increase conversion. | Adding a stronger headline may require an extra 1–2 hours of copywriting, which is within the budget but reduces time for community outreach. |
+| finance | All planned activities (landing page, community outreach, template creation) are estimated to cost under $300, primarily in hosting and minimal paid ads. | If paid outreach is used, the cost per click must be capped at $1 to stay within budget. Any additional tools (e.g., email service) should be free or included in the $300. | Using a free landing page builder (e.g., Carrd) keeps costs low but may limit customization; a paid builder would increase cost but improve conversion. |
+| product | The MVP spec lists only five core features, keeping scope tight and deliverable within the founder’s weekly hours. | The export/share option may require a small script or integration, which is outside the founder’s skill set. It could be replaced with a simple Notion share link. | If the export feature is removed, the product remains functional but loses a convenience that some users might value. |
 
 ## Open disagreements for the founder
 
-- Any feature requiring advanced Notion scripting or external integrations is out of scope due to lack of time and skill.
-- The headline must explicitly mention revision tracking; generic terms like "workflow" may not convert. Also, the waitlist sign‑up form should be minimal to avoid friction.
-- Any additional tools or services that exceed the $300 cap are not allowed.
-- Adding a custom Notion integration would exceed the founder’s weekly hours and budget.
+- The reminder automation may require scripting or external tools, which the founder does not have time or skill for. It should be omitted or replaced with a native Notion reminder.
+- The landing page headline and copy must be testable; the current draft is generic. A more compelling value proposition (e.g., “Save 3 hours per project”) should be added to increase conversion.
+- If paid outreach is used, the cost per click must be capped at $1 to stay within budget. Any additional tools (e.g., email service) should be free or included in the $300.
+- The export/share option may require a small script or integration, which is outside the founder’s skill set. It could be replaced with a simple Notion share link.
 
 ## Founder checkpoint
 

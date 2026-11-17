@@ -12,7 +12,7 @@ docker compose up
 
 Then open **http://localhost:8501**, fill in the brief and start the engagement. The first start downloads the model (`qwen3:8b`, about 5 GB), so it takes a while. Plan for about 8 GB of free RAM and 10 GB of disk.
 
-**How long a run takes.** The local model is slow without a GPU: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour. With a GPU it is minutes: the committed demo run took about 2 minutes with `gpt-oss:20b` on a 16 GB GPU. For a fast run without a GPU, put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)); any Groq error falls back to the local model.
+**How long a run takes.** The local model is slow without a GPU: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour. With a GPU it is minutes: the committed demo run took about 2.5 minutes with `gpt-oss:20b` on a 16 GB GPU. For a fast run without a GPU, put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)); any Groq error falls back to the local model.
 
 **Already running Ollama on your machine?** Reuse it instead of the bundled container (pull the model there first):
 
@@ -68,7 +68,11 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 
 ## Cost per run
 
-**About $0.00 per run** (local model). The committed strong-brief run (phases 1-2, stopping at the demand gate) made 29 model calls and used about 79k tokens with `gpt-oss:20b`, and took about 2 minutes end to end on a 16 GB GPU. The full six-phase `*_demo` run made 56 calls, used about 138k tokens and took about 4.5 minutes. Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
+**About $0.00 per run** (local model). The committed strong-brief run (phases 1-2, stopping at the demand gate) made 31 model calls and used about 75k tokens with `gpt-oss:20b`, and took about 2.5 minutes end to end on a 16 GB GPU. The full six-phase `*_demo` run made 43 calls, used about 108k tokens and took about 3 minutes. Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
+
+## Demo video
+
+No recording yet. The 3-minute walkthrough is scripted in [docs/demo_script.md](docs/demo_script.md); the runs it shows are committed in `outputs/` (strong brief, weak brief that stops, labelled six-phase demo run, payment test).
 
 ## What our system will NOT do
 

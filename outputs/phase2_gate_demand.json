@@ -9,9 +9,9 @@
   "comparison": null,
   "thresholds": {
     "metric": "waitlist signups",
-    "target": 35,
+    "target": 10,
     "days": 7,
-    "basis": "500 visitors x 0.07 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumption based on typical landing page conversion rates (C2.2-7) and the niche focus of the target audience.",
+    "basis": "200 visitors x 0.05 conversion (a value below 1 is read as a fraction; ASSUMPTION unless sourced). Assumptions based on typical reach of free social posts and the niche size; conversion % derived from industry benchmarks for waitlist sign\u2011ups (C2.2-1, C2.2-2).",
     "locked": true
   },
   "founder_decision": "approve"
