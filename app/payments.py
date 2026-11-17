@@ -5,7 +5,7 @@ the founder's one-time token). A buyer checks out; payment happens on the provid
 never sees card details. The provider then sends a signed webhook (app/webhooks.py), and only that
 webhook grants delivery (app/delivery.py). Refunds go through app/refunds.py, again founder-approved.
 
-MOCKED: `MockProvider` is an in-process simulation of a payment provider in test mode. Its fee schedule
+MOCKED: `MockProvider` is an in-process simulation of a payment provider; no real or sandbox payment system is ever contacted. Its fee schedule
 (2.9% + $0.30 per payment, not returned on refund) is an ASSUMPTION used only by the mock. Amounts are
 integer cents. Buyers are stored as an opaque reference, never a name, email or card number.
 """
@@ -26,7 +26,7 @@ from app import approval
 from app import decision_log as dl
 
 AGENT = "governance.payments"
-PROVIDER_NAME = "MOCKED payment provider (test mode, in-process)"
+PROVIDER_NAME = "MOCKED payment provider (simulated, in-process)"
 FEE_PCT, FEE_FIXED_CENTS = 0.029, 30  # ASSUMPTION: typical card fee, used only by the mock
 _CARD_LIKE = re.compile(r"(?:\d[ -]?){13,19}")
 _SECRET = os.environ.get("MOCK_WEBHOOK_SECRET") or secrets.token_hex(16)
@@ -67,7 +67,7 @@ def reset() -> None:
 def propose_store(run_dir: str, product: str, price_usd: float) -> str:
     """Opening the store is a `publish` action: it waits for the founder's approval."""
     payload = {"kind": "open_store", "product": product, "price_usd": round(float(price_usd), 2),
-               "draft": f"Open the store for '{product}' at ${float(price_usd):.2f} (MOCKED provider, test mode)"}
+               "draft": f"Open the store for '{product}' at ${float(price_usd):.2f} (MOCKED provider, simulated)"}
     return approval.propose(run_dir, "5.1", "publish", payload, "Open the store so buyers can check out", "dept.sales")
 
 
@@ -116,7 +116,7 @@ def sign(body: str) -> str:
 
 
 class MockProvider:
-    """MOCKED payment provider in test mode. It keeps its own ledger, which reconciliation checks against ours."""
+    """MOCKED payment provider (in-process simulation). It keeps its own ledger, which reconciliation checks against ours."""
 
     name = PROVIDER_NAME
 

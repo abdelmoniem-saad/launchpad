@@ -1,7 +1,7 @@
 # Payment and delivery test log (MOCKED)
 
 Run: 2026-11-17T19:47:07Z with `python -m app.payment_test`.
-Provider: MOCKED payment provider (test mode, in-process). Fee schedule 2.9% + $0.30 per payment is an ASSUMPTION used only by the mock.
+Provider: MOCKED payment provider (simulated, in-process). Fee schedule 2.9% + $0.30 per payment is an ASSUMPTION used only by the mock.
 No real money moved, no card data was used, and the download links are MOCKED placeholders. Opening the store and the refund were decided by the founder at the prompt.
 
 Product: Revision tracker Notion template pack, price set by the founder: $19.00

@@ -85,7 +85,7 @@ The system **recommends STOP on weak evidence**: when research cannot source cla
 
 ## Sale to cash
 
-Built in code against a **MOCKED** payment provider (an in-process simulation in test mode; no real money, no card data). `python -m app.payment_test` runs the whole path with the founder approving at the prompts and writes `outputs/payment_test_log.md`; `tests/test_payments.py` covers each rule below. Connecting the founder's own provider account in test mode is the next step on the roadmap.
+Built in code against a **MOCKED** payment provider (an in-process simulation; no real money, no card data, and no real or sandbox payment system). `python -m app.payment_test` runs the whole path with the founder approving at the prompts and writes `outputs/payment_test_log.md`; `tests/test_payments.py` covers each rule below.
 
 ```
 founder approves "open store" (action gateway, one-time token)          app/payments.py
@@ -128,12 +128,12 @@ provider's payout report; access vs order status; mismatches go to the founder
 | Department review: fast mode (one panel call) and full mode (parallel `Send` reviews + negotiation) | Built |
 | Step 4.1 pricing (research, verification, calculator tiers) | Built |
 | Steps 3.1, 4.2, 5.1, 6.1 | **MOCKED** drafts |
-| Payments, webhooks, delivery, refunds, reconciliation (`app/payments.py`, `webhooks.py`, `delivery.py`, `refunds.py`, `reconcile.py`) | Built against a **MOCKED** payment provider; a real provider in test mode is on the roadmap |
+| Payments, webhooks, delivery, refunds, reconciliation (`app/payments.py`, `webhooks.py`, `delivery.py`, `refunds.py`, `reconcile.py`) | Built against a **MOCKED** payment provider; no real or sandbox provider is used |
 
 ## Roadmap
 
 1. Take phase 3 (Build) to LIVE: generate the first deliverable and run its tests as the "tests pass" gate.
-2. Swap the MOCKED provider for the founder's own payment provider account in test mode, behind the same action gateway and webhook handler.
+2. After the hackathon, the founder's own payment provider could replace the MOCKED one behind the same action gateway and webhook handler. This prototype makes no payments of any kind, not even sandbox ones.
 3. Add more region-aware sources (local forums, marketplaces) for MENA briefs.
 4. Grow the eval set of trick prompts and score the department pushback.
 5. Add more departments as files that contributors can drop in.

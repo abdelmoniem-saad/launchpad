@@ -69,10 +69,6 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 
 **About $0.00 per run** (local model). The committed demo run (strong brief, phases 1-2) made 27 model calls and used about 71k tokens with `gpt-oss:20b`, and took about 2 minutes end to end on a 16 GB GPU (81 seconds of model time; the rest is web research). Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
 
-## Demo video
-
-To be added (3 minutes at most).
-
 ## What our system will NOT do
 
 - Promise income or guarantee success.
@@ -89,5 +85,5 @@ To be added (3 minutes at most).
 
 - **Open license:** Apache-2.0. Anyone can run, fork and extend it.
 - **Extend with a file:** a new department is one prompt file `prompts/dept_<name>.md` plus one line in `app/phases.py`.
-- **Roadmap:** take the remaining MOCKED steps (3.1, 4.2, 5.1, 6.1) to LIVE one at a time, connect the founder's own payment provider in test mode in place of the MOCKED one, more region-aware research sources, and more evals of the guardrails.
+- **Roadmap:** take the remaining MOCKED steps (3.1, 4.2, 5.1, 6.1) to LIVE one at a time, (after the hackathon) the founder's own payment provider in place of the MOCKED one behind the same gateway, more region-aware research sources, and more evals of the guardrails.
 - **Maintainers and community:** the founding team reviews issues and pull requests. Costs stay at $0 because everything runs locally.
