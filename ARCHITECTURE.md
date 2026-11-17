@@ -56,8 +56,11 @@ Every step ends in a founder checkpoint and writes `outputs/phase<N>_step<M>_<na
 ### Phase 3: Build (MOCKED)
 Product department added. MVP spec (at most 5 core features), user docs draft, test plan. Output `phase3_step1_mvp_spec.md`.
 
-### Phase 4: Commercial setup (MOCKED)
-Legal and Sales added. Pricing tiers from the calculator (0.6× / 1× / 1.6× the sourced competitor median), plus draft terms, privacy and refund policy summaries. Core features are never paywalled. No payment code. Output `phase4_step1_pricing_and_policies.md`.
+### Phase 4: Commercial setup (4.1 LIVE, 4.2 MOCKED)
+Legal and Sales added.
+
+- **4.1 Pricing (LIVE).** The market researcher searches for published prices of comparable products. The departments list price points, each tied to a claim. After Tier 2 verification the calculator counts a price only if its claim is still SOURCED, its quote is on the fetched page, and the quote contains that number. One-time and monthly prices are never mixed. Tiers are 0.6× / 1× / 1.6× the median of the counted prices; with none, it falls back to step 1.3's sourced median, and otherwise leaves tiers to the founder (ASSUMPTION). Core features are never paywalled. No payment code. Output `phase4_step1_pricing.md`.
+- **4.2 Policies (MOCKED).** Draft terms, privacy and refund policy summaries, labelled as drafts that are not legal advice. Output `phase4_step2_policies.md`.
 
 ### Phase 5: Launch (MOCKED)
 Operations added. Store page and launch post drafts (publish actions are MOCKED) and a delivery plan (MOCKED). Output `phase5_step1_launch_drafts.md`.
@@ -119,7 +122,8 @@ compared with the provider's payout report; mismatches go to the founder
 | Tier 1 rule guard, Tier 2 verification, injection stripping, team health check | Built |
 | Action gateway with one-time tokens | Built; execution is **MOCKED** |
 | Department review: fast mode (one panel call) and full mode (parallel `Send` reviews + negotiation) | Built |
-| Phases 3-6 | **MOCKED** drafts |
+| Step 4.1 pricing (research, verification, calculator tiers) | Built |
+| Steps 3.1, 4.2, 5.1, 6.1 | **MOCKED** drafts |
 | Payments, delivery, refunds, reconciliation | **STUBBED** (design above) |
 
 ## Roadmap

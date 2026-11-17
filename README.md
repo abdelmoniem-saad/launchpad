@@ -1,5 +1,7 @@
 # launchpad
 
+[![CI](https://github.com/abdelmoniem-saad/launchpad/actions/workflows/ci.yml/badge.svg)](https://github.com/abdelmoniem-saad/launchpad/actions/workflows/ci.yml)
+
 An open-source AI consulting firm that a founder hires to take a brief to a validated, sellable **digital** product. It builds the company's departments along the way, keeps the founder in charge of every decision, and says "don't launch this" when the evidence is weak. It runs on a local open-weight model with no keys and no paid services.
 
 ## Quickstart
@@ -8,7 +10,15 @@ An open-source AI consulting firm that a founder hires to take a brief to a vali
 docker compose up
 ```
 
-Then open **http://localhost:8501**, fill in the brief and start the engagement. The first start downloads the model (`qwen3:8b`, about 5 GB), so it takes a while. Plan for about 8 GB of free RAM and 10 GB of disk. To use the Groq free tier as an optional fast mode, put `GROQ_API_KEY` in `.env`.
+Then open **http://localhost:8501**, fill in the brief and start the engagement. The first start downloads the model (`qwen3:8b`, about 5 GB), so it takes a while. Plan for about 8 GB of free RAM and 10 GB of disk.
+
+**How long a run takes.** The local model is slow without a GPU: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour. For a fast run, put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)); any Groq error falls back to the local model.
+
+**Already running Ollama on your machine?** Reuse it instead of the bundled container (pull the model there first):
+
+```bash
+docker compose -f docker-compose.yml -f compose.host-ollama.yml up --build app searxng
+```
 
 Without Docker you need Python 3.11+ and [Ollama](https://ollama.com):
 
@@ -35,7 +45,8 @@ There is also a command-line founder console, which runs the same graph: `python
 | 2 Validate | 2.4 Founder enters the real result; demand gate compares it in code | **Working** |
 | 2 Validate | 2.5 Company blueprint: roles, founder / automate / hire later, cost against budget | **Working** (job posts are **MOCKED**) |
 | 3 Build | MVP spec, user docs draft, test plan | **MOCKED** |
-| 4 Commercial setup | Pricing tiers (calculator), draft terms, privacy and refund policies. No payment code of any kind | **MOCKED** |
+| 4 Commercial setup | 4.1 Pricing: competitor prices researched and verified; tiers computed by the calculator only from prices a verified source quote contains. No payment code of any kind | **Working** |
+| 4 Commercial setup | 4.2 Draft terms, privacy and refund policies (not legal advice) | **MOCKED** |
 | 5 Launch | Store page and launch post drafts; automatic delivery to buyers | **MOCKED** |
 | 6 Operate and learn | Support replies, metrics plan, persevere-or-pivot memo | **MOCKED** |
 | Governance | Founder checkpoint after every step; action gateway with one-time tokens; Tier 1 rule guard; Tier 2 claim check; team health check; decision log; cost report | **Working** |
@@ -56,7 +67,7 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 
 ## Cost per run
 
-**About $0.00 per run** (local model). Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
+**About $0.00 per run** (local model). Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed run (an excluded crypto brief, refused at intake) has its figures in [outputs/cost_report_excluded.json](outputs/cost_report_excluded.json).
 
 ## Demo video
 
@@ -78,5 +89,5 @@ To be added (3 minutes at most).
 
 - **Open license:** Apache-2.0. Anyone can run, fork and extend it.
 - **Extend with a file:** a new department is one prompt file `prompts/dept_<name>.md` plus one line in `app/phases.py`.
-- **Roadmap:** take phases 3-6 from MOCKED to LIVE one at a time, add a real checkout behind founder approval (designed in ARCHITECTURE.md), more region-aware research sources, and more evals of the guardrails.
+- **Roadmap:** take the remaining MOCKED steps (3.1, 4.2, 5.1, 6.1) to LIVE one at a time, add a real checkout behind founder approval (designed in ARCHITECTURE.md), more region-aware research sources, and more evals of the guardrails.
 - **Maintainers and community:** the founding team reviews issues and pull requests. Costs stay at $0 because everything runs locally.

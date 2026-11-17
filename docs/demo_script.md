@@ -27,4 +27,4 @@ The point to land: launchpad is a consulting firm that keeps the founder in char
 Show the first checkpoint if it has arrived: approve / edit / redo with feedback / stop.
 
 ## 2:45-3:00 Close
-"Apache-2.0, `docker compose up`, no keys, $0 per run. Phases 1-2 are live; 3-6 are labelled MOCKED; there is no payment code. It will never promise income, fake reviews or urgency, or act without the founder."
+"Apache-2.0, `docker compose up`, no keys, $0 per run. Phases 1-2 and the pricing step are live; the other steps of 3-6 are labelled MOCKED; there is no payment code. It will never promise income, fake reviews or urgency, or act without the founder."
