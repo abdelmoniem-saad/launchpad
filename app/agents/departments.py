@@ -26,17 +26,33 @@ def _context(step: dict, state: dict) -> str:
             + (f"Compliance notes to fix: {state['compliance_note']}\n" if state.get("compliance_note") else ""))
 
 
+def _dept_key(name) -> str:
+    key = str(name or "").strip().lower().replace(" ", "_").replace("-", "_")
+    return key.removeprefix("dept.").removeprefix("dept_")
+
+
+def _by_department(raw) -> dict:
+    """Panel answers keyed by bare department name, accepting "dept.x" keys or a list of entries."""
+    if isinstance(raw, list):
+        raw = {(e.get("department") or e.get("name")): e for e in raw if isinstance(e, dict)}
+    if not isinstance(raw, dict):
+        return {}
+    return {_dept_key(k): v for k, v in raw.items() if isinstance(v, dict)}
+
+
 def panel(step: dict, state: dict, roster: list[str]) -> dict:
     """Fast mode: one call returns {"work": {...}, "departments": {name: {position, pushback, tradeoff}}}."""
     dept_prompts = "\n\n".join(f"## dept.{d}\n{config.load_prompt(f'dept_{d}.md')}" for d in roster)
     system = (config.load_prompt("strategy_architect.md") + "\n\nDepartments at the table:\n" + dept_prompts +
               f"\n\nReply JSON: {{\"work\": {step['work_keys']}, \"departments\": {{\"<name>\": "
-              "{\"position\": str, \"pushback\": str, \"tradeoff\": str}}}}")
+              "{\"position\": str, \"pushback\": str, \"tradeoff\": str}}}}\n"
+              f"Use exactly these department names as keys: {', '.join(roster)}")
     reply = config.call_model("firm.strategy_architect", system, _context(step, state))
     work = reply.get("work") if isinstance(reply.get("work"), dict) else {}
+    answers = _by_department(reply.get("departments"))
     positions = {}
     for d in roster:
-        p = (reply.get("departments") or {}).get(d) or {}
+        p = answers.get(d) or {}
         positions[d] = {"department": d, "position": str(p.get("position", "")), "pushback": str(p.get("pushback", "")),
                         "tradeoff": str(p.get("tradeoff", ""))}
     dl.log("firm.strategy_architect", f"draft_work_with_department_panel step {step['id']} ({', '.join(roster)})"

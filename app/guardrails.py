@@ -119,20 +119,44 @@ JUDGE_SYSTEM = """You verify claims against source text. For each claim, answer 
 source text supports it. Reply JSON: {"verdicts": [{"id": str, "supported": true|false, "note": str}]}"""
 
 
+MIN_QUOTE_WORDS = 3
+PASSAGE_BEFORE, PASSAGE_CHARS = 600, 1600
+
+
+def find_quote(quote: str, text: str) -> int:
+    """Start of `quote` in `text`, ignoring case, punctuation and spacing; -1 if absent or too short."""
+    words = re.findall(r"[a-z0-9]+", (quote or "").lower())
+    if len(words) < MIN_QUOTE_WORDS:
+        return -1
+    m = re.search(r"(?<![a-z0-9])" + r"[^a-z0-9]+".join(map(re.escape, words)), text or "", re.I)
+    return m.start() if m else -1
+
+
 def tier2_verify(claims: list[dict], sources_text: dict, step: str) -> tuple[list[dict], list[str]]:
-    """Quote check (deterministic) + one batched LLM judge call. Unsupported -> ASSUMPTION."""
-    flags = []
-    sourced = [c for c in claims if c.get("type") == "SOURCED"]
-    for c in sourced:
+    """Quote check (deterministic) + one batched LLM judge call. Unsupported -> ASSUMPTION.
+
+    The judge sees the passage around the quote, not just the top of the page, so a claim taken
+    from further down its source can still be confirmed.
+    """
+    flags, passages = [], {}
+    for c in [c for c in claims if c.get("type") == "SOURCED"]:
         text = sources_text.get(c.get("source_url"), "")
         if not text:
             c["type"] = "ASSUMPTION"
             flags.append(f"{c['id']}: cited page was not fetched -> ASSUMPTION")
+            continue
+        pos = find_quote(c.get("quote", ""), text)
+        if pos < 0:
+            c["type"] = "ASSUMPTION"
+            flags.append(f"{c['id']}: quote not found in its source -> ASSUMPTION")
+            continue
+        start = max(0, pos - PASSAGE_BEFORE)
+        passages[c["id"]] = text[start:start + PASSAGE_CHARS]
     sourced = [c for c in claims if c.get("type") == "SOURCED"]
     if not sourced:
         return claims, flags
     payload = [{"id": c["id"], "claim": c["text"], "quote": c.get("quote", ""),
-                "source_text": sources_text.get(c["source_url"], "")[:1200]} for c in sourced[:12]]
+                "source_text": passages[c["id"]]} for c in sourced[:12]]
     reply = config.call_model("governance.verification_gate", JUDGE_SYSTEM, json.dumps(payload))
     dl.log("governance.verification_gate", f"tier2_verify_claims step {step}",
            sources=[c["source_url"] for c in sourced], model=config.model_name(), cost=0)
