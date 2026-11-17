@@ -221,3 +221,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- launchpad ---
+# Runtime state (orders, access grants); never committed
+data/
+# Organizer materials and assistant instructions stay out of the submission
+*.pptx
+*.pdf
+CLAUDE.md

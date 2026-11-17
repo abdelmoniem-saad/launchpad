@@ -1,0 +1,44 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  model-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+    entrypoint: ["ollama", "pull", "${LLM_MODEL:-qwen3:8b}"]
+    restart: "no"
+
+  app:
+    build: .
+    depends_on:
+      model-pull:
+        condition: service_completed_successfully
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - OLLAMA_HOST=http://ollama:11434
+      - LLM_MODEL=${LLM_MODEL:-qwen3:8b}
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./outputs:/app/outputs
+      - ./decision_log.json:/app/decision_log.json
+      - ./data:/app/data
+    command: ["--help"]
+
+volumes:
+  ollama:
