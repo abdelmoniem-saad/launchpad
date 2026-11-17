@@ -1,6 +1,6 @@
 services:
   ollama:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.40.16
     ports:
       - "11434:11434"
     volumes:
@@ -12,33 +12,42 @@ services:
       retries: 30
 
   model-pull:
-    image: ollama/ollama:latest
+    image: ollama/ollama:0.40.16
     depends_on:
       ollama:
         condition: service_healthy
     environment:
       - OLLAMA_HOST=http://ollama:11434
-    entrypoint: ["ollama", "pull", "${LLM_MODEL:-qwen3:8b}"]
+    entrypoint: ["ollama", "pull", "${LOCAL_MODEL:-qwen3:8b}"]
     restart: "no"
+
+  searxng:
+    image: searxng/searxng:latest
+    volumes:
+      - ./searxng/settings.yml:/etc/searxng/settings.yml:ro
+    environment:
+      - SEARXNG_BASE_URL=http://searxng:8080/
 
   app:
     build: .
     depends_on:
       model-pull:
         condition: service_completed_successfully
+      searxng:
+        condition: service_started
     env_file:
       - path: .env
         required: false
     environment:
       - OLLAMA_HOST=http://ollama:11434
-      - LLM_MODEL=${LLM_MODEL:-qwen3:8b}
-    stdin_open: true
-    tty: true
+      - LOCAL_MODEL=${LOCAL_MODEL:-qwen3:8b}
+      - SEARXNG_URL=http://searxng:8080
+    ports:
+      - "8501:8501"
     volumes:
       - ./outputs:/app/outputs
-      - ./decision_log.json:/app/decision_log.json
       - ./data:/app/data
-    command: ["--help"]
+      - ./decision_log.json:/app/decision_log.json
 
 volumes:
   ollama:

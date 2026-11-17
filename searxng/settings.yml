@@ -1,0 +1,10 @@
+# Minimal SearXNG config for local, keyless research. JSON output is needed by app/tools.py.
+use_default_settings: true
+server:
+  secret_key: "change-me-local-only"
+  limiter: false
+  image_proxy: false
+search:
+  formats:
+    - html
+    - json

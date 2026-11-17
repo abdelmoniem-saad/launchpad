@@ -243,3 +243,8 @@ out/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Team planning notes (contain grading notes; kept out of the submission)
+specifications_consulting.md
+.venv/
+.claude/

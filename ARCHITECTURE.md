@@ -2,114 +2,130 @@
 
 ## Overview
 
-launchpad is a sequential pipeline of six agents, one per phase, run by [orchestrator.py](orchestrator.py). Every agent reads the shared context (the idea, founder-given sources, earlier phases' results), calls a local open-weight model through Ollama, and returns JSON with a summary, role-specific details, evidence (each claim with a source URL or `ASSUMPTION`) and a confidence score. A gate after every phase decides go / repeat / pivot / stop. Outbound actions require the founder's approval in code. Every agent action is appended to `decision_log.json`.
+launchpad is a consulting firm in a box. The founder (the client) submits a brief. The firm's agents take it through six phases: Discover, Validate, Build, Commercial setup, Launch, and Operate and learn. Along the way they design the client's company, and its departments review later recommendations. Phases 1 and 2 are live (real web research, claim verification, gates). Phases 3 to 6 produce MOCKED drafts under the same governance. Orchestration is a LangGraph parent graph (`app/orchestrator.py`) with one reusable step subgraph (`app/step_subgraph.py`). Founder checkpoints use `interrupt()`, and state is kept with a SQLite checkpointer.
 
 ```mermaid
-flowchart LR
-    I[Founder idea + sources] --> P1[1 Discover<br/>researcher]
-    P1 --> G1{Gate}
-    G1 -- go --> P2[2 Validate<br/>validator]
-    P2 --> G2{Gate}
-    G2 -- go --> P3[3 Build<br/>builder]
-    P3 --> G3{Gate}
-    G3 -- go --> P4[4 Commercial<br/>commercial]
-    P4 --> G4{Gate}
-    G4 -- go --> A4[/Founder approves offer/]
-    A4 --> P5[5 Sell<br/>seller + payments]
-    P5 --> G5{Gate}
-    G5 -- go --> A5[/Founder approves publish/]
-    A5 --> P6[6 Operate<br/>analyst]
-    G1 & G2 & G3 & G4 & G5 -- repeat --> R[rerun step once with feedback]
-    G1 & G2 & G3 & G4 & G5 -- stop / pivot --> S[End run, recommendation to founder]
+flowchart TD
+    B[Founder brief] --> I[Intake: engagement manager]
+    I --> C{Brief complete?}
+    C -- no --> INT[interrupt: founder interview] --> C
+    C -- yes --> X{Excluded product?}
+    X -- yes --> STOP1[STOP, reason logged]
+    X -- no --> S[Step subgraph]
+    S --> CP[Founder checkpoint: approve / edit / redo / stop]
+    CP --> G{Gate evaluator}
+    G -- go --> N{More steps?}
+    N -- yes --> S
+    N -- no --> CO[Close-out: final report, cost report]
+    G -- repeat --> S
+    G -- pivot --> P[Back to step 1.1 with a pivot note] --> S
+    G -- stop --> CO
+    subgraph Step subgraph
+      direction LR
+      PL[strategy architect: plan] --> R[market researcher: search, fetch, claims]
+      R --> W[department panel / parallel reviews]
+      W --> Q[quant modeler: calculator]
+      Q --> SY[synthesis lead: conclusion first]
+      SY --> CO2[compliance officer: Tier 1 rules]
+      CO2 --> V[verification gate: Tier 2]
+      V --> H[team health check]
+      H --> A[action proposals: pending]
+    end
 ```
 
 ## Phases
 
-### Phase 1: Discover
-- **Agent:** `agents/researcher.py`, prompt `prompts/researcher.md`.
-- **Tools:** fetches founder-given source URLs (plain text, truncated); product-category screen in `guardrails.py`.
-- **Method:** screens out disallowed categories first (STOP), then asks the model for ranked opportunities grounded in the sources.
-- **Output:** `outputs/phase1_step1_opportunities.md`, `outputs/phase1_gate_decision.md`.
+Every step ends in a founder checkpoint and writes `outputs/phase<N>_step<M>_<name>.md`. Every agent action appends one entry to `decision_log.json`.
 
-### Phase 2: Validate
-- **Agent:** `agents/validator.py`. **Method:** target segment, current alternatives, competitor prices, demand signals, risks. The prompt tells the model that stopping early is a good outcome.
-- **Output:** `outputs/phase2_step1_validation.md`, gate decision.
+### Phase 1: Discover (LIVE)
+- **Agents:** strategy architect (lead), market researcher, quant modeler, synthesis lead, compliance officer; department Founder Fit.
+- **Tools:** SearXNG, falling back to `ddgs`, then the Hacker News and Wikipedia APIs. Each job is capped at 3 queries and 5 pages. Page text comes from `trafilatura`, and injected instructions are stripped from it. The calculator does all the maths.
+- **1.1 Idea and industry:** the idea is sharpened into one sentence, and 2-3 candidate niches are scored 1-5 on demand, competition and founder fit. The calculator computes the weighted ranking (0.4 / 0.3 / 0.3) and picks the niche. Output `phase1_step1_idea_and_industry.md`.
+- **1.2 Scoring:** the idea is scored against 2-3 alternatives on demand, competition, founder fit and effort, with weights 0.35 / 0.2 / 0.25 / 0.2. Output `phase1_step2_scoring.md`.
+- **1.3 Market:** market definition, segments, competitors and published prices. Only prices backed by a verified, sourced claim go into the calculator's min / median / max. Output `phase1_step3_market.md`.
+- **1.4 Demand and interviews:** demand signals (labelled signals, never signups) and a Mom Test interview script (past behaviour, no pitching). Then the **evidence gate**. Output `phase1_step4_demand_and_interviews.md`, `phase1_gate_evidence.json`.
 
-### Phase 3: Build
-- **Agent:** `agents/builder.py`. **Method:** smallest sellable digital product: format, at most five core features, out-of-scope list, build steps and the first deliverable's outline.
-- **Output:** `outputs/phase3_step1_product_spec.md`, gate decision.
+### Phase 2: Validate (LIVE)
+- **Departments added:** Marketing (reach) and Finance (budget). Their goals clash on purpose.
+- **2.1 Lean Canvas:** all nine boxes. Output `phase2_step1_lean_canvas.md`.
+- **2.2 Demand test:** an honest landing page draft (the publish action is MOCKED), channels, and expected visitors × conversion % (ASSUMPTION unless sourced). The calculator turns these into a waitlist target, which the **founder locks before any results exist**. Output `phase2_step2_demand_test.md`.
+- **2.3 Collaborations:** communities and partners from the sources, plus outreach drafts in the founder's own name (the send action is MOCKED). Output `phase2_step3_collaborations.md`.
+- **2.4 Demand gate:** the founder enters the real result, and code compares it with the locked target. The system never fills in this number. Output `phase2_step4_demand_results.md`, `phase2_gate_demand.json`.
+- **2.5 Company blueprint:** one role per department. For each: founder does it / automate it / hire later, with the reason and a monthly cost (sourced or ASSUMPTION). The calculator compares the total with the budget; Finance pushes back in code when it is over. Each department gets a 3-5 item backlog, and job posts are MOCKED drafts. Output `phase2_step5_company_blueprint.md`.
 
-### Phase 4: Commercial setup
-- **Agent:** `agents/commercial.py`. **Method:** price based on Phase 2 competitor prices, what is included, refund policy, terms summary.
-- **Approval:** `approve_offer_and_price`; the run ends if the founder rejects.
-- **Output:** `outputs/phase4_step1_offer.md`, gate decision.
+### Phase 3: Build (MOCKED)
+Product department added. MVP spec (at most 5 core features), user docs draft, test plan. Output `phase3_step1_mvp_spec.md`.
 
-### Phase 5: Sell, deliver, get paid
-- **Agent:** `agents/seller.py` drafts landing-page copy, channels and an outreach draft; `guardrails.copy_violations` blocks income promises, testimonials, scarcity and countdowns.
-- **Approval:** `publish_landing_page` (publishing itself is MOCKED). Checkout links and refunds each need their own approval (see Sale to cash).
-- **Output:** `outputs/phase5_step1_landing_page.md`, gate decision, `outputs/payment_test_log.md`.
+### Phase 4: Commercial setup (MOCKED)
+Legal and Sales added. Pricing tiers from the calculator (0.6× / 1× / 1.6× the sourced competitor median), plus draft terms, privacy and refund policy summaries. Core features are never paywalled. No payment code. Output `phase4_step1_pricing_and_policies.md`.
 
-### Phase 6: Operate and learn
-- **Agent:** `agents/analyst.py`. **Method:** reviews the run and recommends metrics, changes and the next experiment.
-- **Output:** `outputs/phase6_step1_learnings.md`, gate decision.
+### Phase 5: Launch (MOCKED)
+Operations added. Store page and launch post drafts (publish actions are MOCKED) and a delivery plan (MOCKED). Output `phase5_step1_launch_drafts.md`.
+
+### Phase 6: Operate and learn (MOCKED)
+Support added. Support reply templates, a metrics plan with a decision threshold per metric, and a persevere-or-pivot memo. Output `phase6_step1_operate_plan.md`.
 
 ## Gates
 
-Implemented in [gates.py](gates.py). Each gate checks the evidence the phase's agent returned:
+`app/gates.py` decides every gate in code. The model's recommendation is shown to the founder but never decides the outcome.
 
-| Check | Rule |
-|---|---|
-| Blocked (disallowed category, copy that breaks limits) | **stop** |
-| No evidence, < 20% of claims sourced, or confidence < 0.3 | **stop** (weak evidence) |
-| >= 50% of claims sourced and confidence >= 0.6 | **go** |
-| Mixed, and the agent suggests a pivot | **pivot** (run ends, suggestion goes to the founder) |
-| Mixed, first attempt | **repeat** (step reruns once with the gate's feedback) |
-| Mixed after the retry | **stop** |
+| Gate | Checks | Outcomes |
+|---|---|---|
+| Intake | Brief complete (otherwise a founder interview); product not excluded | excluded → **stop**, with the reason |
+| Founder checkpoint (every step) | Founder chooses approve / edit / redo with feedback / stop | redo → **repeat** (once per step, then stop); stop → **stop** |
+| Rule guard (every step) | Output blocked after one rewrite | **repeat** once, then **stop** |
+| Evidence gate (after 1.4) | Verified, sourced Phase 1 claims and sourced demand signals | fewer than 3 sourced claims or a sourced ratio under 0.3 → **stop**; no sourced demand signal → **pivot** (once, then stop); otherwise **go** |
+| Demand gate (2.4) | Founder-entered result against the threshold locked in 2.2 | met → **go**; at least 50% of target → **pivot**; below 50% → **stop**; no locked threshold → **stop**; no result yet → **repeat** |
+| Tests pass (Build) | MOCKED in this version | n/a |
 
-Agents may cite only URLs present in the provided sources; any other citation is rewritten to `ASSUMPTION` before the gate runs, so unsourced claims cannot pass as evidence.
+The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
 
 ## Sale to cash
 
-All of this runs against a **MOCKED** provider (`payments.py`); no money moves.
+No payment code exists in this version (**STUBBED**, design only). The cash step is a future integration that the founder would connect to their own payment provider account, behind founder approval:
 
 ```
-founder approves ──> create_checkout ──> order (open, mock://checkout/<id>)
-                                              │
-              payment.succeeded webhook ──────┤  (event id recorded)
-                                              ├─> payment + fee recorded, order paid
-                                              └─> delivery.grant_access (once per order)
-       same event id again ──> "duplicate", ignored (no second delivery)
-founder approves refund ──> refund.succeeded ──> delivery.revoke_access
-reconcile: per order gross - fee - refund = net; sum = expected payout; flags mismatches
+store page (5, MOCKED) -> buyer order (MOCKED) -> payment provider (founder's own account, test mode first)
+   -> webhook "payment succeeded" -> delivery grants access to the download (once per order)
+   -> webhook "refund succeeded"  -> delivery revokes that access
+   -> support (6) -> metrics (6)
+reconciliation: per order, gross - provider fee - refunds = net; the sum of nets = expected payout,
+compared with the provider's payout report; mismatches go to the founder
 ```
 
-- **Payment triggers delivery:** `payments.handle_event` grants access on `payment.succeeded`.
-- **Refund revokes access:** `refunds.request_refund` (founder-approved) emits `refund.succeeded`, which revokes the grant.
-- **Idempotency:** processed event ids are stored, and grants are keyed by order id, so neither a repeated webhook nor a second grant call delivers twice.
-- **Reconciliation:** `reconcile.py` matches orders, payments, fees and refunds, computes the expected payout, and flags paid-without-payment, amount mismatches and refunded-but-still-active access.
+- **Payment triggers delivery:** only a verified provider webhook grants access, never a model.
+- **A refund revokes access:** the founder approves every refund in the action gateway; the provider's refund webhook revokes the grant.
+- **Idempotency:** processed webhook event ids are stored and grants are keyed by order id, so a repeated webhook cannot deliver twice.
+- **Reconciliation:** orders, payments, fees, refunds and payouts are matched per order, and any difference is shown to the founder.
+- The system never holds, moves or refunds money itself, and never stores card details.
 
 ## Data flow
 
-1. Founder supplies the idea and source URLs (CLI).
-2. Orchestrator builds a context dict; each phase adds its summary and details.
-3. Agents send the context to the local model and return JSON; citations are checked against the sources.
-4. Each phase writes `outputs/phase<N>_step1_<name>.md` and `outputs/phase<N>_gate_decision.md`.
-5. Every action, gate and approval is appended to `decision_log.json` (`action`, `sources`, `model`, `cost`, `approved_by`).
-6. Payment state (orders, grants, refunds, processed events) lives in `data/state.json` (untracked).
+1. **Brief** (UI form or `briefs/*.json`) → `EngagementState.brief`.
+2. **Research:** queries go to search, then fetch, then sanitising. The fetched page text is kept in `sources_text`, and claims `{id, text, source_url, quote, type}` go to the claims ledger.
+3. **Work:** department panel JSON is validated with pydantic, then the calculator results go to `quant`.
+4. **Report:** the synthesis report passes through the Tier 1 rule guard (one rewrite, then the output is dropped) and Tier 2 verification, which downgrades unsupported claims to ASSUMPTION.
+5. **Proposals:** `ActionProposal` rows are stored in `data/actions.sqlite` as `pending`. They execute only with a one-time token created by the UI's Approve button, and are written to `outputs/` as MOCKED.
+6. **Checkpoint:** an `interrupt()` returns the founder's decision. The gate decides, and the result goes to `gate_history`, the gate files and the final recommendation.
+7. **Records:** every agent action goes to `decision_log.json` (timestamp, agent, action, sources, model, cost, approved_by). Tokens and seconds go to `outputs/cost_report.json`.
 
 ## Built vs. stubbed
 
 | Part | State |
 |---|---|
-| Six agents, orchestrator, gates, approvals, guardrails, decision log | Built |
-| Delivery, refunds, idempotency, reconciliation logic | Built |
-| Payment provider, fees, payouts | MOCKED |
-| Publishing the landing page | MOCKED |
-| Web search beyond founder-given URLs | STUBBED |
+| Parent graph, step subgraph, founder checkpoints, gates, pivot / repeat / stop | Built |
+| Market research (SearXNG / ddgs / HN / Wikipedia + trafilatura), claims ledger | Built |
+| Calculator (scores, prices, thresholds, budget, pricing tiers) | Built |
+| Tier 1 rule guard, Tier 2 verification, injection stripping, team health check | Built |
+| Action gateway with one-time tokens | Built; execution is **MOCKED** |
+| Department review: fast mode (one panel call) and full mode (parallel `Send` reviews + negotiation) | Built |
+| Phases 3-6 | **MOCKED** drafts |
+| Payments, delivery, refunds, reconciliation | **STUBBED** (design above) |
 
 ## Roadmap
 
-1. Web search with citations (free tier or self-hosted) for Discover and Validate.
-2. Small web UI for founder approvals alongside the CLI.
-3. Adapter for a payment provider in test mode, keeping the same webhook handler.
-4. Agent evals and guardrail trick prompts under `evals/`.
+1. Take phase 3 (Build) to LIVE: generate the first deliverable and run its tests as the "tests pass" gate.
+2. Add a founder-owned checkout in test mode behind the action gateway, following the sale-to-cash design.
+3. Add more region-aware sources (local forums, marketplaces) for MENA briefs.
+4. Grow the eval set of trick prompts and score the department pushback.
+5. Add more departments as files that contributors can drop in.

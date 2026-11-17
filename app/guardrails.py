@@ -1,0 +1,158 @@
+"""Governance checks: excluded products, prompt-injection stripping, Tier 1 rule guard,
+Tier 2 claim verification, and the team health check.
+
+Tier 1 is deterministic (regex + keyword lists, zero tokens). Tier 2 asks the model whether each
+SOURCED claim is supported by the text it cites; unsupported claims are downgraded to ASSUMPTION.
+"""
+from __future__ import annotations
+
+import difflib
+import json
+import re
+
+from app import config
+from app import decision_log as dl
+
+# ------------------------------------------------------------------ excluded products
+
+EXCLUDED = {
+    "physical goods": [r"\bphysical (product|goods)\b", r"\bshipping\b", r"\bdropship", r"\bmerch(andise)?\b",
+                       r"\bhardware device\b", r"\bclothing\b", r"\bfurniture\b"],
+    "financial or crypto products": [r"\bcrypto", r"\bbitcoin\b", r"\btrading (app|bot|signals?)\b",
+                                     r"\binvest(ment|ing) (advice|app|product|signals?)\b", r"\bforex\b",
+                                     r"\bloans?\b", r"\bstock (picks?|tips?)\b", r"\btoken sale\b"],
+    "health advice": [r"\bhealth advice\b", r"\bmedical (advice|diagnos)", r"\bdiagnos(e|is|ing)\b",
+                      r"\bsymptom checker\b", r"\btreatment plans?\b", r"\bdiet(ary)? prescriptions?\b"],
+    "legal advice": [r"\blegal advice\b", r"\blawyer bot\b", r"\blegal counsel\b", r"\bdraft (my |your )?contracts? for clients\b"],
+}
+
+
+def excluded_reason(text: str) -> str | None:
+    low = text.lower()
+    for category, patterns in EXCLUDED.items():
+        for p in patterns:
+            if re.search(p, low):
+                return f"Excluded product category: {category} (matched '{p}'). This system only works on digital products outside these categories."
+    return None
+
+
+# ------------------------------------------------------------------ prompt injection in fetched pages
+
+INJECTION = [r"ignore (all |any |your |the )?(previous |prior |above )?(rules|instructions|guidelines)",
+             r"disregard (all |your |the )?(rules|instructions)", r"you are now\b", r"system prompt",
+             r"new instructions?:", r"act as (an? )?(admin|developer|system)", r"pre-?approved"]
+
+
+def sanitize_source(text: str) -> tuple[str, bool]:
+    """Drop sentences that try to instruct the model. Returns (clean_text, flagged)."""
+    flagged = False
+    kept = []
+    for sent in re.split(r"(?<=[.!?\n])\s+", text):
+        if any(re.search(p, sent.lower()) for p in INJECTION):
+            flagged = True
+            continue
+        kept.append(sent)
+    return " ".join(kept), flagged
+
+
+# ------------------------------------------------------------------ Tier 1 rule guard
+
+RULES = {
+    "income_promise": [r"guarantee[ds]?\b.*\b(income|earn|revenue|profit|results|success)",
+                       r"\b(you|customers?|buyers?|users?)('ll| will) (earn|make)\b",
+                       r"\bearn \$?\d[\d,]*\s*(k\b|a month|per month|/mo|a week|a day)",
+                       r"\bmake \$?\d[\d,]*\s*(k\b|a month|per month|/mo|a week|a day)",
+                       r"\bguaranteed (success|results|income)"],
+    "fake_reviews": [r"\b\d+\s+(five|5)[- ]star reviews?\b", r"\b(five|5)[- ]star reviews?\b",
+                     r"\btestimonials?\b", r"\b(customer|client|user) reviews?:", r"★★★★★"],
+    "fake_urgency": [r"\bonly \d+ (spots?|seats?|left|copies|places)\b", r"\b(offer|sale|deal) ends (in|today|tonight)\b",
+                     r"\bcountdown\b", r"\blast chance\b", r"\bhurry\b", r"\blimited time\b"],
+    "fake_signups": [r"\b\d[\d,]*\+? (people|founders|users|customers) (have )?(already )?(signed up|joined|use)\b",
+                     r"\bjoin \d[\d,]*\+? (others|people|users)\b"],
+    "impersonation": [r"\bas (if (you're|you are|i am|i'm) )?(apple|google|microsoft|amazon|meta|nike)\b",
+                      r"\bwrite (this )?as (if you're |if you are )?the founder\b", r"\bon behalf of the founder\b",
+                      r"\b(i am|i'm) the founder\b", r"\bofficial (apple|google|microsoft|amazon) (partner|product)\b"],
+    "paywall_core": [r"\bcore features? (are |is )?(only )?(available )?(behind|for) (a |the )?(paywall|paid|premium)",
+                     r"\bpaywall (the )?core\b"],
+    "credential_capture": [r"\b(?:\d[ -]?){13,19}\b", r"\bcard number\b", r"\bcvv\b", r"\bpassword\b",
+                           r"\bsave (my|your) card\b"],
+    "invented_internal_metrics": [r"\b(our|the company's|the team's) (sprint velocity|gross margin|margin|headcount|churn|mrr|arr|retention rate|nps)\b",
+                                  r"\bsprint velocity\b", r"\bour (current )?(customers|revenue|users) (are|is|grew)\b"],
+}
+
+
+def rule_violations(text: str) -> list[str]:
+    low = text.lower()
+    hits = []
+    for rule, patterns in RULES.items():
+        for p in patterns:
+            if re.search(p, low):
+                hits.append(rule)
+                break
+    return hits
+
+
+def scrub_card_numbers(text: str) -> str:
+    """Never keep anything that looks like a card number, even in logs."""
+    return re.sub(r"\b(?:\d[ -]?){13,19}\b", "[REMOVED]", text)
+
+
+def label_numeric_claims(claims: list[dict]) -> list[dict]:
+    """Every claim with a number must cite a URL, or it becomes ASSUMPTION."""
+    out = []
+    for c in claims:
+        c = dict(c)
+        if c.get("type") == "SOURCED" and not str(c.get("source_url") or "").startswith("http"):
+            c["type"] = "ASSUMPTION"
+        if re.search(r"\d", c.get("text", "")) and not c.get("source_url"):
+            c["type"] = "ASSUMPTION"
+        out.append(c)
+    return out
+
+
+# ------------------------------------------------------------------ Tier 2 verification
+
+JUDGE_SYSTEM = """You verify claims against source text. For each claim, answer whether the cited
+source text supports it. Reply JSON: {"verdicts": [{"id": str, "supported": true|false, "note": str}]}"""
+
+
+def tier2_verify(claims: list[dict], sources_text: dict, step: str) -> tuple[list[dict], list[str]]:
+    """Quote check (deterministic) + one batched LLM judge call. Unsupported -> ASSUMPTION."""
+    flags = []
+    sourced = [c for c in claims if c.get("type") == "SOURCED"]
+    for c in sourced:
+        text = sources_text.get(c.get("source_url"), "")
+        if not text:
+            c["type"] = "ASSUMPTION"
+            flags.append(f"{c['id']}: cited page was not fetched -> ASSUMPTION")
+    sourced = [c for c in claims if c.get("type") == "SOURCED"]
+    if not sourced:
+        return claims, flags
+    payload = [{"id": c["id"], "claim": c["text"], "quote": c.get("quote", ""),
+                "source_text": sources_text.get(c["source_url"], "")[:1200]} for c in sourced[:12]]
+    reply = config.call_model("governance.verification_gate", JUDGE_SYSTEM, json.dumps(payload))
+    dl.log("governance.verification_gate", f"tier2_verify_claims step {step}",
+           sources=[c["source_url"] for c in sourced], model=config.model_name(), cost=0)
+    verdicts = {v.get("id"): v for v in reply.get("verdicts", []) if isinstance(v, dict)}
+    for c in sourced:
+        v = verdicts.get(c["id"])
+        if reply.get("_error") or (v is not None and v.get("supported") is False):
+            c["type"] = "ASSUMPTION"
+            flags.append(f"{c['id']}: not supported by its source -> ASSUMPTION ({(v or {}).get('note', reply.get('_error', ''))})")
+    return claims, flags
+
+
+# ------------------------------------------------------------------ team health check
+
+def health_check(positions: dict) -> list[str]:
+    """Flags sycophancy (no trade-off raised) and generic repetition across departments."""
+    flags = []
+    texts = [f"{p.get('position', '')} {p.get('pushback', '')}" for p in positions.values()]
+    if positions and not any((p.get("pushback") or p.get("tradeoff") or "").strip() for p in positions.values()):
+        flags.append("sycophancy: no department raised a trade-off or pushback")
+    for i in range(len(texts)):
+        for j in range(i + 1, len(texts)):
+            if texts[i] and difflib.SequenceMatcher(None, texts[i], texts[j]).ratio() > 0.8:
+                flags.append("local minimum: two departments gave near-identical advice")
+                return flags
+    return flags

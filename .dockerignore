@@ -1,7 +1,9 @@
 .git
+.venv
 .env
 data/
 *.pptx
 *.pdf
 __pycache__/
-tests/
+.pytest_cache/
+outputs/
