@@ -158,7 +158,8 @@ def build(checkpointer):
     g = StateGraph(EngagementState)
     g.add_node("intake", intake)
     g.add_node("completeness", completeness)
-    g.add_node("excluded_check", excluded_check)
+    g.add_node("screen", excluded_check)  # refuse excluded products before interviewing the founder
+    g.add_node("excluded_check", excluded_check)  # re-check once the interview answers are in
     g.add_node("collect", collect)
     g.add_node("run_step", step_subgraph.build())
     g.add_node("write", write)
@@ -166,7 +167,9 @@ def build(checkpointer):
     g.add_node("gate", gate)
     g.add_node("close_out", close_out)
     g.add_edge(START, "intake")
-    g.add_edge("intake", "completeness")
+    g.add_edge("intake", "screen")
+    g.add_conditional_edges("screen", lambda s: "close_out" if s.get("status") == "stopped" else "completeness",
+                            ["close_out", "completeness"])
     g.add_conditional_edges("completeness", route_completeness, ["completeness", "excluded_check"])
     g.add_conditional_edges("excluded_check", lambda s: "close_out" if s.get("status") == "stopped" else "collect",
                             ["close_out", "collect"])

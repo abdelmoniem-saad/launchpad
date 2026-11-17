@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "timestamp": "2026-11-17T17:03:48Z",
+    "agent": "firm.engagement_manager",
+    "action": "brief_intake",
+    "sources": [],
+    "model": null,
+    "cost": 0,
+    "approved_by": null
+  },
+  {
+    "timestamp": "2026-11-17T17:03:48Z",
+    "agent": "firm.compliance_officer",
+    "action": "excluded_product_check: EXCLUDED, stop",
+    "sources": [],
+    "model": null,
+    "cost": 0,
+    "approved_by": null,
+    "outcome": "stop"
+  },
+  {
+    "timestamp": "2026-11-17T17:03:48Z",
+    "agent": "firm.engagement_manager",
+    "action": "engagement_close_out: stop",
+    "sources": [],
+    "model": null,
+    "cost": 0,
+    "approved_by": null,
+    "outcome": "stop",
+    "tokens": 0,
+    "seconds": 0.0
+  }
+]

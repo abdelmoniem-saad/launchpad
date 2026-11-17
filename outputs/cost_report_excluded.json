@@ -1,0 +1,11 @@
+{
+  "cost_usd": 0.0,
+  "model": "ollama/qwen3:8b",
+  "calls": 0,
+  "tokens_in": 0,
+  "tokens_out": 0,
+  "tokens_total": 0,
+  "wall_clock_seconds": 0.0,
+  "by_agent": {},
+  "pricing_note": "Local Ollama and Groq free tier are priced at $0."
+}

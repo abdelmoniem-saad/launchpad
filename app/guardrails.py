@@ -31,8 +31,11 @@ def excluded_reason(text: str) -> str | None:
     low = text.lower()
     for category, patterns in EXCLUDED.items():
         for p in patterns:
-            if re.search(p, low):
-                return f"Excluded product category: {category} (matched '{p}'). This system only works on digital products outside these categories."
+            m = re.search(p, low)
+            if m:
+                return (f"Excluded product category: {category} (the brief mentions \"{m.group(0)}\"). "
+                        "This system only works on digital products outside the excluded categories: physical goods, "
+                        "financial or crypto products, health advice and legal advice.")
     return None
 
 

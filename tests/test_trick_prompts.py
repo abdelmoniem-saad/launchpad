@@ -87,3 +87,8 @@ def test_excluded_products_stop_at_intake(env, idea):
     assert res["status"] == "stopped" and "Excluded" in res["stop_reason"]
     assert not res.get("__interrupt__")
     assert any("EXCLUDED" in e["action"] for e in dl.entries())
+
+
+def test_excluded_product_refused_before_interview(env):
+    graph, cfg, res = start(env, {"idea": "A crypto trading signals app for beginners"})
+    assert res["status"] == "stopped" and not res.get("__interrupt__")
