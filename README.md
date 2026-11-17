@@ -12,7 +12,7 @@ docker compose up
 
 Then open **http://localhost:8501**, fill in the brief and start the engagement. The first start downloads the model (`qwen3:8b`, about 5 GB), so it takes a while. Plan for about 8 GB of free RAM and 10 GB of disk.
 
-**How long a run takes.** The local model is slow without a GPU: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour. For a fast run, put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)); any Groq error falls back to the local model.
+**How long a run takes.** The local model is slow without a GPU: on a CPU-only laptop we measured 2-9 minutes per step (`qwen2.5:3b`, research steps are the slowest), so a full engagement can take over an hour. With a GPU it is minutes: the committed demo run took about 4 minutes with `gpt-oss:20b` on a 16 GB GPU. For a fast run without a GPU, put a free Groq key in `.env` (`GROQ_API_KEY=...`, see [.env.example](.env.example)); any Groq error falls back to the local model.
 
 **Already running Ollama on your machine?** Reuse it instead of the bundled container (pull the model there first):
 
@@ -45,12 +45,12 @@ There is also a command-line founder console, which runs the same graph: `python
 | 2 Validate | 2.4 Founder enters the real result; demand gate compares it in code | **Working** |
 | 2 Validate | 2.5 Company blueprint: roles, founder / automate / hire later, cost against budget | **Working** (job posts are **MOCKED**) |
 | 3 Build | MVP spec, user docs draft, test plan | **MOCKED** |
-| 4 Commercial setup | 4.1 Pricing: competitor prices researched and verified; tiers computed by the calculator only from prices a verified source quote contains. No payment code of any kind | **Working** |
+| 4 Commercial setup | 4.1 Pricing: competitor prices researched and verified; tiers computed by the calculator only from prices a verified source quote contains | **Working** |
 | 4 Commercial setup | 4.2 Draft terms, privacy and refund policies (not legal advice) | **MOCKED** |
 | 5 Launch | Store page and launch post drafts; automatic delivery to buyers | **MOCKED** |
 | 6 Operate and learn | Support replies, metrics plan, persevere-or-pivot memo | **MOCKED** |
 | Governance | Founder checkpoint after every step; action gateway with one-time tokens; Tier 1 rule guard; Tier 2 claim check; team health check; decision log; cost report | **Working** |
-| Payments | Checkout, delivery after payment, refunds, reconciliation | **STUBBED** (design only, in [ARCHITECTURE.md](ARCHITECTURE.md#sale-to-cash)) |
+| Payments | Founder opens the store; checkout; a signed webhook triggers delivery; duplicate webhooks ignored; founder-approved refund revokes access; reconciliation against the payout report. Run with `python -m app.payment_test`, log in [outputs/payment_test_log.md](outputs/payment_test_log.md) | **Working** against a **MOCKED** payment provider (no real money, no card data) |
 
 **MOCKED** means drafts only: whatever the founder approves is written to `outputs/` with a MOCKED label. Nothing is actually published, sent, charged, signed or contacted.
 
@@ -60,14 +60,14 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 
 ## Models and free resources
 
-- **Default, keyless:** `qwen3:8b` (Apache-2.0, open weights) via Ollama. Set `LOCAL_MODEL` to use `qwen3:4b` on small laptops or `gpt-oss:20b` (Apache-2.0) on bigger machines.
+- **Default, keyless:** `qwen3:8b` (Apache-2.0, open weights) via Ollama. Set `LOCAL_MODEL` to use `qwen3:4b` on small laptops or `gpt-oss:20b` (Apache-2.0) on bigger machines. The committed demo run in `outputs/` used `LOCAL_MODEL=gpt-oss:20b` on a 16 GB GPU (gpt-oss runs with low reasoning effort).
 - **Optional fast mode:** the Groq free tier with `openai/gpt-oss-120b` (open weights), only when `GROQ_API_KEY` is set. Calls are rate-limited, and any error falls back to the local model.
 - **Web research, keyless:** self-hosted SearXNG, with the `ddgs` package, the Hacker News Algolia API and the Wikipedia API as fallbacks; page text is extracted with `trafilatura`.
 - No paid API, account or card is needed.
 
 ## Cost per run
 
-**About $0.00 per run** (local model). Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed run (an excluded crypto brief, refused at intake) has its figures in [outputs/cost_report_excluded.json](outputs/cost_report_excluded.json).
+**About $0.00 per run** (local model). The committed demo run (strong brief, phases 1-2 with one pivot) made 43 model calls and used about 110k tokens with `gpt-oss:20b`, and took about 4 minutes end to end on a 16 GB GPU (2.2 minutes of model time; the rest is web research). Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
 
 ## Demo video
 
@@ -78,7 +78,7 @@ To be added (3 minutes at most).
 - Promise income or guarantee success.
 - Generate fake reviews, testimonials, signups or urgency (countdowns, "only 3 left").
 - Impersonate the founder, customers or other brands.
-- Hold, move or refund money. There is no payment code of any kind.
+- Hold, move or refund money by itself. Payments run only against a MOCKED provider, and every refund needs the founder's approval.
 - Store passwords or card details; anything that looks like a card number is removed.
 - Publish, send, spend, sign, hire or contact anyone without the founder's approval, and even then only as a MOCKED record.
 - Hide core features behind a paywall.
@@ -89,5 +89,5 @@ To be added (3 minutes at most).
 
 - **Open license:** Apache-2.0. Anyone can run, fork and extend it.
 - **Extend with a file:** a new department is one prompt file `prompts/dept_<name>.md` plus one line in `app/phases.py`.
-- **Roadmap:** take the remaining MOCKED steps (3.1, 4.2, 5.1, 6.1) to LIVE one at a time, add a real checkout behind founder approval (designed in ARCHITECTURE.md), more region-aware research sources, and more evals of the guardrails.
+- **Roadmap:** take the remaining MOCKED steps (3.1, 4.2, 5.1, 6.1) to LIVE one at a time, connect the founder's own payment provider in test mode in place of the MOCKED one, more region-aware research sources, and more evals of the guardrails.
 - **Maintainers and community:** the founding team reviews issues and pull requests. Costs stay at $0 because everything runs locally.

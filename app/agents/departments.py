@@ -26,6 +26,15 @@ def _context(step: dict, state: dict) -> str:
             + (f"Compliance notes to fix: {state['compliance_note']}\n" if state.get("compliance_note") else ""))
 
 
+_EMPTY = {"", "none", "none.", "n/a", "na", "null", "-"}
+
+
+def _text(v) -> str:
+    """A placeholder such as "None" is not a position or a pushback."""
+    s = str(v or "").strip()
+    return "" if s.lower() in _EMPTY else s
+
+
 def _dept_key(name) -> str:
     key = str(name or "").strip().lower().replace(" ", "_").replace("-", "_")
     return key.removeprefix("dept.").removeprefix("dept_")
@@ -53,8 +62,8 @@ def panel(step: dict, state: dict, roster: list[str]) -> dict:
     positions = {}
     for d in roster:
         p = answers.get(d) or {}
-        positions[d] = {"department": d, "position": str(p.get("position", "")), "pushback": str(p.get("pushback", "")),
-                        "tradeoff": str(p.get("tradeoff", ""))}
+        positions[d] = {"department": d, "position": _text(p.get("position")), "pushback": _text(p.get("pushback")),
+                        "tradeoff": _text(p.get("tradeoff"))}
     dl.log("firm.strategy_architect", f"draft_work_with_department_panel step {step['id']} ({', '.join(roster)})"
            + (f"; error {reply['_error']}" if reply.get("_error") else ""), model=config.model_name(), cost=0)
     for d, p in positions.items():
@@ -80,5 +89,5 @@ def review(dept: str, step: dict, state: dict, others: dict | None = None) -> di
         user += f"\nOther departments said: {json.dumps(others, ensure_ascii=False)[:2000]}"
     reply = config.call_model(f"dept.{dept}", system, user)
     dl.log(f"dept.{dept}", f"{'negotiate' if others else 'review'} step {step['id']}", model=config.model_name(), cost=0)
-    return {"department": dept, "position": str(reply.get("position", "")), "pushback": str(reply.get("pushback", "")),
-            "tradeoff": str(reply.get("tradeoff", ""))}
+    return {"department": dept, "position": _text(reply.get("position")), "pushback": _text(reply.get("pushback")),
+            "tradeoff": _text(reply.get("tradeoff"))}

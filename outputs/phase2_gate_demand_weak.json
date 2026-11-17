@@ -1,0 +1,18 @@
+{
+  "step": "2.4",
+  "gate": "demand",
+  "outcome": "stop",
+  "reasons": [
+    "no results entered yet: run the demand test, then enter the real number",
+    "paused: run the demand test, then start again with the real result"
+  ],
+  "comparison": null,
+  "thresholds": {
+    "metric": "waitlist signups",
+    "target": 0,
+    "days": 7,
+    "basis": "200 visitors x 0.06% conversion (ASSUMPTION unless sourced). Assumption based on median landing page conversion rate (6.6%) from C2.2-1 and typical cold traffic performance.",
+    "locked": true
+  },
+  "founder_decision": "approve"
+}

@@ -61,8 +61,12 @@ def model_name() -> str:
 def build_llm():
     from langchain_ollama import ChatOllama
 
-    local = ChatOllama(model=LOCAL_MODEL, base_url=OLLAMA_HOST, format="json", reasoning=False,
-                       temperature=0.2, num_ctx=8192, num_predict=1500)
+    # gpt-oss cannot switch reasoning off: with reasoning=False it still reasons, hidden, until it hits
+    # num_predict and returns an empty reply. Low effort plus room for the reasoning tokens fixes that.
+    gpt_oss = LOCAL_MODEL.startswith("gpt-oss")
+    local = ChatOllama(model=LOCAL_MODEL, base_url=OLLAMA_HOST, format="json",
+                       reasoning="low" if gpt_oss else False,
+                       temperature=0.2, num_ctx=8192, num_predict=4096 if gpt_oss else 1500)
     if not os.environ.get("GROQ_API_KEY"):
         return local
     from langchain_core.rate_limiters import InMemoryRateLimiter

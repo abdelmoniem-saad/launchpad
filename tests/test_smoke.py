@@ -94,3 +94,11 @@ def test_clarifying_questions_asked_once(env):
     assert fields["product_format"]["options"] and fields["success_goal"]["options"] is None
     res = graph.invoke(Command(resume={"product_format": "template pack"}), cfg)  # skipping the others is allowed
     assert res["__interrupt__"][0].value["type"] == "checkpoint"
+
+
+def test_department_keys_and_placeholders_are_normalised():
+    """Models may key departments as "dept.x" or "Founder Fit", or say "None" for no pushback."""
+    from app.agents.departments import _by_department, _text
+    got = _by_department({"dept.founder_fit": {"pushback": "too many hours"}, "Marketing": {"pushback": "None"}})
+    assert got["founder_fit"]["pushback"] == "too many hours" and _text(got["marketing"]["pushback"]) == ""
+    assert _by_department([{"department": "dept.finance", "pushback": "over budget"}])["finance"]["pushback"] == "over budget"
