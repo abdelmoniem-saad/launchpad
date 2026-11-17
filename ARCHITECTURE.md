@@ -2,7 +2,7 @@
 
 ## Overview
 
-launchpad is a consulting firm in a box. The founder (the client) submits a brief. The firm's agents take it through six phases: Discover, Validate, Build, Commercial setup, Launch, and Operate and learn. Along the way they design the client's company, and its departments review later recommendations. Phases 1 and 2 are live (real web research, claim verification, gates). Phase 3 is live: the firm builds the MVP and a tests-pass gate checks it in code. Step 4.1 pricing is live. The rest of phases 4 to 6 produces MOCKED drafts under the same governance. Orchestration is a LangGraph parent graph (`app/orchestrator.py`) with one reusable step subgraph (`app/step_subgraph.py`). Founder checkpoints use `interrupt()`, and state is kept with a SQLite checkpointer.
+launchpad is a consulting firm in a box. The founder (the client) submits a brief. The firm's agents take it through six phases: Discover, Validate, Build, Commercial setup, Launch, and Operate and learn. Along the way they design the client's company, and its departments review later recommendations. Phases 1 and 2 are live (real web research, claim verification, gates). Phases 3 to 6 produce MOCKED drafts under the same governance. Orchestration is a LangGraph parent graph (`app/orchestrator.py`) with one reusable step subgraph (`app/step_subgraph.py`). Founder checkpoints use `interrupt()`, and state is kept with a SQLite checkpointer.
 
 ```mermaid
 flowchart TD
@@ -53,8 +53,8 @@ Every step ends in a founder checkpoint and writes `outputs/phase<N>_step<M>_<na
 - **2.4 Demand gate:** the founder enters the real result, and code compares it with the locked target. The system never fills in this number. Output `phase2_step4_demand_results.md`, `phase2_gate_demand.json`.
 - **2.5 Company blueprint:** one role per department. For each: founder does it / automate it / hire later, with the reason and a monthly cost (sourced or ASSUMPTION). The calculator compares the total with the budget; Finance pushes back in code when it is over. Each department gets a 3-5 item backlog, and job posts are MOCKED drafts. Output `phase2_step5_company_blueprint.md`.
 
-### Phase 3: Build (LIVE)
-Product department added. **3.1 Build the MVP:** the firm writes the product itself in text form, exactly what a buyer would receive (for a template pack, every template with its sections, fields and example rows; for a guide, the full lessons; for a software tool, its screens, data fields and rules), with at most 5 core features, user docs and a test plan. `app/build_tests.py` then runs eight named checks in code, with no model: a title; 1 to 5 features; every feature with real content (at least 60 words); user docs of at least 80 words that name every feature; a test-plan check for every feature; no placeholder text (TODO, lorem ipsum, "insert here"); and the Tier 1 rule guard over the whole product (no income promises, reviews, urgency, impersonation or card data). These are the **tests-pass gate**. Outputs: `phase3_step1_mvp_build.md` (the step report), `phase3_step1_mvp_product.md` (the product, with its test table) and `phase3_gate_tests.md`. The product is built and tested, never published, listed or sold: that needs the founder's approval in phase 5, which is MOCKED.
+### Phase 3: Build (MOCKED)
+Product department added. MVP spec (at most 5 core features), user docs draft, test plan. Output `phase3_step1_mvp_spec.md`.
 
 ### Phase 4: Commercial setup (4.1 LIVE, 4.2 MOCKED)
 Legal and Sales added.
@@ -74,14 +74,14 @@ Support added. Support reply templates, a metrics plan with a decision threshold
 
 | Gate | Checks | Outcomes |
 |---|---|---|
-| Intake | Brief complete (otherwise a founder interview); product not excluded; the brief does not ask for anything the firm refuses (fake reviews, testimonials or sign-ups, urgency, income promises, impersonation, storing card numbers or passwords, moving money) | excluded or refused → **stop** before any research, with the reason |
-| Founder checkpoint (every step) | Founder chooses approve / edit / redo with feedback / stop. Feedback or an edit that asks for something refused is logged and never passed to the firm | redo → **repeat** (once per step, then stop); stop → **stop** |
+| Intake | Brief complete (otherwise a founder interview); product not excluded | excluded → **stop**, with the reason |
+| Founder checkpoint (every step) | Founder chooses approve / edit / redo with feedback / stop | redo → **repeat** (once per step, then stop); stop → **stop** |
 | Rule guard (every step) | Output blocked after one rewrite | **repeat** once, then **stop** |
-| Evidence gate (after 1.4) | Verified, sourced Phase 1 claims and sourced demand signals | fewer than 3 sourced claims or a sourced ratio under 0.3 → **stop**; no sourced demand signal → **pivot** (once, then stop); sourced signals that only show the customer's problems, none showing demand for this product → **stop ("don't launch this")**; demand for the product found on fewer than 2 independent sites → **pivot** ("thin evidence", once, then stop); the product demand check failed (model error) → signals are never counted, **repeat** once, then **stop**; otherwise **go** |
+| Evidence gate (after 1.4) | Verified, sourced Phase 1 claims and sourced demand signals | fewer than 3 sourced claims or a sourced ratio under 0.3 → **stop**; no sourced demand signal → **pivot** (once, then stop); sourced signals that only show the customer's problems, none showing demand for this product → **stop ("don't launch this")**; otherwise **go** |
 | Demand gate (2.4) | Founder-entered result against the threshold locked in 2.2 | met → **go**; at least 50% of target → **pivot**; below 50% → **stop**; no locked threshold → **stop**; no result yet → **repeat** |
-| Tests pass (Build, 3.1) | The eight build tests in `app/build_tests.py` over the MVP the firm built | all pass → **go**; any fail → **repeat** once, with the failing tests given to the redo as feedback; still failing → **stop** (a broken MVP is never shipped) |
+| Tests pass (Build) | MOCKED in this version | n/a |
 
-The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, when the sources show the customer's problems but no one wanting this product (a product demand check over the step 1.4 signals), when that demand rests on a single site, or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
+The system **recommends STOP on weak evidence**: when research cannot source claims, when verification downgrades them to ASSUMPTION, when the sources show the customer's problems but no one wanting this product (a product demand check over the step 1.4 signals), or when the demand test misses its locked target by more than half. A failed gate is reported as failed. A pivot sends the engagement back to step 1.1 with the reasons and the niche to avoid; only one pivot is allowed before STOP.
 
 The system never fills in the demand-test result. For a demonstration before any real test has run, the CLI accepts `--demo-result N`: the gate still compares it in code, but the result is recorded as **DEMO INPUT** (hypothetical, demand not validated) in the gate reasons, in every step file from 2.4 on and in `decision_log.json` (`demo_input: true`). The committed `*_demo` run uses this to show phases 3-6; the other runs leave 2.4 blank and stop at the demand gate.
 
@@ -129,14 +129,12 @@ provider's payout report; access vs order status; mismatches go to the founder
 | Action gateway with one-time tokens | Built; execution is **MOCKED** |
 | Department review: fast mode (one panel call) and full mode (parallel `Send` reviews + negotiation) | Built |
 | Step 4.1 pricing (research, verification, calculator tiers) | Built |
-| Step 3.1 MVP build and its tests-pass gate (`app/build_tests.py`) | Built (the product is written and tested; never published or sold) |
-| Intake and checkpoint refusals of forbidden requests (`guardrails.refused_request`) | Built |
-| Steps 4.2, 5.1, 6.1 | **MOCKED** drafts |
+| Steps 3.1, 4.2, 5.1, 6.1 | **MOCKED** drafts |
 | Payments, webhooks, delivery, refunds, reconciliation (`app/payments.py`, `webhooks.py`, `delivery.py`, `refunds.py`, `reconcile.py`) | Built against a **MOCKED** payment provider; no real or sandbox provider is used |
 
 ## Roadmap
 
-1. Export the step 3.1 MVP into real files (Notion/Markdown/CSV templates) and add format-specific build tests.
+1. Take phase 3 (Build) to LIVE: generate the first deliverable and run its tests as the "tests pass" gate.
 2. After the hackathon, the founder's own payment provider could replace the MOCKED one behind the same action gateway and webhook handler. This prototype makes no payments of any kind, not even sandbox ones.
 3. Add more region-aware sources (local forums, marketplaces) for MENA briefs.
 4. Grow the eval set of trick prompts and score the department pushback.

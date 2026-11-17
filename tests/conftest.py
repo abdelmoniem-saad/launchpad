@@ -16,20 +16,7 @@ PAGE = ("Freelance video editors on the forum say client revisions are hard to t
         "Many editors ask for a simple tracker template. EditorTrack costs $12 per month. "
         "ClipBoard Pro costs $20 per month. A community of 40,000 editors meets weekly. ") * 3
 URL = "https://example.org/editors-forum"
-URL2 = "https://example.net/pricing-page"  # a second, independent site
-
-
-_BODY = ("Each row is one client project with the client name, the delivery date, the current cut number and the status. "
-         "A revision entry records who asked, what they asked for, the timestamp in the video, and whether it is done. ") * 3
-GOOD_MVP = {
-    "product_title": "Revision Tracker for Freelance Video Editors",
-    "core_features": [{"name": "Project board", "content": _BODY}, {"name": "Revision log", "content": _BODY}],
-    "user_docs": ("Start with the Project board: add one row per client project and set its status. Open the Revision log "
-                  "for that project and add one entry per change request, then tick it when the change is done. ") * 3,
-    "out_of_scope": ["invoicing"],
-    "test_plan": [{"feature": "Project board", "check": "a new project row shows its status"},
-                  {"feature": "Revision log", "check": "a ticked revision shows as done"}],
-}
+URL2 = "https://example.org/pricing-page"
 
 
 def work_for(step_id: str, overrides: dict) -> dict:
@@ -44,8 +31,7 @@ def work_for(step_id: str, overrides: dict) -> dict:
         "2.2": {"landing_page_markdown": "# Revision tracker\nJoin the waitlist.", "channels": ["forum"], "test_days": 14,
                 "expected_visitors": 1000, "expected_conversion_pct": 10, "basis": "ASSUMPTION"},
         "2.3": {"communities": [], "partners": [], "outreach_drafts": [{"to": "forum mods", "channel": "email", "message": "Hello"}]},
-        "3.1": GOOD_MVP,
-        "2.5": {"roles":[{"department": "finance", "role": "bookkeeping", "choice": "automate", "reason": "cheap", "monthly_cost_usd": 30}],
+        "2.5": {"roles": [{"department": "finance", "role": "bookkeeping", "choice": "automate", "reason": "cheap", "monthly_cost_usd": 30}],
                 "backlog": {"finance": ["set up tool"]}, "job_post_drafts": []},
     }
     return overrides.get(step_id, base.get(step_id, {"draft": f"MOCKED draft {step_id}"}))
@@ -59,12 +45,10 @@ class FakeChat:
         self.synthesis_extra = synthesis_extra
         self.product_demand = product_demand  # verdict of the evidence gate's product demand check
         self.calls = []
-        self.calls_full = []  # full user messages, to check what the model was told
 
     def invoke(self, messages):
         system, user = messages[0].content, messages[1].content
         self.calls.append(system[:40])
-        self.calls_full.append(user)
         step = (re.search(r"Step (\d\.\d)", user) or [None, "1.1"])[1]
         if system.startswith("# firm.market_researcher"):
             urls = re.findall(r'"url": "([^"]+)"', user)
