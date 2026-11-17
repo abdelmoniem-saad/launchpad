@@ -19,7 +19,7 @@ def scan(work: dict, report: dict, positions: dict) -> list[str]:
 
 
 def rewrite(step: dict, work: dict, violations: list[str]) -> dict:
-    system = (config.load_prompt("firm/compliance_officer.md") +
+    system = (config.load_prompt("compliance_officer.md") +
               f"\n\nRewrite the work so it breaks none of these rules: {violations}. Keep the same JSON keys. "
               'Reply JSON: {"work": {...}}')
     reply = config.call_model(AGENT, system, json.dumps(work, ensure_ascii=False)[:4000])

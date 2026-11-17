@@ -77,6 +77,6 @@ To be added (3 minutes at most).
 ## How the project stays alive after the hackathon
 
 - **Open license:** Apache-2.0. Anyone can run, fork and extend it.
-- **Extend with a file:** a new department is one prompt file in `prompts/departments/` plus one line in `app/phases.py`.
+- **Extend with a file:** a new department is one prompt file `prompts/dept_<name>.md` plus one line in `app/phases.py`.
 - **Roadmap:** take phases 3-6 from MOCKED to LIVE one at a time, add a real checkout behind founder approval (designed in ARCHITECTURE.md), more region-aware research sources, and more evals of the guardrails.
 - **Maintainers and community:** the founding team reviews issues and pull requests. Costs stay at $0 because everything runs locally.

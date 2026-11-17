@@ -16,9 +16,15 @@ def _p(state, name: str) -> Path:
     return d / name
 
 
+def sfx(state) -> str:
+    """Optional run label, so a second demo run (e.g. the weak brief) sits beside the first in outputs/."""
+    label = (state.get("run_label") or "").strip().lower()
+    return f"_{label}" if label else ""
+
+
 def step_file(state, step) -> Path:
     phase, num = step["id"].split(".")
-    return _p(state, f"phase{phase}_step{num}_{step['name']}.md")
+    return _p(state, f"phase{phase}_step{num}_{step['name']}{sfx(state)}.md")
 
 
 def _render_value(v, depth=0) -> list[str]:
@@ -102,9 +108,9 @@ def write_gate(state, step, name: str, gate: dict) -> None:
     data = {"step": step["id"], "gate": name, "outcome": gate["outcome"], "reasons": gate["reasons"],
             "comparison": gate.get("comparison"), "thresholds": state.get("thresholds"),
             "founder_decision": state.get("founder_decision")}
-    _p(state, f"phase{step['phase']}_gate_{name}.json").write_text(json.dumps(data, indent=2), "utf-8")
+    _p(state, f"phase{step['phase']}_gate_{name}{sfx(state)}.json").write_text(json.dumps(data, indent=2), "utf-8")
     md = [f"# Phase {step['phase']} gate: {name}", "", f"**Outcome: {gate['outcome'].upper()}**", ""] + [f"- {r}" for r in gate["reasons"]]
-    _p(state, f"phase{step['phase']}_gate_{name}.md").write_text("\n".join(md) + "\n", "utf-8")
+    _p(state, f"phase{step['phase']}_gate_{name}{sfx(state)}.md").write_text("\n".join(md) + "\n", "utf-8")
 
 
 def write_final(state, phase: int, outcome: str, reasons: list[str]) -> None:
@@ -112,10 +118,10 @@ def write_final(state, phase: int, outcome: str, reasons: list[str]) -> None:
              *[f"- {r}" for r in reasons], "", "## Gate history", ""]
     lines += [f"- step {g['step']}: {g['outcome']} ({'; '.join(g['reasons'])})" for g in state.get("gate_history", [])]
     lines += ["", "This system never promises income or success. Every claim above is sourced or labelled ASSUMPTION."]
-    _p(state, f"phase{phase}_gate_final_recommendation.md").write_text("\n".join(lines) + "\n", "utf-8")
+    _p(state, f"phase{phase}_gate_final_recommendation{sfx(state)}.md").write_text("\n".join(lines) + "\n", "utf-8")
 
 
 def write_cost(state) -> dict:
     rep = config.COST.report()
-    _p(state, "cost_report.json").write_text(json.dumps(rep, indent=2), "utf-8")
+    _p(state, f"cost_report{sfx(state)}.json").write_text(json.dumps(rep, indent=2), "utf-8")
     return rep

@@ -60,7 +60,7 @@ def extract_claims(step: dict, state: dict, pages: dict) -> list[dict]:
     if not pages:
         dl.log(AGENT, f"extract_claims step {step['id']}: no pages fetched, no sourced claims", model=None)
         return []
-    system = config.load_prompt("firm/market_researcher.md")
+    system = config.load_prompt("market_researcher.md")
     sources = [{"url": u, "text": t[:2000]} for u, t in pages.items()]
     user = (f"Step {step['id']}: {step['title']}\nTask: {step['task']}\n"
             f"Brief: {json.dumps(state['brief'], ensure_ascii=False)}\n\n"

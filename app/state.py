@@ -14,11 +14,27 @@ class Brief(BaseModel):
     hours_per_week: Optional[float] = None
     skills: str = ""
     values: str = ""
+    product_format: str = ""
+    existing_audience: str = ""
+    success_goal: str = ""
 
     REQUIRED: ClassVar[tuple] = ("idea", "target_customer", "budget_usd", "hours_per_week", "skills")
+    # Follow-up questions asked once at intake, so the firm understands the case before researching it.
+    CLARIFIERS: ClassVar[dict] = {
+        "product_format": {"question": "What form should the product take?",
+                           "options": ["template pack", "online course", "software tool / web app", "ebook or guide",
+                                       "not sure yet"]},
+        "existing_audience": {"question": "How many people can you reach today (followers, list, community)?",
+                              "options": ["none yet", "under 500", "500 to 5,000", "over 5,000"]},
+        "success_goal": {"question": "What would make the next 90 days worth it to you? (a learning goal, not an income target)",
+                         "options": None},
+    }
 
     def missing(self) -> list[str]:
         return [f for f in self.REQUIRED if getattr(self, f) in (None, "", 0)]
+
+    def unclarified(self) -> list[str]:
+        return [f for f in self.CLARIFIERS if not getattr(self, f)]
 
 
 class Claim(BaseModel):
@@ -74,6 +90,8 @@ def merge_dict(old: dict | None, new: dict | None) -> dict:
 class EngagementState(TypedDict, total=False):
     brief: dict
     run_dir: str
+    run_label: str
+    clarified: bool
     status: str  # running | stopped | completed
     stop_reason: str
     current_phase: int

@@ -102,7 +102,13 @@ with tab_step:
         if p["type"] == "brief_interview":
             st.header("A few questions before we start")
             with st.form("interview"):
-                answers = {f: st.text_input(f) for f in p["missing"]}
+                answers = {}
+                for q in p["questions"]:
+                    label = q["question"] + ("" if q["required"] else " (optional)")
+                    if q.get("options"):
+                        answers[q["field"]] = st.radio(label, q["options"], index=None, key="q_" + q["field"])
+                    else:
+                        answers[q["field"]] = st.text_input(label, key="q_" + q["field"])
                 if st.form_submit_button("Continue"):
                     run(Command(resume=answers))
         elif p["type"] == "enter_results":

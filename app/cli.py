@@ -64,9 +64,21 @@ def answer(payload: dict, run_dir: str) -> dict:
     kind = payload.get("type")
     if kind == "brief_interview":
         print("\n" + payload["question"])
-        return {f: ask(f"  {f}: ") for f in payload["missing"]}
+        answers = {}
+        for q in payload["questions"]:
+            print(f"\n{q['question']}" + ("" if q["required"] else " (optional, Enter to skip)"))
+            if q.get("options"):
+                for i, opt in enumerate(q["options"], 1):
+                    print(f"  {i}. {opt}")
+                a = ask("  choose a number: ")
+                answers[q["field"]] = q["options"][int(a) - 1] if a.isdigit() and 1 <= int(a) <= len(q["options"]) else a
+            else:
+                answers[q["field"]] = ask("  > ")
+        return answers
     if kind == "enter_results":
         print("\n" + payload["question"])
+        print("  This is how many real people joined the waitlist when you ran the demand test from step 2.2.\n"
+              "  If you have not run that test yet, just press Enter: the gate will honestly record 'no results yet'.")
         return {"actual": ask("  actual: ")}
     show_checkpoint(payload)
     handle_actions(run_dir)
@@ -90,6 +102,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--brief", required=True)
     ap.add_argument("--out", default=os.environ.get("OUTPUT_DIR", "outputs"))
+    ap.add_argument("--label", default="", help="suffix for output file names, e.g. 'weak' for a second demo run")
     ap.add_argument("--fresh-log", action="store_true")
     ap.add_argument("--full", action="store_true", help="full mode: parallel department reviews + negotiation")
     args = ap.parse_args(argv)
@@ -98,7 +111,7 @@ def main(argv=None) -> int:
     brief = json.loads(Path(args.brief).read_text("utf-8"))
     graph = orchestrator.build(InMemorySaver())
     cfg = {"configurable": {"thread_id": uuid.uuid4().hex}, "recursion_limit": 400}
-    result = graph.invoke({"brief": brief, "run_dir": args.out, "fast_mode": not args.full}, cfg)
+    result = graph.invoke({"brief": brief, "run_dir": args.out, "run_label": args.label, "fast_mode": not args.full}, cfg)
     while result.get("__interrupt__"):
         payload = result["__interrupt__"][0].value
         result = graph.invoke(Command(resume=answer(payload, args.out)), cfg)

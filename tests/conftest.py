@@ -88,4 +88,5 @@ def env(tmp_path, monkeypatch):
 
 BRIEF = {"idea": "Notion templates that track client revisions for freelance video editors",
          "target_customer": "freelance video editors", "market": "global, English-speaking",
-         "budget_usd": 200, "hours_per_week": 10, "skills": "video editing, Notion", "values": "honest, simple"}
+         "budget_usd": 200, "hours_per_week": 10, "skills": "video editing, Notion", "values": "honest, simple",
+         "product_format": "template pack", "existing_audience": "under 500", "success_goal": "learn if editors want this"}

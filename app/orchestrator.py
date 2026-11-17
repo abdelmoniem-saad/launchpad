@@ -29,14 +29,16 @@ def intake(state: EngagementState) -> dict:
 
 
 def completeness(state: EngagementState) -> dict:
-    missing = em.missing_fields(state["brief"])
-    if not missing:
+    questions = em.interview_questions(state["brief"], state.get("clarified", False))
+    if not questions:
         dl.log("firm.engagement_manager", "completeness_check: brief complete")
-        return {}
-    answers = interrupt({"type": "brief_interview", "missing": missing,
-                         "question": f"Before we start, please tell us: {', '.join(missing)}"})
-    dl.log("firm.engagement_manager", f"founder_interview: answered {sorted(answers)}", approved_by="founder")
-    return {"brief": {**state["brief"], **{k: v for k, v in answers.items() if v not in (None, '')}}}
+        return {"clarified": True}
+    answers = interrupt({"type": "brief_interview", "questions": questions,
+                         "missing": [q["field"] for q in questions if q["required"]],
+                         "question": "Before we start, a few questions so we understand your case."})
+    answers = {k: v for k, v in (answers or {}).items() if v not in (None, "")}
+    dl.log("firm.engagement_manager", f"founder_interview: answered {sorted(answers)}")
+    return {"brief": {**state["brief"], **answers}, "clarified": True}
 
 
 def route_completeness(state) -> str:

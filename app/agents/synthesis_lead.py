@@ -17,7 +17,7 @@ def write(step: dict, state: dict, note: str = "") -> dict:
             f"Calculator results: {json.dumps(state.get('quant', {}), ensure_ascii=False)[:1500]}\n"
             f"Department positions: {json.dumps(state.get('drafts', {}), ensure_ascii=False)[:2500]}\n"
             f"Claims: {json.dumps(claims, ensure_ascii=False)}\n" + (f"Fix these problems: {note}\n" if note else ""))
-    reply = config.call_model(AGENT, config.load_prompt("firm/synthesis_lead.md"), user)
+    reply = config.call_model(AGENT, config.load_prompt("synthesis_lead.md"), user)
     try:
         report = SynthesisReport(**{k: v for k, v in reply.items() if k in SynthesisReport.model_fields}).model_dump()
     except Exception:  # noqa: BLE001  (schema failure -> empty report, caught by the verification gate)

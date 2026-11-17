@@ -10,8 +10,32 @@ from app.state import Brief
 AGENT = "firm.engagement_manager"
 
 
+def _brief(brief: dict) -> Brief:
+    clean = {}
+    for k, v in brief.items():
+        if k not in Brief.model_fields:
+            continue
+        if k in ("budget_usd", "hours_per_week"):
+            try:
+                v = float(str(v).replace("$", "").replace(",", "")) if v not in (None, "") else None
+            except ValueError:
+                v = None  # unreadable number: ask again
+        clean[k] = v
+    return Brief(**clean)
+
+
 def missing_fields(brief: dict) -> list[str]:
-    return Brief(**{k: v for k, v in brief.items() if k in Brief.model_fields}).missing()
+    return _brief(brief).missing()
+
+
+def interview_questions(brief: dict, clarified: bool) -> list[dict]:
+    """Required fields that are missing, plus (once) the clarifying questions not yet answered."""
+    b = _brief(brief)
+    qs = [{"field": f, "question": f"Please tell us your {f.replace('_', ' ')}.", "options": None, "required": True}
+          for f in b.missing()]
+    if not clarified:
+        qs += [{"field": f, "required": False, **Brief.CLARIFIERS[f]} for f in b.unclarified()]
+    return qs
 
 
 def excluded(brief: dict) -> str | None:

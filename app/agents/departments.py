@@ -28,8 +28,8 @@ def _context(step: dict, state: dict) -> str:
 
 def panel(step: dict, state: dict, roster: list[str]) -> dict:
     """Fast mode: one call returns {"work": {...}, "departments": {name: {position, pushback, tradeoff}}}."""
-    dept_prompts = "\n\n".join(f"## dept.{d}\n{config.load_prompt(f'departments/{d}.md')}" for d in roster)
-    system = (config.load_prompt("firm/strategy_architect.md") + "\n\nDepartments at the table:\n" + dept_prompts +
+    dept_prompts = "\n\n".join(f"## dept.{d}\n{config.load_prompt(f'dept_{d}.md')}" for d in roster)
+    system = (config.load_prompt("strategy_architect.md") + "\n\nDepartments at the table:\n" + dept_prompts +
               f"\n\nReply JSON: {{\"work\": {step['work_keys']}, \"departments\": {{\"<name>\": "
               "{\"position\": str, \"pushback\": str, \"tradeoff\": str}}}}")
     reply = config.call_model("firm.strategy_architect", system, _context(step, state))
@@ -49,7 +49,7 @@ def panel(step: dict, state: dict, roster: list[str]) -> dict:
 
 def draft_work(step: dict, state: dict) -> dict:
     """Full mode: the architect drafts the work alone."""
-    system = config.load_prompt("firm/strategy_architect.md") + f"\n\nReply JSON: {{\"work\": {step['work_keys']}}}"
+    system = config.load_prompt("strategy_architect.md") + f"\n\nReply JSON: {{\"work\": {step['work_keys']}}}"
     reply = config.call_model("firm.strategy_architect", system, _context(step, state))
     dl.log("firm.strategy_architect", f"draft_work step {step['id']}", model=config.model_name(), cost=0)
     return reply.get("work") if isinstance(reply.get("work"), dict) else {}
@@ -57,7 +57,7 @@ def draft_work(step: dict, state: dict) -> dict:
 
 def review(dept: str, step: dict, state: dict, others: dict | None = None) -> dict:
     """Full mode: one department reviews the draft (and, in negotiation, the others' positions)."""
-    system = (config.load_prompt(f"departments/{dept}.md") +
+    system = (config.load_prompt(f"dept_{dept}.md") +
               '\n\nReply JSON: {"position": str, "pushback": str, "tradeoff": str}')
     user = _context(step, state) + f"\nDraft work: {json.dumps(state.get('work', {}), ensure_ascii=False)[:3000]}"
     if others:

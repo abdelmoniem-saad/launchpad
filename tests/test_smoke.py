@@ -80,3 +80,14 @@ def test_founder_stop_ends_engagement(env):
     res, _ = drive(graph, cfg, res, lambda p: {"decision": "stop"})
     assert res["status"] == "stopped"
     assert (Path(env["out"]) / "phase1_gate_final_recommendation.md").exists()
+
+
+def test_clarifying_questions_asked_once(env):
+    brief = {k: v for k, v in BRIEF.items() if k not in ("product_format", "existing_audience", "success_goal")}
+    graph, cfg, res = start(env, brief)
+    payload = res["__interrupt__"][0].value
+    assert payload["type"] == "brief_interview" and payload["missing"] == []
+    fields = {q["field"]: q for q in payload["questions"]}
+    assert fields["product_format"]["options"] and fields["success_goal"]["options"] is None
+    res = graph.invoke(Command(resume={"product_format": "template pack"}), cfg)  # skipping the others is allowed
+    assert res["__interrupt__"][0].value["type"] == "checkpoint"
