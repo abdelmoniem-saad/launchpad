@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 
 from app import decision_log as dl
-from app import tools
+from app import build_tests, tools
 from app.guardrails import find_quote
 
 AGENT = "firm.quant_modeler"
@@ -44,6 +44,8 @@ def compute(step: dict, work: dict, state: dict) -> dict:
             out = tools.total_cost(work.get("roles", []), brief.get("budget_usd"))
         elif kind == "pricing":
             out = _pricing(work, state)
+        elif kind == "build_tests":
+            out = {"build_tests": build_tests.run(work)}
     except (TypeError, ValueError, KeyError) as exc:
         out = {"error": f"calculator rejected the inputs: {exc}"}
     if kind:

@@ -1,13 +1,14 @@
 """Parent graph: brief intake -> completeness check (founder interview) -> excluded-product check
 -> every step (step subgraph) -> founder checkpoint (interrupt) -> gate -> go / repeat / pivot / stop
--> engagement close-out. Phases 1-2 and step 4.1 (pricing) are LIVE; steps 3.1, 4.2, 5.1 and 6.1 are MOCKED drafts.
+-> engagement close-out. Phases 1-2, step 3.1 (MVP build, tests-pass gate) and step 4.1 (pricing) are LIVE;
+steps 4.2, 5.1 and 6.1 are MOCKED drafts.
 """
 from __future__ import annotations
 
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import interrupt
 
-from app import config, gates, outputs, step_subgraph
+from app import config, gates, guardrails, outputs, step_subgraph
 from app import decision_log as dl
 from app.agents import engagement_manager as em
 from app.phases import STEPS, step_of
@@ -66,7 +67,10 @@ def collect(state: EngagementState) -> dict:
 
 
 def write(state: EngagementState) -> dict:
-    outputs.write_step(state, step_of(state))
+    step = step_of(state)
+    outputs.write_step(state, step)
+    if step.get("build") and not state.get("step_blocked"):
+        outputs.write_product(state, step)
     outputs.write_cost(state)
     return {}
 
@@ -83,6 +87,12 @@ def checkpoint(state: EngagementState) -> dict:
     if decision not in DECISIONS:
         decision = "stop"
     update = {"founder_decision": decision, "founder_feedback": str(resp.get("feedback") or "")[:1000]}
+    refused = guardrails.refused_request(f"{resp.get('feedback') or ''} {resp.get('edited_conclusion') or ''}")
+    if refused:  # the founder's decision stands, but the forbidden instruction is never passed to the firm
+        dl.log("firm.compliance_officer", f"founder_instruction_refused step {step['id']}: {refused[:160]}", outcome="refused")
+        update["founder_feedback"] = ""
+        update["verification_flags"] = (state.get("verification_flags") or []) + [refused]
+        resp = {k: v for k, v in resp.items() if k != "edited_conclusion"}
     if decision == "edit" and resp.get("edited_conclusion"):
         update["report"] = {**(state.get("report") or {}), "conclusion": f"{resp['edited_conclusion']} (edited by the founder)"}
     proposal = (state.get("quant") or {}).get("proposed_threshold")
@@ -120,6 +130,10 @@ def gate(state: EngagementState) -> dict:
         upd.update({"work_memory": mem, "step_index": state["step_index"] + 1, "founder_feedback": ""})
     elif o == gates.REPEAT:
         upd["repeats"] = {**(state.get("repeats") or {}), step["id"]: (state.get("repeats") or {}).get(step["id"], 0) + 1}
+        if step.get("gate") == "tests":  # the redo is told exactly which build tests failed
+            fails = [r[len("failing: "):] for r in g["reasons"] if r.startswith("failing: ")]
+            upd["founder_feedback"] = ("Fix the failing build tests: " + "; ".join(fails) + ". "
+                                       + (state.get("founder_feedback") or "")).strip()
     elif o == gates.PIVOT:
         old = (state.get("work_memory") or {}).get("niche", state["brief"].get("idea"))
         upd.update({"pivots": (state.get("pivots") or 0) + 1, "step_index": 0, "claims": [],
@@ -144,7 +158,7 @@ def close_out(state: EngagementState) -> dict:
     idx = min(state.get("step_index", 0), len(STEPS) - 1)
     phase = STEPS[idx]["phase"] if stopped else STEPS[-1]["phase"]
     outcome = gates.STOP if stopped else "completed"
-    reasons = [state.get("stop_reason", "")] if stopped else ["All steps approved by the founder. Steps 3.1, 4.2, 5.1 and 6.1 are MOCKED drafts."]
+    reasons = [state.get("stop_reason", "")] if stopped else ["All steps approved by the founder. Steps 4.2, 5.1 and 6.1 are MOCKED drafts."]
     outputs.write_final(state, phase, outcome, reasons)
     rep = outputs.write_cost(state)
     dl.log("firm.engagement_manager", f"engagement_close_out: {outcome}", outcome=outcome,

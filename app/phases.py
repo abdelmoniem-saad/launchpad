@@ -1,8 +1,8 @@
 """Phase and step definitions, the department roster per phase, and which gate each step uses.
 
-Phases 1-2 and the phase 4 pricing step are LIVE (real web research + verification). The rest of
-phases 3-6 is MOCKED: the firm writes drafts with the same governance, but nothing is built, sold,
-delivered or published.
+Phases 1-2 and the phase 4 pricing step are LIVE (real web research + verification). Step 3.1 is LIVE:
+the firm builds the MVP as text and a tests-pass gate checks it in code. The rest of phases 4-6 is
+MOCKED: the firm writes drafts with the same governance, but nothing is sold, delivered or published.
 """
 from __future__ import annotations
 
@@ -89,10 +89,17 @@ STEPS = [
              "Any job post is a draft only (MOCKED).",
      "work_keys": '{"roles": [{"department": str, "role": str, "choice": "founder|automate|hire_later", "reason": str, "monthly_cost_usd": number, "cost_claim_id": str or null}], "backlog": {"<department>": [str]}, "job_post_drafts": [{"role": str, "text": str}]}',
      "quant": "blueprint_cost", "actions": [("hire", "job_post_drafts", "Post job drafts")]},
-    {"id": "3.1", "phase": 3, "name": "mvp_spec", "live": False,
-     "title": "MVP spec, user docs draft and test plan (MOCKED)", "queries": [],
-     "task": "Write the MVP spec (at most 5 core features, out of scope list), a short user docs draft and a test plan.",
-     "work_keys": '{"core_features": [str], "out_of_scope": [str], "user_docs_draft": str, "test_plan": [str]}', "quant": None},
+    {"id": "3.1", "phase": 3, "name": "mvp_build", "live": True, "build": True, "gate": "tests",
+     "title": "Build the MVP and its user docs; tests must pass", "queries": [],
+     "task": "Build the MVP itself: the complete digital product in text form, exactly what a buyer would receive "
+             "(for a template pack: every template with its sections, fields and example rows; for a guide or course: "
+             "the full lessons; for a software tool: the screens, data fields and rules as a usable spec). "
+             "At most 5 core features, each with its full content (at least 60 words, no placeholders such as TODO "
+             "or 'insert here'). Write user docs that explain how to use every feature by name, an out-of-scope list, "
+             "and a test plan with at least one check per feature. No prices, reviews, testimonials, urgency or income promises.",
+     "work_keys": '{"product_title": str, "core_features": [{"name": str, "content": str}], "user_docs": str, '
+                  '"out_of_scope": [str], "test_plan": [{"feature": str, "check": str}]}',
+     "quant": "build_tests"},
     {"id": "4.1", "phase": 4, "name": "pricing", "live": True,
      "title": "Pricing: sourced price points and calculator tiers (no payments)",
      "queries": ["{niche} price", "{niche} template pricing", "{customer} pay for {niche}"],
