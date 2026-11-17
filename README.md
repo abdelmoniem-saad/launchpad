@@ -70,7 +70,7 @@ The founder is the client and the system is a consulting firm. Six firm agents r
 
 **About $0.00 per run** (local model). The committed strong-brief run (phases 1-2, stopping at the demand gate) made 31 model calls and used about 75k tokens with `gpt-oss:20b`, and took about 2.5 minutes end to end on a 16 GB GPU. The full six-phase `*_demo` run made 43 calls, used about 108k tokens and took about 3 minutes. Every model call's tokens and wall-clock time are counted and saved to `outputs/cost_report.json` at each step; the CLI also prints the total at the end. The committed demo run's figures are in [outputs/cost_report.json](outputs/cost_report.json).
 
-### Demo video
+## Demo video
 
 No recording yet. The 3-minute walkthrough is scripted in [docs/demo_script.md](docs/demo_script.md); the runs it shows are committed in `outputs/` (strong brief, weak brief that stops, labelled six-phase demo run, payment test).
 
