@@ -8,7 +8,7 @@ import json
 
 from app import config, tools
 from app import decision_log as dl
-from app.guardrails import label_numeric_claims, sanitize_source
+from app.guardrails import sanitize_source
 
 AGENT = "firm.market_researcher"
 
@@ -75,7 +75,6 @@ def extract_claims(step: dict, state: dict, pages: dict) -> list[dict]:
         quote = str(c.get("quote") or "")
         claims.append({"id": f"C{step['id']}-{i}", "text": str(c["text"])[:400], "source_url": url,
                        "quote": quote[:300], "type": "SOURCED" if url and quote else "ASSUMPTION", "step": step["id"]})
-    claims = label_numeric_claims(claims)
     dl.log(AGENT, f"extract_claims step {step['id']}: {len(claims)} claims "
                   f"({sum(c['type'] == 'SOURCED' for c in claims)} sourced)" + (f"; error {reply['_error']}" if reply.get("_error") else ""),
            sources=[c["source_url"] for c in claims if c["source_url"]], model=config.model_name(), cost=0)

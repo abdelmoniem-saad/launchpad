@@ -10,14 +10,10 @@ from langgraph.types import interrupt
 from app import config, gates, outputs, step_subgraph
 from app import decision_log as dl
 from app.agents import engagement_manager as em
-from app.phases import STEPS
+from app.phases import STEPS, step_of
 from app.state import EngagementState
 
 DECISIONS = ("approve", "edit", "redo", "stop")
-
-
-def _step(state):
-    return STEPS[state["step_index"]]
 
 
 def intake(state: EngagementState) -> dict:
@@ -55,7 +51,7 @@ def excluded_check(state: EngagementState) -> dict:
 
 def collect(state: EngagementState) -> dict:
     """Founder inputs a step needs before it runs (the real demand-test result for 2.4)."""
-    step = _step(state)
+    step = step_of(state)
     if not step.get("needs_results"):
         return {}
     t = state.get("thresholds") or {}
@@ -68,13 +64,13 @@ def collect(state: EngagementState) -> dict:
 
 
 def write(state: EngagementState) -> dict:
-    outputs.write_step(state, _step(state))
+    outputs.write_step(state, step_of(state))
     outputs.write_cost(state)
     return {}
 
 
 def checkpoint(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     resp = interrupt({"type": "checkpoint", "step": step["id"], "title": step["title"], "live": step.get("live"),
                       "report": state.get("report"), "work": state.get("work"), "quant": state.get("quant"),
                       "departments": state.get("drafts"), "flags": (state.get("verification_flags") or []) + (state.get("health_flags") or []),
@@ -100,7 +96,7 @@ def checkpoint(state: EngagementState) -> dict:
 
 
 def gate(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     g = gates.step_gate(step, state, state.get("founder_decision", "stop"))
     dl.log("governance.gate_evaluator", f"gate step {step['id']}", outcome=g["outcome"], reasons=g["reasons"])
     if step.get("gate"):
@@ -154,6 +150,11 @@ def close_out(state: EngagementState) -> dict:
     return {"status": "stopped" if stopped else "completed", "cost": rep}
 
 
+def _stop_or(next_node: str):
+    """Route to close_out when the engagement was stopped, otherwise to `next_node`."""
+    return lambda s: "close_out" if s.get("status") == "stopped" else next_node
+
+
 def build(checkpointer):
     g = StateGraph(EngagementState)
     g.add_node("intake", intake)
@@ -168,11 +169,9 @@ def build(checkpointer):
     g.add_node("close_out", close_out)
     g.add_edge(START, "intake")
     g.add_edge("intake", "screen")
-    g.add_conditional_edges("screen", lambda s: "close_out" if s.get("status") == "stopped" else "completeness",
-                            ["close_out", "completeness"])
+    g.add_conditional_edges("screen", _stop_or("completeness"), ["close_out", "completeness"])
     g.add_conditional_edges("completeness", route_completeness, ["completeness", "excluded_check"])
-    g.add_conditional_edges("excluded_check", lambda s: "close_out" if s.get("status") == "stopped" else "collect",
-                            ["close_out", "collect"])
+    g.add_conditional_edges("excluded_check", _stop_or("collect"), ["close_out", "collect"])
     g.add_edge("collect", "run_step")
     g.add_edge("run_step", "write")
     g.add_edge("write", "checkpoint")

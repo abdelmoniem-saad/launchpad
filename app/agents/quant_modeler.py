@@ -5,6 +5,7 @@ import re
 
 from app import decision_log as dl
 from app import tools
+from app.guardrails import find_quote
 
 AGENT = "firm.quant_modeler"
 
@@ -74,8 +75,8 @@ def _pricing(work: dict, state: dict) -> dict:
     counted, rejected = [], []
     for p in work.get("price_points", []) if isinstance(work.get("price_points"), list) else []:
         c = claims.get(str(p.get("claim_id") or ""), {})
-        quote = " ".join(str(c.get("quote") or "").split())
-        on_page = bool(quote) and quote in " ".join(str(pages.get(c.get("source_url"), "")).split())
+        quote = str(c.get("quote") or "")
+        on_page = find_quote(quote, str(pages.get(c.get("source_url"), "")), min_words=1) >= 0
         try:
             ok = c.get("type") == "SOURCED" and on_page and float(p.get("price_usd")) > 0 and _quoted(p["price_usd"], quote)
         except (TypeError, ValueError):

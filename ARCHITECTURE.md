@@ -106,7 +106,7 @@ compared with the provider's payout report; mismatches go to the founder
 
 1. **Brief** (UI form or `briefs/*.json`) → `EngagementState.brief`. The engagement manager then interviews the founder (`interrupt()`): required fields that are missing, plus, once, three clarifying questions (product format and current audience as multiple choice, a 90-day learning goal as free text). The answers become part of the brief that every agent reads.
 2. **Research:** queries go to search, then fetch, then sanitising. The fetched page text is kept in `sources_text`, and claims `{id, text, source_url, quote, type}` go to the claims ledger.
-3. **Work:** department panel JSON is validated with pydantic, then the calculator results go to `quant`.
+3. **Work:** department panel JSON is normalised to a position, pushback and trade-off per department, then the calculator results go to `quant`.
 4. **Report:** the synthesis report passes through the Tier 1 rule guard (one rewrite, then the output is dropped) and Tier 2 verification, which downgrades unsupported claims to ASSUMPTION.
 5. **Proposals:** `ActionProposal` rows are stored in `data/actions.sqlite` as `pending`. They execute only with a one-time token created by the UI's Approve button, and are written to `outputs/` as MOCKED.
 6. **Checkpoint:** an `interrupt()` returns the founder's decision. The gate decides, and the result goes to `gate_history`, the gate files and the final recommendation.

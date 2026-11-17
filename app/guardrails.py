@@ -123,10 +123,10 @@ MIN_QUOTE_WORDS = 3
 PASSAGE_BEFORE, PASSAGE_CHARS = 600, 1600
 
 
-def find_quote(quote: str, text: str) -> int:
+def find_quote(quote: str, text: str, min_words: int = MIN_QUOTE_WORDS) -> int:
     """Start of `quote` in `text`, ignoring case, punctuation and spacing; -1 if absent or too short."""
     words = re.findall(r"[a-z0-9]+", (quote or "").lower())
-    if len(words) < MIN_QUOTE_WORDS:
+    if not words or len(words) < min_words:
         return -1
     m = re.search(r"(?<![a-z0-9])" + r"[^a-z0-9]+".join(map(re.escape, words)), text or "", re.I)
     return m.start() if m else -1

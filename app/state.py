@@ -1,7 +1,7 @@
-"""Engagement state and the pydantic schemas every agent output is validated against."""
+"""Engagement state, the brief (with its intake questions) and the synthesis report schema."""
 from __future__ import annotations
 
-from typing import Annotated, Any, ClassVar, Literal, Optional, TypedDict
+from typing import Annotated, ClassVar, Literal, Optional, TypedDict
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -37,35 +37,6 @@ class Brief(BaseModel):
         return [f for f in self.CLARIFIERS if not getattr(self, f)]
 
 
-class Claim(BaseModel):
-    id: str
-    text: str
-    source_url: Optional[str] = None
-    quote: str = ""
-    type: Literal["SOURCED", "ASSUMPTION"] = "ASSUMPTION"
-    step: str = ""
-
-    @field_validator("type", mode="before")
-    @classmethod
-    def _norm(cls, v):
-        return "SOURCED" if str(v).upper() == "SOURCED" else "ASSUMPTION"
-
-
-class Threshold(BaseModel):
-    metric: str = "waitlist signups"
-    target: int = 0
-    days: int = 14
-    locked: bool = False
-    basis: str = ""
-
-
-class DeptPosition(BaseModel):
-    department: str
-    position: str = ""
-    pushback: str = ""
-    tradeoff: str = ""
-
-
 class SynthesisReport(BaseModel):
     conclusion: str = ""
     key_points: list[dict] = Field(default_factory=list)  # {"text", "claim_ids": [...]}
@@ -94,15 +65,11 @@ class EngagementState(TypedDict, total=False):
     clarified: bool
     status: str  # running | stopped | completed
     stop_reason: str
-    current_phase: int
     step_index: int
-    current_step: str
     departments: list[str]
-    messages: list[dict]
     drafts: Annotated[dict, merge_dict]
     work: dict
-    pushback_notes: list[str]
-    claims: list[dict]
+    claims: list[dict]  # {"id", "text", "source_url", "quote", "type": SOURCED | ASSUMPTION, "step"}
     sources_text: dict
     thresholds: dict
     evidence: dict
@@ -124,4 +91,3 @@ class EngagementState(TypedDict, total=False):
     compliance_note: str
     fast_mode: bool
     health_rerun: bool
-    extra: Any

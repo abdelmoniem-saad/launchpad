@@ -14,44 +14,47 @@ from langgraph.types import Send
 from app import approval, gates
 from app import decision_log as dl
 from app.agents import (compliance_officer, departments, engagement_manager, market_researcher,
-                        quant_modeler, strategy_architect, synthesis_lead)
+                        quant_modeler, synthesis_lead)
 from app.guardrails import health_check, label_numeric_claims, tier2_verify
-from app.phases import STEPS, roster
+from app.phases import roster, step_of
 from app.state import EngagementState
 
 MAX_NEGOTIATION_ROUNDS = 2  # review + one negotiation round
 CLAIM_BASED_QUANT = {"price_stats", "pricing"}  # calculators that only count SOURCED claims
 
 
-def _step(state) -> dict:
-    return STEPS[state["step_index"]]
+def _replace_step_claims(state, step_id: str, new: list[dict]) -> list[dict]:
+    """All claims from earlier steps, plus `new` as this step's claims."""
+    return [c for c in state.get("claims", []) if c.get("step") != step_id] + new
 
 
 def plan(state: EngagementState) -> dict:
-    step = _step(state)
+    """firm.strategy_architect: the plan is fixed by phases.py, so it costs no tokens; only logged."""
+    step = step_of(state)
     r = roster(step["phase"])
-    strategy_architect.plan(step, r, state.get("fast_mode", True))
-    return {"current_step": step["id"], "current_phase": step["phase"], "departments": r,
-            "drafts": {"__reset__": True}, "work": {}, "quant": {}, "report": {}, "verification_flags": [],
+    tasks = 4 + bool(step.get("queries")) + bool(step.get("quant"))  # research?, work, calculator?, report, rules, verify
+    dl.log("firm.strategy_architect", f"plan step {step['id']} ({'fast' if state.get('fast_mode', True) else 'full'} mode): "
+                                      f"{tasks} tasks, departments {r}")
+    return {"departments": r, "drafts": {"__reset__": True}, "work": {}, "quant": {}, "report": {}, "verification_flags": [],
             "health_flags": [], "step_blocked": False, "compliance_note": "", "pending_actions": [], "health_rerun": False}
 
 
 def route_after_plan(state) -> str:
-    step = _step(state)
+    step = step_of(state)
     if step.get("needs_results"):
         return "results"
     return "research" if step.get("live") and step.get("queries") else "work"
 
 
 def research(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     res = market_researcher.research(step, state)
-    claims = [c for c in state.get("claims", []) if c.get("step") != step["id"]] + res["claims"]
-    return {"claims": claims, "sources_text": {**(state.get("sources_text") or {}), **res["pages"]}}
+    return {"claims": _replace_step_claims(state, step["id"], res["claims"]),
+            "sources_text": {**(state.get("sources_text") or {}), **res["pages"]}}
 
 
 def work(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     if state.get("fast_mode", True):
         out = departments.panel(step, state, state["departments"])
         return {"work": out["work"], "drafts": out["positions"]}
@@ -66,11 +69,11 @@ def route_after_work(state):
 
 def dept_review(state: dict) -> dict:
     d = state["_dept"]
-    return {"drafts": {d: departments.review(d, _step(state), state)}}
+    return {"drafts": {d: departments.review(d, step_of(state), state)}}
 
 
 def negotiate(state: EngagementState) -> dict:
-    step, drafts = _step(state), dict(state.get("drafts") or {})
+    step, drafts = step_of(state), dict(state.get("drafts") or {})
     for _ in range(MAX_NEGOTIATION_ROUNDS - 1):
         for d in state["departments"]:
             others = {k: v for k, v in drafts.items() if k != d}
@@ -79,19 +82,19 @@ def negotiate(state: EngagementState) -> dict:
 
 
 def quant(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     q = quant_modeler.compute(step, state.get("work", {}), state)
     drafts = dict(state.get("drafts") or {})
     if q.get("over_budget") and "finance" in drafts:  # Finance pushback triggered in code
         note = f"Over budget: plan costs ${q['monthly_total_usd']}/month against a ${q['budget_usd']} budget."
         drafts["finance"] = {**drafts["finance"], "pushback": (drafts["finance"].get("pushback", "") + " " + note).strip()}
         dl.log("dept.finance", f"pushback step {step['id']}: {note}")
-        return {"quant": q, "drafts": drafts, "pushback_notes": [note]}
+        return {"quant": q, "drafts": drafts}
     return {"quant": q}
 
 
 def synthesize(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     if not step.get("live"):
         report = {"conclusion": f"MOCKED draft for founder review: {step['title']}.", "key_points": [],
                   "open_disagreements": [p["pushback"] for p in (state.get("drafts") or {}).values() if p.get("pushback")],
@@ -101,7 +104,7 @@ def synthesize(state: EngagementState) -> dict:
 
 
 def compliance(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     w, report, drafts = compliance_officer.clean(state.get("work", {})), state.get("report", {}), state.get("drafts", {})
     violations = compliance_officer.scan(w, report, drafts)
     if not violations:
@@ -123,13 +126,13 @@ def compliance(state: EngagementState) -> dict:
 
 
 def verify(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     mine = label_numeric_claims([c for c in state.get("claims", []) if c.get("step") == step["id"]])
     flags = list(state.get("verification_flags") or [])
     if mine and step.get("live") and not state.get("step_blocked"):
         mine, f2 = tier2_verify(mine, state.get("sources_text") or {}, step["id"])
         flags += f2
-    claims = [c for c in state.get("claims", []) if c.get("step") != step["id"]] + mine
+    claims = _replace_step_claims(state, step["id"], mine)
     report = dict(state.get("report") or {})
     types = {c["id"]: c["type"] for c in mine}
     for kp in report.get("key_points", []):
@@ -146,7 +149,7 @@ def verify(state: EngagementState) -> dict:
 
 
 def health(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     drafts = state.get("drafts") or {}
     flags = health_check(drafts) if len(drafts) > 0 and not state.get("step_blocked") else []
     dl.log("governance.team_health_check", f"step {step['id']}: {flags or 'healthy'}")
@@ -160,7 +163,7 @@ def health(state: EngagementState) -> dict:
 
 
 def actions(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     if state.get("step_blocked"):
         return {}
     ids = []
@@ -174,7 +177,7 @@ def actions(state: EngagementState) -> dict:
 
 
 def results(state: EngagementState) -> dict:
-    step = _step(state)
+    step = step_of(state)
     actual = (state.get("evidence") or {}).get("actual")
     g = gates.demand_gate(state.get("thresholds") or {}, actual)
     t = state.get("thresholds") or {}

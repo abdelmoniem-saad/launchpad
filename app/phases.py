@@ -120,3 +120,8 @@ STEPS = [
 ]
 
 STEP_INDEX = {s["id"]: i for i, s in enumerate(STEPS)}
+
+
+def step_of(state) -> dict:
+    """The step the engagement is currently on."""
+    return STEPS[state["step_index"]]
