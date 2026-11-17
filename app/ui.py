@@ -18,7 +18,7 @@ import streamlit as st  # noqa: E402
 from langgraph.checkpoint.sqlite import SqliteSaver  # noqa: E402
 from langgraph.types import Command  # noqa: E402
 
-from app import approval, config, orchestrator, tools  # noqa: E402
+from app import approval, config, orchestrator  # noqa: E402
 from app import decision_log as dl  # noqa: E402
 from app.phases import PHASE_NAMES, STEPS  # noqa: E402
 
@@ -52,7 +52,6 @@ with st.sidebar:
     st.title("launchpad")
     st.caption("An open-source AI consulting firm for founders. You approve every step.")
     st.write(f"Model: `{config.model_name()}`")
-    st.write(f"Search: `{tools.search_backend()}`")
     st.markdown("**What is live and what is mocked**")
     for s in STEPS:
         st.markdown(f"{badge(s['live'])} {s['id']} {s['title']}")

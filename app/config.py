@@ -45,7 +45,7 @@ class CostTracker:
                 "tokens_in": self.tokens_in, "tokens_out": self.tokens_out,
                 "tokens_total": self.tokens_in + self.tokens_out,
                 "wall_clock_seconds": round(self.seconds, 1), "by_agent": self.by_agent,
-                "pricing_note": "Local Ollama, the Groq free tier and the Tavily free tier are priced at $0."}
+                "pricing_note": "Local Ollama and Groq free tier are priced at $0."}
 
 
 COST = CostTracker()
